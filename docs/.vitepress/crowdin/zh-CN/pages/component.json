@@ -1,6 +1,11 @@
 {
   "basic": {
     "text": "Basic 基础组件",
-    "children": []
+    "children": [
+      {
+        "link": "/three-renderer",
+        "text": "ThreeRenderer"
+      }
+    ]
   }
 }

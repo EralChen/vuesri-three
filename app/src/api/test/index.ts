@@ -5,7 +5,7 @@
  * zz-test 目录下有参考的示例
  */
 
-import { request } from '@skzz-template/shared/fetch/base'
+import { request } from '@vuesri-three/shared/fetch/base'
 
 export const rTestData = () => {
   return request<{

@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-template/api",
+  "name": "@vuesri-three/api",
   "private": true,
   "module": "index.ts",
   "type": "module",

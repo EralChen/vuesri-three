@@ -9,7 +9,7 @@ import VPTableOfContent from './doc-content/vp-table-of-content.vue'
 const { page } = useData()
 const content = ref<{ $el: HTMLElement }>()
 
-function updateDom() {
+function updateDom () {
   insertLinkIcon(content)
   insertTableWrapper(content)
 }
@@ -21,8 +21,8 @@ function updateDom() {
       <Content
         ref="content"
         class="doc-content"
-        @vnode-mounted="updateDom"
-        @vnode-updated="updateDom"
+        @vue:mounted="updateDom"
+        @vue:updated="updateDom"
       />
       <VPPageFooter />
       <VPPageNav />

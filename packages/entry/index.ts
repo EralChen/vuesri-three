@@ -1,5 +1,5 @@
 import installer from './defaults'
-export * from '@skzz-template/shared'
+export * from '@vuesri-three/shared'
 export const install = installer.install
 export default installer
 

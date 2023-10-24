@@ -47,10 +47,10 @@
 
 ### 修改名称
 
-1. 将包名`@skzz/template` 和 别名`@skzz-template` 全局替换
+1. 将包名`@vuesri/three` 和 别名`@vuesri-three` 全局替换
    > 如现在要发布一个 @vuesium/mars3d 的包, 则将： 
-   > `@skzz/template` => `@vuesium/mars3d`
-   > `@skzz-template` => `@vuesium-mars3d`
+   > `@vuesri/three` => `@vuesium/mars3d`
+   > `@vuesri-three` => `@vuesium-mars3d`
    
 2. `pnpm i` 重新装包
 
@@ -165,7 +165,7 @@ export const libExternal = [
 
 ### docs component 页面重定向
 
-全局替换 `/component/hello-world` => `/component/[第一个组件的link]`
+全局替换 `/component/three-renderer` => `/component/[第一个组件的link]`
 
 
 

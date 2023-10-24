@@ -6,6 +6,7 @@ export const libExternal = [
   /^@vunk\/skzz/,
   /^@vunk\/form/,
   /^element-plus/,
+  /^@vuesri\/core/,
   new RegExp(`^${LIB_NAME}`),
   new RegExp(`^${LIB_ALIAS}`),
 ]

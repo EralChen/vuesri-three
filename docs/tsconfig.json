@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "lib": ["WebWorker"],
     "paths": {
-      "@skzz/template": ["../packages/entry"],
+      "@vuesri/three": ["../packages/entry"],
       "~/*": ["./.vitepress/vitepress/*"]
     },
 

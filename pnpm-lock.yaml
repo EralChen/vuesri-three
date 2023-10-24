@@ -17,33 +17,33 @@ importers:
       '@element-plus/utils':
         specifier: workspace:*
         version: link:packages/element-utils
-      '@skzz-template/api':
-        specifier: workspace:*
-        version: link:packages/api
-      '@skzz-template/components':
-        specifier: workspace:*
-        version: link:packages/components
-      '@skzz-template/composables':
-        specifier: workspace:*
-        version: link:packages/composables
-      '@skzz-template/shared':
-        specifier: workspace:*
-        version: link:packages/shared
-      '@skzz-template/stores':
-        specifier: workspace:*
-        version: link:packages/stores
-      '@skzz-template/theme':
-        specifier: workspace:*
-        version: link:packages/theme
       '@skzz/platform':
         specifier: 0.0.0-alpha.64
         version: 0.0.0-alpha.64
-      '@skzz/template':
+      '@vuesri-three/api':
         specifier: workspace:*
-        version: link:packages/entry
+        version: link:packages/api
+      '@vuesri-three/components':
+        specifier: workspace:*
+        version: link:packages/components
+      '@vuesri-three/composables':
+        specifier: workspace:*
+        version: link:packages/composables
+      '@vuesri-three/shared':
+        specifier: workspace:*
+        version: link:packages/shared
+      '@vuesri-three/stores':
+        specifier: workspace:*
+        version: link:packages/stores
+      '@vuesri-three/theme':
+        specifier: workspace:*
+        version: link:packages/theme
       '@vuesri/core':
         specifier: ^0.0.45
         version: 0.0.45
+      '@vuesri/three':
+        specifier: workspace:*
+        version: link:packages/entry
       '@vueuse/core':
         specifier: ^9.12.0
         version: 9.13.0(vue@3.3.6)
@@ -140,7 +140,7 @@ importers:
         version: 0.7.6
       unocss:
         specifier: ^0.50.6
-        version: 0.50.8(postcss@8.4.28)(rollup@2.79.1)(vite@4.4.9)
+        version: 0.50.8(postcss@8.4.31)(rollup@2.79.1)(vite@4.4.9)
       unplugin-vue-jsx:
         specifier: ^0.1.2
         version: 0.1.2(rollup@2.79.1)(vite@4.4.9)(vue@3.3.6)
@@ -208,12 +208,12 @@ importers:
       '@docsearch/js':
         specifier: ^3.1.0
         version: 3.5.2(@algolia/client-search@4.19.1)(search-insights@2.8.3)
-      '@skzz/template':
-        specifier: workspace:*
-        version: link:../packages/entry
       '@vue/shared':
         specifier: ^3.2.37
         version: 3.3.4
+      '@vuesri/three':
+        specifier: workspace:*
+        version: link:../packages/entry
       axios:
         specifier: ^0.27.2
         version: 0.27.2
@@ -3260,7 +3260,7 @@ packages:
       sirv: 2.0.3
     dev: true
 
-  /@unocss/postcss@0.50.8(postcss@8.4.28):
+  /@unocss/postcss@0.50.8(postcss@8.4.31):
     resolution: {integrity: sha512-UbFD+25EkmBonZggKuQdunAU+1O6O83NcnMqSalhn4vhsr4yHeD4P+Omr+CnBcuOxkP4h2JYHzfzdpe4DZxKYg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3271,7 +3271,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.3.1
       magic-string: 0.30.3
-      postcss: 8.4.28
+      postcss: 8.4.31
     dev: true
 
   /@unocss/preset-attributify@0.50.8:
@@ -9544,7 +9544,7 @@ packages:
     resolution: {integrity: sha512-kjSFZzdf0qSkt8bQRVaZakTyRXX5gzM2kMrkmU5k8iYrSXoTdYZwiT1HxRff+XF+1ZCBljNcCWoFAZptQGI/FA==}
     dev: true
 
-  /unocss@0.50.8(postcss@8.4.28)(rollup@2.79.1)(vite@4.4.9):
+  /unocss@0.50.8(postcss@8.4.31)(rollup@2.79.1)(vite@4.4.9):
     resolution: {integrity: sha512-3yqKkSm/SKCKxFolXNR12Mi64lr4PW95LSHKZ/a9Yzlf2PT1NirAn8/uJ8KoJJBNR2YWobtkLi4UplFz/8IAYA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -9556,7 +9556,7 @@ packages:
       '@unocss/astro': 0.50.8(rollup@2.79.1)(vite@4.4.9)
       '@unocss/cli': 0.50.8(rollup@2.79.1)
       '@unocss/core': 0.50.8
-      '@unocss/postcss': 0.50.8(postcss@8.4.28)
+      '@unocss/postcss': 0.50.8(postcss@8.4.31)
       '@unocss/preset-attributify': 0.50.8
       '@unocss/preset-icons': 0.50.8
       '@unocss/preset-mini': 0.50.8

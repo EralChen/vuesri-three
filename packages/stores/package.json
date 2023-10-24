@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-template/stores",
+  "name": "@vuesri-three/stores",
   "private": true,
   "module": "index.ts",
   "type": "module",

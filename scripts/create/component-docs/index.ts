@@ -5,6 +5,7 @@ import { docRoot } from '@lib-env/path'
 import path from 'path'
 import { createMd, createVue } from './temp'
 import fsp from 'fs/promises'
+import { camelize, capitalize } from 'vue'
 type MriDataP = keyof typeof import('../../../docs/.vitepress/crowdin/zh-CN/pages/component.json')
 interface MriData {
   p: MriDataP // parent
@@ -14,8 +15,12 @@ interface MriData {
 
 const argv = process.argv.slice(2)
 const mriData = mri<MriData>(argv)
-if (!mriData.l || !mriData.t) {
+if (!mriData.l) {
   errorAndExit(new Error('请输入 link 和 title 作为参数'))
+}
+
+if (!mriData.t) {
+  mriData.t = capitalize(camelize(mriData.l))
 }
 
 export default series(
@@ -44,6 +49,14 @@ export default series(
 
   taskWithName('add md to docs', async () => {
     const componentMdPath = path.resolve(docRoot, './zh-CN/component')
+    
+    // 如果没有这个目录，就创建
+    try {
+      await fsp.mkdir(componentMdPath, {
+        recursive: true,
+      })
+    } catch {}
+    
     const mdStr = createMd(mriData.t, mriData.l)
 
     await fsp.writeFile(

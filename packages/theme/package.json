@@ -1,5 +1,5 @@
 {
-  "name": "@skzz-template/theme",
+  "name": "@vuesri-three/theme",
   "private": true,
   "module": "index.ts",
   "type": "module",

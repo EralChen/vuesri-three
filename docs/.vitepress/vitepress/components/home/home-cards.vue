@@ -12,7 +12,10 @@ const homeLang = computed(() => homeLocale[lang.value])
     <ul class="container">
       <li>
         <div class="card">
-          <guide-svg w="40" m="y-12" />
+          <guide-svg
+            w="40"
+            m="y-12"
+          />
           <h3>{{ homeLang['3'] }}</h3>
           <p>{{ homeLang['4'] }}</p>
           <a :href="`/${lang}/guide/installation.html`">{{ homeLang['5'] }}</a>
@@ -20,17 +23,23 @@ const homeLang = computed(() => homeLocale[lang.value])
       </li>
       <li>
         <div class="card">
-          <component-svg w="40" m="y-12" />
+          <component-svg
+            w="40"
+            m="y-12"
+          />
           <h3>{{ homeLang['6'] }}</h3>
           <p>{{ homeLang['7'] }}</p>
-          <a :href="`/${lang}/component/hello-world.html`">
+          <a :href="`/${lang}/component/three-renderer.html`">
             {{ homeLang['5'] }}
           </a>
         </div>
       </li>
       <li>
         <div class="card">
-          <resource-svg w="40" m="y-12" />
+          <resource-svg
+            w="40"
+            m="y-12"
+          />
           <h3>{{ homeLang['8'] }}</h3>
           <p>{{ homeLang['9'] }}</p>
           <a :href="`/${lang}/resource/index.html`"> {{ homeLang['5'] }} </a>
