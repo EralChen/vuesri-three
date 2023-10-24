@@ -6,6 +6,8 @@ import 'uno.css'
 import './style.css'
 import type { Theme } from 'vitepress'
 import '@vunk/core/index.css'
+import '@vuesri/core/index.css'
+
 
 
 export default define<Theme>({

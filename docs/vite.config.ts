@@ -58,6 +58,9 @@ export default defineConfig(async ({ mode }) => {
     resolve: {
       alias,
     },
+    build: {
+      target: 'esnext',
+    },
     plugins: [
       vueJsx(),
       DefineOptions(),

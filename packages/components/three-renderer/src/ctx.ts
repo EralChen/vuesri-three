@@ -1,11 +1,9 @@
-import { PropType } from 'vue'
+// import { PropType } from 'vue'
+import { LoadEvent } from './types'
+// export const props = {
 
-export const props = {
-  modelValue: {
-    type: Object as PropType<unknown>,
-    default: () => ({}),
-  },
-}
+// }
 
 export const emits = {
+  load: (e: LoadEvent) => e,
 }

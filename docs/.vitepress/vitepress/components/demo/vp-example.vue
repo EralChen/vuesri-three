@@ -14,7 +14,11 @@ defineProps({
 <template>
   <div class="example-showcase">
     <ClientOnly>
-      <component :is="demo" v-if="demo" v-bind="$attrs" />
+      <component
+        :is="demo"
+        v-if="demo"
+        v-bind="$attrs"
+      />
     </ClientOnly>
   </div>
 </template>
@@ -24,5 +28,11 @@ defineProps({
   padding: 1.5rem;
   margin: 0.5px;
   background-color: var(--bg-color);
+}
+
+</style>
+<style>
+.example-showcase .va-scene-view {
+  height: 40vh;
 }
 </style>
