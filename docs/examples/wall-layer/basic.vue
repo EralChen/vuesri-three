@@ -2,22 +2,40 @@
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
 import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
 import { VaWallLayer } from '@vuesri-three/components/wall-layer'
-import { Polyline } from '@vuesri/core/arcgis'
+import { Polyline, Polygon, Extent } from '@vuesri/core/arcgis'
 const viewOptions:__esri.SceneViewProperties = {
-  center: [120, 30],
-  zoom: 10,
+  center: [104.06179498614645, 30.659871702738265],
+  zoom: 18,
 }
-const geometry = new Polyline({
-  paths: [
-    [
-      [121, 31],
-      [120, 30],
-    ],
+// const geometry = new Polyline({
+//   paths: [
+//     [
+//       [104.06191956585747, 30.660483165583024], // 坐标1
+//       [104.0646914649979, 30.65909115535485], // 坐标2
+//     ],
    
+
+//   ],
+// })
+// const geometry = new Extent({
+//   xmin: 104.06191956585747,
+//   ymin: 30.660483165583024,
+//   xmax: 104.0646914649979,
+//   ymax: 30.65909115535485,
+//   spatialReference: {
+//     wkid: 4326,
+//   },
+// })
+
+const geometry = new Polygon({
+  rings: [
     [
-      [120, 30],
-      [121.15803278368847, 30.84917751352612],
+      [104.06191956585747, 30.660483165583024], // 坐标1
+      [104.06191956585747, 30.65909115535485], // 坐标2
+      [104.0646914649979, 30.65909115535485], // 坐标3
+      [104.0646914649979, 30.660483165583024], // 坐标4
     ],
+
   ],
 })
 </script>
@@ -35,7 +53,7 @@ const geometry = new Polyline({
     <VaThreeRenderer :axes-helper="true">
       <VaWallLayer 
         :geometry="geometry"
-        :height="1000"
+        :height="50"
         :alpha-map-url="'/ThreeRenderer/images/wall_layer_alpha_map.png'"
         :texture-url="'/ThreeRenderer/images/wall_layer_texture.png'"
       >

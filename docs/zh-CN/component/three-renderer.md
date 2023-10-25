@@ -19,6 +19,9 @@ three-renderer/basic
 
 :::demo
 three-renderer/custom/index
+>>>tabs
+[three-renderer/custom/custom-layer]
+>>>
 :::
 
 

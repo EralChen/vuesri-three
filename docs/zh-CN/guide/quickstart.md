@@ -5,24 +5,9 @@ lang: zh-CN
 
 # 快速开始
 
-本节将介绍如何在项目中使用 @vunk/core。
+本节将介绍如何在项目中使用 @vuesri/three。
 
 ## 用法
-
-### 完整引入
-
-```typescript
-// main.ts
-import { createApp } from 'vue'
-import VunkCore from '@vunk/core'
-import '@vunk/core/index.css'
-import App from './App.vue'
-
-const app = createApp(App)
-
-app.use(VunkCore)
-app.mount('#app')
-```
 
 ### 单组件引入
 
@@ -33,13 +18,28 @@ import '@vunk/core/index.css'
 ```
 
 ```vue
-<script setup>
-import { VkDuplex } from '@vunk/core'
-</script>
+<script lang="ts" setup>
+import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
+import { VaThreeRenderer } from '@vuesri/three'
+import CustomLayer from './custom-layer.vue'
 
+
+</script>
 <template>
-  <VkDuplex></VkDuplex>
+  <VaSceneView>
+    <VaTdtBasemap
+      :type="'vec_w'"
+      :spatial-reference="{
+        wkid: 102100,
+      }"
+    ></VaTdtBasemap>
+
+    <VaThreeRenderer>
+      <CustomLayer></CustomLayer>
+    </VaThreeRenderer>
+  </VaSceneView>
 </template>
+
 ```
 
 

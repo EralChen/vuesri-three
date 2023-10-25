@@ -16,19 +16,11 @@ lang: zh-CN
 
 ## 使用包管理器
 
-**我们建议您使用包管理器 (NPM, [Yarn](https://classic.yarnpkg.com/lang/en/), [pnpm](https://pnpm.io/)) 安装 @vunk/core**, 然后您就可以使用打包工具，例如 [Vite](https://vitejs.dev) 和 [webpack](https://webpack.js.org/)
+**我们建议您使用包管理器 ([pnpm](https://pnpm.io/)) 安装 @vuesri/three**, 然后您就可以使用打包工具，例如 [Vite](https://vitejs.dev) 和 [webpack](https://webpack.js.org/)
 
 ```shell
-# 选择一个你喜欢的包管理器
-
-# NPM
-$ npm install @vunk/core@alpha --save
-
-# Yarn
-$ yarn add @vunk/core@alpha
-
 # pnpm
-$ pnpm install @vunk/core@alpha
+$ pnpm install @vuesri/core @vuesri/three@alpha --S
 ```
 
 通过包管理器安装，并希望配合打包工具使用，请阅读下一节：[快速上手](/zh-CN/guide/quickstart)。

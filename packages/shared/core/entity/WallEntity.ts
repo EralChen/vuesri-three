@@ -106,45 +106,25 @@ export class WallEntity implements ThreeComponent {
 
     })
 
-
-    // 纹理坐标
-    const t0 = new Vector2(0, 0) // 图片左下角
-    const t1 = new Vector2(1, 0) // 图片右下角
-    const t2 = new Vector2(1, 1) // 图片右上角
-    const t3 = new Vector2(0, 1) // 图片左上角
-    
     const geometry = new BufferGeometry()
-
-    // 转换Vector3对象为一个类型化数组
-    const vertices = new Float32Array(vector3List.length * 3)
-
-    for (let i = 0; i < vector3List.length; i++) {
-      vertices[i * 3] = vector3List[i].x
-      vertices[i * 3 + 1] = vector3List[i].y
-      vertices[i * 3 + 2] = vector3List[i].z
-    }
-
-
-
-    // 设置geometry的position属性
-    geometry.setAttribute('position', new BufferAttribute(vertices, 3))
+    geometry.setFromPoints(vector3List)
 
     // 矩形
-    geometry.setIndex([
+    const faceIndex = [
       0, 1, 2,
-      2, 3, 0,
-    ])
+      2, 1, 3,
+    ]
+    geometry.setIndex(faceIndex)
 
 
     // 设置uv属性
     const uv = new Float32Array(
-      [   
-        t0.x, t0.y,
-        t1.x, t1.y,
-      
-        t2.x, t2.y,
-        t3.x, t3.y,
-     
+      [ 
+        0,0,
+        1,1,
+        1,0,
+        0,1,
+        
       ],
     )
 

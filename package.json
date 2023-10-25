@@ -35,6 +35,7 @@
 		"@element-plus/icons-vue": "^2.1.0",
 		"@element-plus/utils": "workspace:*",
 		"@skzz/platform": "0.0.0-alpha.64",
+		"@turf/turf": "^6.5.0",
 		"@vuesri-three/api": "workspace:*",
 		"@vuesri-three/components": "workspace:*",
 		"@vuesri-three/composables": "workspace:*",

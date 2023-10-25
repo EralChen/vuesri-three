@@ -30,7 +30,6 @@ export default defineComponent({
     })
 
 
-
     renderer.layers.add(layer)
     
     onUnmounted(() => {
