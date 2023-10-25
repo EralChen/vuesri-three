@@ -56,8 +56,8 @@
 	"scripts": {
 		"dev": "pnpm run -C docs dev",
 		"lint": "eslint --fix app/**/*.{ts,tsx,vue}",
-		"build": "pnpm run -C app build",
-		"lib:build": "gulp -f scripts/build/index.ts",
+		"app:build": "pnpm run -C app build",
+		"build": "gulp -f scripts/build/index.ts",
 		"stub": "pnpm run -r --parallel stub",
 		"postinstall": "pnpm stub",
 		"docs:dev": "pnpm run -C docs dev",

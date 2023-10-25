@@ -16,7 +16,7 @@ export class WallLayer implements ThreeLayer {
   
   alphaMapUrl: string
 
-  get lines ():[Position, Position][] {
+  getLines ():[Position, Position][] {
     const res: [Position, Position][] = []
     
     if (!this.geometry) return res
@@ -66,7 +66,7 @@ export class WallLayer implements ThreeLayer {
   updateEntities (): void {
   
     this.entities = []
-    this.lines.forEach(line => {
+    this.getLines().forEach(line => {
       const entity = this.createEntity({
         path: [line[0], line[1]],
       })
