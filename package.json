@@ -31,7 +31,7 @@
 		"vitest": "^0.18.1"
 	},
 	"dependencies": {
-		"@arcgis/core": "^4.25.5",
+		"@arcgis/core": "^4.28.0",
 		"@element-plus/icons-vue": "^2.1.0",
 		"@element-plus/utils": "workspace:*",
 		"@skzz/platform": "0.0.0-alpha.64",

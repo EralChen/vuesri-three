@@ -1,7 +1,6 @@
 import { externalRenderers } from '@vuesri/core/arcgis'
-import { AmbientLight, Color, DirectionalLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three'
-import { ThreeLayer } from './types'
-
+import { AmbientLight, AxesHelper, Color, DirectionalLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three'
+import { ThreeLayer } from '@vuesri-three/shared/types'
 
 export class ThreeRenderer {
   view: __esri.SceneView
@@ -15,8 +14,14 @@ export class ThreeRenderer {
 
   constructor (e: {
     view: __esri.SceneView,
+    axesHelper?: boolean,
   }) {
     this.view = e.view
+
+    if (e.axesHelper) {
+      this.scene.add(new AxesHelper(10000000))
+    }
+
     externalRenderers.add(e.view, this)
   }
 
@@ -33,7 +38,11 @@ export class ThreeRenderer {
     })
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setViewport(0, 0, this.view.width, this.view.height)
+
     this.renderer.autoClear = false
+    this.renderer.autoClearDepth = false // 定义renderer是否清除深度缓存
+    this.renderer.autoClearStencil = false // 定义renderer是否清除模板缓存
+    this.renderer.autoClearColor = false // 定义renderer是否清除颜色缓存
 
     // setup scene lighting
     this.scene.add(this.ambient)
@@ -91,7 +100,12 @@ export class ThreeRenderer {
 
     
     this.layers.forEach(layer => {
-      layer.render(context)
+      layer.render({
+        context,
+        renderer: this.renderer as THREE.WebGLRenderer,
+        scene: this.scene,
+        view: this.view,
+      })
     })
 
     this.renderer?.resetState()
@@ -108,7 +122,12 @@ export class ThreeRenderer {
   public dispose (context: __esri.RenderContext): void {
 
     this.layers.forEach(layer => {
-      layer.dispose(context)
+      layer.dispose({
+        context,
+        renderer: this.renderer as THREE.WebGLRenderer,
+        scene: this.scene,
+        view: this.view,
+      })
     })
     this.scene.remove(this.ambient)
     this.scene.remove(this.sun)

@@ -1,8 +1,11 @@
 // import { PropType } from 'vue'
 import { LoadEvent } from './types'
-// export const props = {
-
-// }
+export const props = {
+  axesHelper: {
+    type: Boolean,
+    default: false,
+  },
+}
 
 export const emits = {
   load: (e: LoadEvent) => e,

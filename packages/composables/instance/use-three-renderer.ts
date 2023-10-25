@@ -1,9 +1,9 @@
 import { inject } from 'vue'
-import { __VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { ThreeRenderer } from '@vuesri-three/shared/core'
 
 export const useThreeRenderer = () => {
   const threeRenderer = inject<
-    __VaThreeRenderer.ThreeRenderer | null
+    ThreeRenderer | null
   >('vaThreeRenderer', null)
 
   if (!threeRenderer) {

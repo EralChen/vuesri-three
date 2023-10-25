@@ -4,11 +4,12 @@ import { __VaThreeRenderer } from '@vuesri-three/components/three-renderer'
 import { BoxGeometry, BufferGeometry, Clock, Material, MathUtils, Matrix4, Mesh, MeshStandardMaterial } from 'three'
 import { externalRenderers, SpatialReference } from '@vuesri/core/arcgis'
 import { useThreeRenderer } from '@vuesri-three/composables'
+import { ThreeLayerContext, ThreeLayer } from '@vuesri/three'
 
 const renderer = useThreeRenderer()
 
 
-class ExampleLayer implements __VaThreeRenderer.ThreeLayer {
+class ExampleLayer implements ThreeLayer {
       
   private clock: Clock = new Clock()
   private mesh?: Mesh<BufferGeometry, Material>
@@ -18,12 +19,13 @@ class ExampleLayer implements __VaThreeRenderer.ThreeLayer {
   setup (
     {
       scene, view,
-    }: __VaThreeRenderer.SetupEvent,
+    }: ThreeLayerContext,
   ) {
     let geometry = new BoxGeometry(100, 100, 100)
     let material = new MeshStandardMaterial({
-      color: 0xFF0000,
+      color: 0xFFFF00,
       flatShading: true,
+      opacity: 1,
     })
 
     let WGS84Position = [120, 30, 0]

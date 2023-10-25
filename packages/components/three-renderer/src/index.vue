@@ -1,18 +1,20 @@
 <script lang="ts">
-import { emits } from './ctx'
+import { emits, props } from './ctx'
 import { defineComponent, provide } from 'vue'
 import { useSceneView } from '@vuesri/core/composables'
-import { ThreeRenderer } from './ThreeRenderer'
+import { ThreeRenderer } from '@vuesri-three/shared/core'
+
 
 export default defineComponent({
   name: 'VaThreeRenderer',
-  // props,
+  props,
   emits,
   setup (props, { emit }) {
     const view = useSceneView()
     
     const threeRenderer = new ThreeRenderer({
       view: view,
+      axesHelper: props.axesHelper,
     })
 
     provide('vaThreeRenderer', threeRenderer)

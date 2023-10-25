@@ -1,10 +1,8 @@
 
+import { ThreeRenderer } from '@vuesri-three/shared/core'
 import { ReturnVoid } from '@vunk/core'
-import type { ThreeRenderer } from './ThreeRenderer'
 
-export {
-  ThreeRenderer,
-}
+
 
 export interface SetupEvent {
   context: __esri.RenderContext
@@ -13,11 +11,7 @@ export interface SetupEvent {
   view: __esri.SceneView
 }
 
-export interface ThreeLayer {
-  setup (e: SetupEvent): void;
-  render(context: __esri.RenderContext): void;
-  dispose(context: __esri.RenderContext): void;
-}
+
 
 
 export interface LoadEvent {

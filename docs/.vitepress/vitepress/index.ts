@@ -8,11 +8,12 @@ import 'element-plus/dist/index.css'
 
 // for dark mode
 import 'element-plus/theme-chalk/src/dark/css-vars.scss'
-
+import './init-esri'
 import './styles/css-vars.scss'
 import './styles/app.scss'
 
 import 'uno.css'
+
 
 import VPApp from './components/vp-app.vue'
 import VPDemo from './components/vp-demo.vue'

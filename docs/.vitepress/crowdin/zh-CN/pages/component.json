@@ -7,5 +7,14 @@
         "text": "ThreeRenderer"
       }
     ]
+  },
+  "layer": {
+    "text": "Layer 图层",
+    "children": [
+      {
+        "link": "/wall-layer",
+        "text": "WallLayer"
+      }
+    ]
   }
 }
