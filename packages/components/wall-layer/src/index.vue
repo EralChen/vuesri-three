@@ -1,5 +1,5 @@
 <script lang="ts">
-import { WallLayer } from '@vuesri-three/shared/core/layers'
+import { WallLayer } from '@vuesri-three/shared/core'
 import { props, emits } from './ctx'
 import { defineComponent, onUnmounted, watchEffect } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'

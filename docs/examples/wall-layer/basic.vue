@@ -10,11 +10,14 @@ const viewOptions:__esri.SceneViewProperties = {
 const geometry = new Polyline({
   paths: [
     [
-      [120, 30],
-   
       [121, 31],
+      [120, 30],
     ],
-
+   
+    [
+      [120, 30],
+      [121.15803278368847, 30.84917751352612],
+    ],
   ],
 })
 </script>

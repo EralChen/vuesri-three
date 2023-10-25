@@ -1,2 +1,3 @@
 export * from './ThreeRenderer'
-export * from './layers'
+export * from './layer'
+export * from './entity'

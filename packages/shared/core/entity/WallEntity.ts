@@ -1,10 +1,10 @@
 import { externalRenderers } from '@vuesri/core/arcgis'
-import { ThreeLayerContext, ThreeLayer } from '@vuesri/three'
+import { ThreeLayerContext, ThreeComponent } from '@vuesri/three'
 import * as webMercatorUtils from '@arcgis/core/geometry/support/webMercatorUtils'
 import { Matrix4, Vector2, Vector3, Mesh, MeshBasicMaterial, DoubleSide, BufferGeometry, BufferAttribute, TextureLoader, Texture, RepeatWrapping } from 'three'
 
 
-export class WallLayer implements ThreeLayer {
+export class WallEntity implements ThreeComponent {
 
   private alphaMesh: Mesh
 
@@ -19,6 +19,8 @@ export class WallLayer implements ThreeLayer {
 
   private alphaMapUrl: string
   private alphaMap: Texture
+
+  private path: number[][]
 
   updateTexture (): void {
     if (!this.textureUrl) return
@@ -51,58 +53,56 @@ export class WallLayer implements ThreeLayer {
     const transformation = new Array(16)
     const vector3List: Vector3[] = [] // 顶点数组
 
-    const paths = this.getPaths()
-    paths.forEach(path => {
+    const path = this.getPath()
+    if (!path.length) return
 
-      path.forEach((point) => {
+    path.forEach((point) => {
 
-        // 将经纬度坐标转换为xy值
-        const pointXY = webMercatorUtils.lngLatToXY(point[0], point[1])
+      // 将经纬度坐标转换为xy值
+      const pointXY = webMercatorUtils.lngLatToXY(point[0], point[1])
 
-        let coordinateTransformAt = externalRenderers.renderCoordinateTransformAt(
-          e.view,
-          [pointXY[0], pointXY[1], 0],
-          e.view.spatialReference,
-          transformation,
-        )
+      let coordinateTransformAt = externalRenderers.renderCoordinateTransformAt(
+        e.view,
+        [pointXY[0], pointXY[1], 0],
+        e.view.spatialReference,
+        transformation,
+      )
 
-        const transform = new Matrix4() // 变换矩阵
+      const transform = new Matrix4() // 变换矩阵
     
 
-        transform.fromArray(coordinateTransformAt)
+      transform.fromArray(coordinateTransformAt)
 
 
-        vector3List.push(
-          new Vector3(
-            transform.elements[12],
-            transform.elements[13],
-            transform.elements[14],
-          ),
-        )
+      vector3List.push(
+        new Vector3(
+          transform.elements[12],
+          transform.elements[13],
+          transform.elements[14],
+        ),
+      )
 
-        coordinateTransformAt = externalRenderers.renderCoordinateTransformAt(
-          e.view,
-          [pointXY[0], pointXY[1], this.getHeight()],
-          e.view.spatialReference,
-          transformation,
-        )
+      coordinateTransformAt = externalRenderers.renderCoordinateTransformAt(
+        e.view,
+        [pointXY[0], pointXY[1], this.getHeight()],
+        e.view.spatialReference,
+        transformation,
+      )
 
-        transform.fromArray(coordinateTransformAt)
+      transform.fromArray(coordinateTransformAt)
 
-        vector3List.push(
-          new Vector3(
-            transform.elements[12],
-            transform.elements[13],
-            transform.elements[14],
-          ),
-        )
+      vector3List.push(
+        new Vector3(
+          transform.elements[12],
+          transform.elements[13],
+          transform.elements[14],
+        ),
+      )
 
 
 
         
         
-
-      })
 
     })
 
@@ -136,13 +136,15 @@ export class WallLayer implements ThreeLayer {
     ])
 
 
-    // 设置uv属性, 从下到上
+    // 设置uv属性
     const uv = new Float32Array(
-      [
+      [   
+        t0.x, t0.y,
         t1.x, t1.y,
+      
         t2.x, t2.y,
         t3.x, t3.y,
-        t0.x, t0.y,
+     
       ],
     )
 
@@ -183,7 +185,7 @@ export class WallLayer implements ThreeLayer {
 
   }
 
-  render (): void {
+  render (e: ThreeLayerContext): void {
     const texture = this.getTexture()
     if (!texture) return
     
@@ -239,14 +241,15 @@ export class WallLayer implements ThreeLayer {
   getGeometry (): __esri.Geometry {
     return this.geometry
   }
-  getPaths (): number[][][] {
-    const geometry = this.getGeometry() as __esri.Polyline
+ 
 
-    if (geometry.type === 'polyline') { 
-      return geometry.paths
-    }
-
-    return []
+  getPath (): number[][] {
+    return this.path
+  }
+  setPath (path: number[][]): void {
+    this.path = path
   }
 
+
 }
+
