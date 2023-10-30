@@ -51,8 +51,8 @@ importers:
         specifier: ^9.12.0
         version: 9.13.0(vue@3.3.6)
       '@vunk/core':
-        specifier: 0.0.0-alpha.106
-        version: 0.0.0-alpha.106
+        specifier: 0.0.0-alpha.107
+        version: 0.0.0-alpha.107
       '@vunk/form':
         specifier: ^1.1.52
         version: 1.1.52
@@ -371,8 +371,6 @@ importers:
         version: 3.3.4
 
   packages/entry: {}
-
-  packages/icons: {}
 
   packages/shared:
     dependencies:
@@ -4873,14 +4871,14 @@ packages:
       - vue
     dev: false
 
-  /@vunk/core@0.0.0-alpha.106:
-    resolution: {integrity: sha512-xTbFSzES0KH5wEgffCs3j3GIuhB3yLH0NWx+PRWhfba/rTqLgWkohEyAFuli3IMeFUzpFrfLwxHWxM4CF4GOyg==}
+  /@vunk/core@0.0.0-alpha.107:
+    resolution: {integrity: sha512-buC9p6a4n+5CXuyG3r0bKPiobDaSZtBEz2jt2/idEaAXXZ3kKMbXNV+fW2ubhSbtwGu4ZtBbHi6o39/FLt4zzg==}
     dev: false
 
   /@vunk/form@1.1.52:
     resolution: {integrity: sha512-qbYqGJd5FjTvCviGQq2htCU946jL678tgE3Rm/u+05oJwlzEwXBd0bNw3eyJd8Ey+eVf2oiuD2sdKjgDeo3b8A==}
     dependencies:
-      '@vunk/core': 0.0.0-alpha.106
+      '@vunk/core': 0.0.0-alpha.107
     dev: false
 
   /@vunk/skzz@0.0.0-alpha.106:

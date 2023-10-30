@@ -14,7 +14,7 @@ export const props = {
     default: undefined,
   },
 
-  alphaMapUrl: {
+  alphaTextureUrl: {
     type: String,
     default: undefined,
   },

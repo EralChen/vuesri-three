@@ -1,20 +1,69 @@
 import { ThreeLayerContext, ThreeLayer } from '@vuesri/three'
-import { WallEntity } from '@vuesri-three/shared/core'
+import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-three/shared/core'
 // import { Polyline } from '@vuesri/core/arcgis'
 import type { Position } from '@turf/turf'
+import { DoubleSide, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
 
 
-export class WallLayer implements ThreeLayer {
+export interface WallLayerProperties {
+  height?: number
+  textureUrl?: string
+  alphaMapUrl?: string
+  geometry?: __esri.Geometry
+}
 
+
+export class WallLayer extends MaterialManager(
+  TextureManager(Layer),
+) implements ThreeLayer {
+  height = 0
   entities: WallEntity[] = []
+  geometry: __esri.Geometry | undefined
 
-  geometry: __esri.Geometry
+  constructor (e: WallLayerProperties = {}) {
+    super()
+    e.height && (this.height = e.height)
+    e.textureUrl && (this.textureUrl = e.textureUrl)
+    e.alphaMapUrl && (this.alphaTextureUrl = e.alphaMapUrl)
+    e.geometry && (this.geometry = e.geometry)
 
-  height: number
-
-  textureUrl: string
+  }
   
-  alphaMapUrl: string
+  
+  setup (e: ThreeLayerContext): void {
+    super.setup(e)
+
+    this.baseMaterial = new MeshBasicMaterial({
+      color: 0xff0000,
+      side: DoubleSide,
+      transparent: true, // 必须设置为true,alphaMap才有效果
+      depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
+      alphaMap: this.alphaTexture,
+    })
+    
+    this.material = new MeshBasicMaterial({
+      side: DoubleSide,
+      transparent: true,
+      depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
+      map: this.texture,
+    })
+
+    
+    this.entities.forEach((entity) => {
+      entity.setup(e)
+    })
+  }
+  render (e: ThreeLayerContext): void {
+    this.entities.forEach((entity) => {
+      entity.render(e)
+    })
+  }
+  dispose (e: ThreeLayerContext): void {
+    this.entities.forEach((entity) => {
+      entity.dispose(e)
+    })
+  }
+
 
   getLines ():[Position, Position][] {
     const res: [Position, Position][] = []
@@ -63,65 +112,124 @@ export class WallLayer implements ThreeLayer {
     return res
   }
 
-  updateEntities (): void {
-  
-    this.entities = []
-    this.getLines().forEach(line => {
-      const entity = this.createEntity({
-        path: [line[0], line[1]],
+  updateEntities (e: {
+    geometry?: __esri.Geometry,
+    height?: number,
+  }): void {
+    e.geometry && (this.geometry = e.geometry)
+
+    e.height && (this.height = e.height)
+
+    if (typeof e.height === 'number') {
+      this.height = e.height
+    }
+
+    const lines = this.getLines()
+    this.entities = lines.map((line) => {
+      return this.createEntity({
+        path: line,
+        height: this.height,
       })
-      this.entities.push(entity)
     })
-    
-  }
-
-  setGeometry (geometry: __esri.Geometry): void {
-    this.geometry = geometry
-    this.updateEntities()
-  }
 
 
-  setHeight (height: number): void {
-    this.height = height
-    this.entities.forEach(entity => entity.setHeight(height))
-  }
-
-  setTextureUrl (url = ''): void {
-    this.textureUrl = url
-    this.entities.forEach(entity => entity.setTextureUrl(url))
-  }
-
-  setAlphaMapUrl (url = ''): void {
-    this.alphaMapUrl = url
-    this.entities.forEach(entity => entity.setAlphaMapUrl(url))
-  }
-
-  setup (e: ThreeLayerContext) {
-    this.entities.forEach(entity => entity.setup(e))
-  }
-  render (e: ThreeLayerContext) {
-    this.entities.forEach(entity => entity.render(e))
-  }
-  dispose (e: ThreeLayerContext) {
-    this.entities.forEach(entity => entity.dispose(e))
-    this.entities = []
   }
 
   createEntity (e: {
-    path: number[][]
-  }) {
-    const entity = new WallEntity()
-
-    entity.setPath(e.path)
-    entity.setAlphaMapUrl(this.alphaMapUrl)
-    entity.setTextureUrl(this.textureUrl)
-    entity.setHeight(this.height)
-
+    path: [Position, Position],
+    height: number,
+  }): WallEntity {
+    const entity = new WallEntity({
+      layer: this,
+      path: e.path,
+      height: e.height,
+    })
     return entity
-
   }
 
- 
-  
+  createTexture (p: {
+    textureUrl: string
+  }): Texture {
+    const texture = new TextureLoader().load(p.textureUrl)
+    texture.wrapS = RepeatWrapping
+    texture.wrapT = RepeatWrapping
+    this.texture = texture
+    return this.texture
+  }
+
+
+  private _alphaTextureUrl = ''
+  get alphaTextureUrl (): string {
+    return this._alphaTextureUrl
+  }
+
+  /**
+   * @description 设置透明纹理
+   * @param {string} v - 透明纹理地址
+   */
+  set alphaTextureUrl (v: string) {
+    if (v === this._alphaTextureUrl) {
+      return
+    }
+
+    const texture = this.createTexture({
+      textureUrl: v,
+    })
+    this._alphaTextureUrl = v
+    this.alphaTexture = texture
+    if (this.baseMaterial) {
+      this.baseMaterial.alphaMap = texture
+    }
+  }
+
+  private _textureUrl = ''
+  get textureUrl (): string {
+    return this._textureUrl
+  }
+
+  /**
+   * @description 设置纹理
+   * @param {string} v - 纹理地址
+   */
+  set textureUrl (v: string) {
+    if (v === this._textureUrl) {
+      return
+    }
+    const texture = this.createTexture({
+      textureUrl: v,
+    })
+    this._textureUrl = v
+    this.texture = texture
+
+    const material = this.getMaterial()
+    if (material) {
+      material.map = texture
+    }
+    
+  }
+
+  readonly baseMaterialKey = 'baseMaterial' as const
+  get baseMaterial (): MeshBasicMaterial {
+    return this.materialMap
+      .get(this.baseMaterialKey) as MeshBasicMaterial
+  }
+  set baseMaterial (v: MeshBasicMaterial) {
+    this.materialMap.set(this.baseMaterialKey, v)
+  }
+
+  readonly alphaTextureKey = 'alphaTexture' as const
+
+  get alphaTexture (): Texture {
+    return this.textureMap
+      .get(this.alphaTextureKey) as Texture
+  }
+  set alphaTexture (v: Texture) {
+    this.textureMap.set(this.alphaTextureKey, v)
+  }
+
+  getMaterial (): MeshBasicMaterial {
+    return this.material as MeshBasicMaterial
+  }
+
 }
 

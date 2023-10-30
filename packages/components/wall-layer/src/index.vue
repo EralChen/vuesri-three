@@ -14,20 +14,29 @@ export default defineComponent({
 
     watchEffect(() => {
       if (!props.geometry) return
-      layer.setGeometry(props.geometry)
+
+      layer.updateEntities({
+        geometry: props.geometry,
+        height: props.height,
+      })
+
     })
 
     watchEffect(() => {
-      if (typeof props.height !== 'number') return
-      layer.setHeight(props.height)
-    })
-    watchEffect(() => {
-      layer.setAlphaMapUrl(props.alphaMapUrl)
+      if (!props.alphaTextureUrl) return
+
+      layer.alphaTextureUrl = props.alphaTextureUrl
     })
 
     watchEffect(() => {
-      layer.setTextureUrl(props.textureUrl)
+      if (!props.textureUrl) return
+
+      layer.textureUrl = props.textureUrl
     })
+
+  
+
+
 
 
     renderer.layers.add(layer)

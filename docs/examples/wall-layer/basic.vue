@@ -54,7 +54,7 @@ const geometry = new Polygon({
       <VaWallLayer 
         :geometry="geometry"
         :height="50"
-        :alpha-map-url="'/ThreeRenderer/images/wall_layer_alpha_map.png'"
+        :alpha-texture-url="'/ThreeRenderer/images/wall_layer_alpha_map.png'"
         :texture-url="'/ThreeRenderer/images/wall_layer_texture.png'"
       >
       </VaWallLayer>
