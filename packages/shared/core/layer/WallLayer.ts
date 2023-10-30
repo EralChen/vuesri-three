@@ -39,6 +39,8 @@ export class WallLayer extends MaterialManager(
       transparent: true, // 必须设置为true,alphaMap才有效果
       depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
       alphaMap: this.alphaTexture,
+      opacity: 0.1,
+    
     })
     
     this.material = new MeshBasicMaterial({
@@ -46,7 +48,9 @@ export class WallLayer extends MaterialManager(
       transparent: true,
       depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
       map: this.texture,
+      opacity: 0.6,
     })
+    
 
     
     this.entities.forEach((entity) => {

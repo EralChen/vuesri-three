@@ -52,7 +52,7 @@ export class WallEntity implements ThreeComponent {
     if (texture.offset.y <= 0) {
       texture.offset.set(0, 1)
     } else {
-      texture.offset.set(0, texture.offset.y - 0.0015)
+      texture.offset.set(0, texture.offset.y - 0.001)
     }
   }
   dispose (e: ThreeLayerContext): void {
