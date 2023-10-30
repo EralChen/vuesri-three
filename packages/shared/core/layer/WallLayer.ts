@@ -3,6 +3,7 @@ import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-thre
 // import { Polyline } from '@vuesri/core/arcgis'
 import type { Position } from '@turf/turf'
 import { DoubleSide, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
+import { Deferred } from '@vunk/core/shared/utils-promise'
 
 
 export interface WallLayerProperties {
@@ -19,6 +20,8 @@ export class WallLayer extends MaterialManager(
   height = 0
   entities: WallEntity[] = []
   geometry: __esri.Geometry | undefined
+
+  
 
   constructor (e: WallLayerProperties = {}) {
     super()
@@ -56,6 +59,7 @@ export class WallLayer extends MaterialManager(
     this.entities.forEach((entity) => {
       entity.setup(e)
     })
+    this.whenDef.resolve()
   }
   render (e: ThreeLayerContext): void {
     this.entities.forEach((entity) => {
@@ -116,10 +120,15 @@ export class WallLayer extends MaterialManager(
     return res
   }
 
-  updateEntities (e: {
+  async updateEntities (e: {
     geometry?: __esri.Geometry,
     height?: number,
-  }): void {
+  }) {
+    const ctx = await this.contextDef.promise
+    this.entities.forEach((entity) => {
+      entity.dispose(ctx)
+    })
+
     e.geometry && (this.geometry = e.geometry)
 
     e.height && (this.height = e.height)
@@ -130,10 +139,12 @@ export class WallLayer extends MaterialManager(
 
     const lines = this.getLines()
     this.entities = lines.map((line) => {
-      return this.createEntity({
+      const entity = this.createEntity({
         path: line,
         height: this.height,
       })
+      entity.setup(ctx)
+      return entity
     })
 
 
@@ -150,6 +161,8 @@ export class WallLayer extends MaterialManager(
     })
     return entity
   }
+
+
 
   createTexture (p: {
     textureUrl: string

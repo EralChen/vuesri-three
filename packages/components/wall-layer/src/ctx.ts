@@ -1,3 +1,4 @@
+import { Color } from 'three'
 import { PropType } from 'vue'
 
 export const props = {
@@ -16,6 +17,11 @@ export const props = {
 
   alphaTextureUrl: {
     type: String,
+    default: undefined,
+  },
+
+  color: {
+    type: Object as PropType<Color>,
     default: undefined,
   },
   

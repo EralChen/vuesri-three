@@ -45,6 +45,7 @@ export class WallEntity implements ThreeComponent {
   }
   
   render (e: ThreeLayerContext): void {
+    if (!this.mesh) return
     const material = this.mesh.material as MeshBasicMaterial
     const texture = material.map 
     if (!texture) return
@@ -56,8 +57,8 @@ export class WallEntity implements ThreeComponent {
     }
   }
   dispose (e: ThreeLayerContext): void {
-    this.alphaMesh.geometry.dispose()
-    this.mesh.geometry.dispose()
+    e.scene.remove(this.mesh)
+    e.scene.remove(this.alphaMesh)
   }
 
   async createBufferGeometry () {

@@ -22,6 +22,8 @@ export default defineComponent({
 
     })
 
+
+
     watchEffect(() => {
       if (!props.alphaTextureUrl) return
 
@@ -36,10 +38,15 @@ export default defineComponent({
 
   
 
-
-
-
     renderer.layers.add(layer)
+
+    watchEffect(() => {
+      const color = props.color
+      if (!color) return
+      layer.when().then(() => {
+        layer.baseMaterial.color = color
+      })
+    })
     
     onUnmounted(() => {
       renderer.layers.remove(layer)

@@ -16,6 +16,13 @@ export class Layer  {
  
   contextDef = new Deferred<ThreeLayerContext>()
 
+  protected whenDef = new Deferred<void>()
+
+
+  async when () {
+    return this.whenDef.promise
+  }
+
   setup (e: ThreeLayerContext): void {
     this.contextDef.resolve(e)
   }
