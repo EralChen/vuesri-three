@@ -8,6 +8,7 @@ import { Color } from 'three'
 const viewOptions:__esri.SceneViewProperties = {
   center: [104.06179498614645, 30.659871702738265],
   zoom: 18,
+  viewingMode: 'local',
 }
 const geometry2 = new Polyline({
   paths: [

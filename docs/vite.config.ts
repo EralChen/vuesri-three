@@ -54,6 +54,7 @@ export default defineConfig(async ({ mode }) => {
       fs: {
         allow: [projRoot],
       },
+      port: 9996,
     },
     resolve: {
       alias,
