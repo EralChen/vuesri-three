@@ -372,15 +372,7 @@ importers:
 
   packages/entry: {}
 
-  packages/shared:
-    dependencies:
-      qs:
-        specifier: ^6.11.0
-        version: 6.11.2
-    devDependencies:
-      '@types/qs':
-        specifier: ^6.9.7
-        version: 6.9.7
+  packages/shared: {}
 
   packages/stores: {}
 
@@ -4056,10 +4048,6 @@ packages:
 
   /@types/picomatch@2.3.0:
     resolution: {integrity: sha512-O397rnSS9iQI4OirieAtsDqvCj4+3eY1J+EPdNTKuHuRWIfUoGyzX294o8C4KJYaLqgSrd2o60c5EqCU8Zv02g==}
-    dev: true
-
-  /@types/qs@6.9.7:
-    resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
   /@types/qs@6.9.9:

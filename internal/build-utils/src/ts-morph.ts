@@ -1,4 +1,4 @@
-import { Project, SourceFile } from 'ts-morph'
+import { ModuleResolutionKind, Project, ScriptTarget, SourceFile } from 'ts-morph'
 import path from 'path'
 import { distTypesDir, pkgsEntryFile, workRoot } from '@lib-env/path'
 import { LIB_ALIAS, LIB_NAME } from '@lib-env/build-constants'
@@ -26,6 +26,8 @@ export async function genTypes (opts = {} as {
       noEmitOnError: true,
       strict: false,
       jsx: JsxEmit.Preserve,
+      moduleResolution: ModuleResolutionKind.NodeJs,
+      target: ScriptTarget.ESNext,
       disableSizeLimit: true,
       esModuleInterop: true,
       outDir: distTypesDir,

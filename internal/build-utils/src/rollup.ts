@@ -68,7 +68,10 @@ export async function rollupFile (opts: {
         output: 'index.css',
       }),
       vue(),
-      esbuild(), 
+      esbuild({
+        target: 'ESNext',
+        
+      }), 
       commonjs(),
     ],
     external: [
