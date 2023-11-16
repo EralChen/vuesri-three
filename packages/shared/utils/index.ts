@@ -11,6 +11,7 @@ export async function genEsriPoints (
   let serverPoints = new Array<__esri.PointProperties>(ps.length)
 
   ps.forEach((pointProperties, i) => {
+    if (!pointProperties) return
     if (
       pointProperties.spatialReference
       && pointProperties.spatialReference.wkid !== view.spatialReference.wkid
