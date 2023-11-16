@@ -3,6 +3,7 @@ import { WallLayer } from '@vuesri-three/shared/core'
 import { props, emits } from './ctx'
 import { defineComponent, onUnmounted, watchEffect } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
+import type {} from 'three'
 
 export default defineComponent({
   name: 'VaWallLayer',
@@ -36,7 +37,7 @@ export default defineComponent({
       layer.textureUrl = props.textureUrl
     })
 
-  
+    
 
     renderer.layers.add(layer)
 

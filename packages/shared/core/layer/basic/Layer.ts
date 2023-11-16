@@ -1,9 +1,9 @@
 import { ThreeLayerContext } from '@vuesri/three'
 import { Matrix4, Quaternion, Vector3 } from 'three'
 import { Deferred } from '@vunk/core/shared/utils-promise'
-import { Point, externalRenderers, esriConfig, SpatialReference } from '@vuesri/core/arcgis'
-import * as geometryService from '@arcgis/core/rest/geometryService'
-import ProjectParameters from '@arcgis/core/rest/support/ProjectParameters'
+import { externalRenderers } from '@vuesri/core/arcgis'
+
+import { createRenderCoordinates, genEsriPoints } from '@vuesri-three/shared/utils'
 
 
 export class Layer  {
@@ -29,55 +29,7 @@ export class Layer  {
 
   async genEsriPoints (ps: __esri.PointProperties[]) {
     const e = await this.contextDef.promise
-    const points = new Array<__esri.Point>(ps.length)
-    let serverPoints = new Array<__esri.PointProperties>(ps.length)
-
-    ps.forEach((pointProperties, i) => {
-      if (
-        pointProperties.spatialReference
-        && pointProperties.spatialReference.wkid !== e.view.spatialReference.wkid
-      ) {
-        serverPoints[i] = pointProperties
-      } else {
-        points[i] = new Point({
-          longitude: pointProperties.longitude,
-          latitude: pointProperties.latitude,
-          z: pointProperties.z,
-          spatialReference: e.view.spatialReference,
-        })
-      }
-    })
-
-
-    const realIndex: number[] = []
-    serverPoints = serverPoints.filter((sPoint, index) => {
-      if (sPoint) {
-        realIndex.push(index)
-        return true
-      }
-      return false
-    })
-
- 
-    if (!serverPoints.length) {
-      return points
-    }
-
-    const gs = await geometryService.project(
-      esriConfig.geometryServiceUrl,
-      new ProjectParameters({
-        geometries: serverPoints,
-        outSpatialReference: e.view.spatialReference,
-      }),
-    )
-      
-    gs.forEach((g, i) => {
-      points[realIndex[i]] = g as __esri.Point
-    })
-
-   
-
-    return points
+    return genEsriPoints(e.view, ps)
   }
 
 
@@ -133,33 +85,11 @@ export class Layer  {
     ps: __esri.PointProperties[],
   ) {
     const e = await this.contextDef.promise
-    await e.view.when()
 
-    const points = await this.genEsriPoints(ps)
-
-    const pos = points.reduce((a, point) => {
-      a.push( 
-        point.x, 
-        point.y, 
-        point.z ?? 0,
-      )
-      return a
-    }, [] as number[])
-
-    const res  = new Float32Array(pos.length)
-
-    externalRenderers.toRenderCoordinates(
+    return createRenderCoordinates(
       e.view,
-      pos,
-      0,
-      e.view.spatialReference,
-      res,
-      0,
-      points.length,
+      ps,
     )
-
-
-    return res
   }
 }
 

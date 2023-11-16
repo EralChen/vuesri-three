@@ -50,6 +50,7 @@
 		"@vunk/skzz": "0.0.0-alpha.106",
 		"chroma-js": "^2.4.2",
 		"element-plus": "npm:element-plus@latest",
+		"mitt": "^3.0.1",
 		"three": "^0.157.0",
 		"vue": "^3.3.6"
 	},

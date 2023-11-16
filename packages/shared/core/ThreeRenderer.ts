@@ -2,15 +2,26 @@ import { externalRenderers } from '@vuesri/core/arcgis'
 import { AmbientLight, AxesHelper, Color, DirectionalLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three'
 import { ThreeLayer } from '@vuesri-three/shared/types'
 
+
 export class ThreeRenderer {
   view: __esri.SceneView
   layers: ThreeLayerCollection = new ThreeLayerCollection()
+    
 
   private renderer?: THREE.WebGLRenderer
-  private scene: THREE.Scene = new Scene()
-  private camera: THREE.PerspectiveCamera = new PerspectiveCamera()
+  readonly scene: THREE.Scene = new Scene()
+  readonly camera: THREE.PerspectiveCamera = new PerspectiveCamera()
   private ambient: THREE.AmbientLight = new AmbientLight(0xffffff, 0.5)
   private sun: THREE.DirectionalLight = new DirectionalLight(0xffffff, 0.5)
+
+
+  getRenderer () {
+    if (!this.renderer) {
+      throw new Error('no renderer available')
+    }
+
+    return this.renderer 
+  }
 
   constructor (e: {
     view: __esri.SceneView,
@@ -36,8 +47,18 @@ export class ThreeRenderer {
       premultipliedAlpha: false,
       preserveDrawingBuffer: true,
     })
+    
     this.renderer.setPixelRatio(window.devicePixelRatio)
+ 
+
+
     this.renderer.setViewport(0, 0, this.view.width, this.view.height)
+
+    this.resize()
+
+    this.view.watch(['width', 'height'], () => {
+      this.resize()
+    })
 
     this.renderer.autoClear = false
     this.renderer.autoClearDepth = false // 定义renderer是否清除深度缓存
@@ -73,6 +94,7 @@ export class ThreeRenderer {
     )
 
     this.camera.projectionMatrix.fromArray(context.camera.projectionMatrix)
+    // this.camera.updateProjectionMatrix()
 
     const sunLight = context.sunLight
 
@@ -134,6 +156,16 @@ export class ThreeRenderer {
     this.ambient.dispose()
     this.sun.dispose()
     this.renderer?.dispose()
+  }
+
+  public resize () {
+    const aspect = this.view.width / this.view.height
+    const renderer = this.getRenderer()
+    if (isNaN(aspect)) return
+    this.camera.aspect = aspect
+    this.camera.updateProjectionMatrix()
+    renderer.setSize(this.view.width, this.view.height)
+
   }
 
 
