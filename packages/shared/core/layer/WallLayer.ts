@@ -44,6 +44,7 @@ export class WallLayer extends MaterialManager(
       alphaMap: this.alphaTexture,
       opacity: 0.1,
     
+    
     })
     
     this.material = new MeshBasicMaterial({
