@@ -5,6 +5,8 @@ import { VaWallLayer } from '@vuesri-three/components/wall-layer'
 import { Polyline, Polygon, Extent } from '@vuesri/core/arcgis'
 import { shallowRef } from 'vue'
 import { Color } from 'three'
+const base = import.meta.env.VITE_BASE_URL
+
 const viewOptions:__esri.SceneViewProperties = {
   center: [104.06179498614645, 30.659871702738265],
   zoom: 18,
@@ -77,8 +79,8 @@ const color = shallowRef(
       <VaWallLayer 
         :geometry="geometry"
         :height="50"
-        :alpha-texture-url="'/ThreeRenderer/images/wall_layer_alpha_map.png'"
-        :texture-url="'/ThreeRenderer/images/wall_layer_texture.png'"
+        :alpha-texture-url="base + '/ThreeRenderer/images/wall_layer_alpha_map.png'"
+        :texture-url="base + '/ThreeRenderer/images/wall_layer_texture.png'"
         :color="color"
       >
       </VaWallLayer>
