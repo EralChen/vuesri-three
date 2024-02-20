@@ -1,0 +1,24 @@
+{
+  "basic": {
+    "text": "Basic 基础组件",
+    "children": [
+      {
+        "link": "/three-renderer",
+        "text": "ThreeRenderer"
+      }
+    ]
+  },
+  "layer": {
+    "text": "Layer 图层",
+    "children": [
+      {
+        "link": "/wall-layer",
+        "text": "WallLayer"
+      },
+      {
+        "link": "/line-layer",
+        "text": "LineLayer"
+      }
+    ]
+  }
+}

@@ -4,7 +4,7 @@ import { taskWithName } from '@lib-env/shared'
 import fsp from 'fs/promises'
 import path from 'path'
 import { pkgsComponentsDir } from '@lib-env/path'
-import { camelize, capitalize } from '@element-plus/utils'
+import { camelize, capitalize } from 'vue'
 import { createCtxStr, createIndexStr, createTypesStr, createVueStr } from './temp'
 interface MriData {
   name: string // aaa-bbb

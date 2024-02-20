@@ -3,7 +3,6 @@ import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-thre
 // import { Polyline } from '@vuesri/core/arcgis'
 import type { Position } from '@turf/turf'
 import { DoubleSide, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
-import { Deferred } from '@vunk/core/shared/utils-promise'
 
 
 export interface WallLayerProperties {
@@ -56,7 +55,6 @@ export class WallLayer extends MaterialManager(
     })
     
 
-    
     this.entities.forEach((entity) => {
       entity.setup(e)
     })

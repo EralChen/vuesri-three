@@ -8,6 +8,10 @@ import esbuild from 'rollup-plugin-esbuild'
 import { libExternal } from '@lib-env/build-constants'
 import commonjs from '@rollup/plugin-commonjs'
 import vueJsx from 'unplugin-vue-jsx/rollup'
+import alias from '@rollup/plugin-alias'
+import multiInput from 'rollup-plugin-multi-input'
+
+
 export function rollupComponents (opts: {
   files: string[],
   entry: (file: string) => string,
@@ -19,6 +23,15 @@ export function rollupComponents (opts: {
     const inputConfig: InputOptions = {
       input: entry,
       plugins: [
+        alias({
+          entries: [
+            { find: 'esri', replacement: '@arcgis/core' },
+          ],
+        }),
+        nodeResolve({
+          extensions: ['.json', '.js',  '.ts'],
+          browser: true,
+        }),
         css({
           output: 'index.css',
         }),
@@ -26,10 +39,8 @@ export function rollupComponents (opts: {
         vue({
           preprocessStyles: false,
         }),
-        vueJsx(),
-        nodeResolve({
-          extensions: ['.json', '.js',  '.ts'],
-        }),
+        vueJsx({}),
+ 
         esbuild(),
         commonjs(),
       ],
@@ -51,15 +62,22 @@ export function rollupComponents (opts: {
 }
 
 export async function rollupFile (opts: {
-  inputFile: string,
-  outputFile: string
+  inputFile: string | string[],
+  outputFile?: string
+  outputDir?: string
   external?: (string|RegExp)[]
   format: 'umd'|'esm'
+  multi?: boolean
 }) {
   const inputConfig = {
     input: opts.inputFile,
     
     plugins: [
+      alias({
+        entries: [
+          { find: 'esri', replacement: '@arcgis/core' },
+        ],
+      }),
       nodeResolve({
         extensions: ['.js', '.json', '.ts'],
         browser: true,
@@ -68,22 +86,29 @@ export async function rollupFile (opts: {
         output: 'index.css',
       }),
       vue(),
-      esbuild({
-        target: 'ESNext',
-        
-      }), 
+      esbuild(), 
       commonjs(),
     ],
     external: [
       ...libExternal,
       ...opts.external ?? [],
     ],
+    
   }
+
+  opts.multi && inputConfig.plugins.push(multiInput())
+
   const outConfig: OutputOptions = {
     format: 'esm',
-    file: opts.outputFile,
     paths: fixPath,
-  } 
+    inlineDynamicImports: true,
+  }
+  opts.multi && (outConfig.inlineDynamicImports = false)
+
+  opts.outputFile && (outConfig.file = opts.outputFile)
+  opts.outputDir && (outConfig.dir = opts.outputDir)
+
+
   const bundle = await rollup(inputConfig)
   return bundle.write(outConfig)
 

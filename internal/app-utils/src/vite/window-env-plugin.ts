@@ -1,7 +1,7 @@
 import { PluginOption } from 'vite'
 import { getEnv } from '../env'
 
-export function windowEnvPlugin (appRoot: string): PluginOption {
+export function windowEnvPlugin (): PluginOption {
   let mode = ''
   
   return {
@@ -20,13 +20,9 @@ export function windowEnvPlugin (appRoot: string): PluginOption {
       return code
     },
     transformIndexHtml (html) {
-      const obj = getEnv(appRoot, mode)
-      Reflect.deleteProperty(obj, 'NODE_ENV')
-      // Reflect.deleteProperty(obj, 'VITE_BASE_URL')
-      
       return html.replace(`<script id="env"></script>`,
         `<script id="env">
-          ${'window.__env__ =' + JSON.stringify(obj, null, 2)}
+          ${'window.__env__ =' + JSON.stringify(getEnv(mode), null, 2)}
         </script>`)
     },
   }

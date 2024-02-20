@@ -1,101 +1,159 @@
-import path from 'path'
-import Inspect from 'vite-plugin-inspect'
-import { defineConfig, loadEnv } from 'vite'
-import DefineOptions from 'unplugin-vue-define-options/vite'
-import UnoCSS from 'unocss/vite'
-import mkcert from 'vite-plugin-mkcert'
-import glob from 'fast-glob'
+import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import Components from 'unplugin-vue-components/vite'
+import markdown from 'unplugin-vue-markdown/vite'
+import vike from 'vike/plugin'
+
+import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
+import { unocssPreferences , containerPlugin, getDefaultHighlight, preWrapperPlugin } from '@lib-env/app-utils'
+import { appRoot, srcRoot } from './path.config'
+
+import path from 'path'
+
+import Inspect from 'vite-plugin-inspect'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import { getPackageDependencies } from '@lib-env/build-utils'
-import { workRoot as projRoot, docPackage, entryPackage } from '@lib-env/path'
 
-import { MarkdownTransform } from './.vitepress/plugins/markdown-transform'
+import Components from 'unplugin-vue-components/vite'
 
-import type { Alias } from 'vite'
+import { MarkdownTransform } from './vitepress/plugins/markdown-transform'
+import { linkPlugin } from './vitepress/plugins/link'
+import { anchorPlugin } from './vitepress/plugins/anchor'
 
-const alias: Alias[] = [
+
+
+const alias: AliasOptions = [
   {
-    find: '~/',
-    replacement: `${path.resolve(__dirname, './.vitepress/vitepress')}/`,
+    find: '#s',
+    replacement: srcRoot,
   },
   {
-    find: '_e/',
-    replacement: `${path.resolve(__dirname, './examples')}/`,
+    find: '#r',
+    replacement: path.resolve(appRoot,'./renderer'),
+  },
+  {
+    find: '#p',
+    replacement: path.resolve(appRoot,'./pages'),
+  },
+  {
+    find: '#e',
+    replacement: path.resolve(appRoot,'./examples'),
+  },
+  {
+    find: 'esri/',
+    replacement: '@arcgis/core/',
+  },
+
+  {
+    find: '#',
+    replacement: path.resolve(appRoot),
   },
 ]
 
+
 export default defineConfig(async ({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
 
-  const { dependencies: epDeps } = getPackageDependencies(entryPackage)
-  const { dependencies: docsDeps } = getPackageDependencies(docPackage)
+  const env = loadEnv(mode, process.cwd()) as unknown as ImportMetaEnv
+  const base = env.VITE_BASE_URL + '/'
 
-  const optimizeDeps = [...new Set([...epDeps, ...docsDeps])].filter(
-    (dep) =>
-      !dep.startsWith('@types/') &&
-      // [TODO] dep
-      !['@element-plus/metadata', 'element-plus'].includes(dep),
-  )
-
-  optimizeDeps.push(
-    ...(await glob(['dayjs/plugin/*.js'], {
-      cwd: path.resolve(projRoot, 'node_modules'),
-      onlyFiles: true,
-    })),
-  )
-
-  return {
-    server: {
-      host: true,
-      https: !!env.HTTPS,
-      fs: {
-        allow: [projRoot],
-      },
-      port: 9996,
-    },
+  const config: UserConfig = {
+    
+    base,
     resolve: {
       alias,
     },
-    build: {
-      target: 'esnext',
+    
+    server: {
+      port: 9995,
     },
+    ssr: {
+      noExternal: [
+        '@vuesri-core/**',
+        '@arcgis/core/**',
+        '@vunk/skzz/**',
+        '@skzz/platform/**',
+        'esri/**',
+        '@vunk/gsap/**',
+      ],
+    
+    },
+    build: {
+      target: ['esnext'],
+    },
+    
     plugins: [
-      vueJsx(),
-      DefineOptions(),
+      
+      MarkdownTransform(),
+      vike({
+        prerender: true, 
+      }),
 
-      // https://github.com/antfu/unplugin-vue-components
-      Components({
-        dirs: [
-          '.vitepress/vitepress/components',
+      unocssPreferences(),
+      
+      vue({
+        include: [/\.vue$/, /\.md$/],
+      }),
+      vueJsx({}),
+
+ 
+
+      markdown({
+        
+        markdownItOptions: {
+          html: true,
+          linkify: true,
+          highlight: (await getDefaultHighlight()),
+        },
+        
+        markdownItSetup (md) {
+          md
+            .use(preWrapperPlugin)
+            .use(containerPlugin)
+            .use(linkPlugin,
+              { 
+                target: '_blank', 
+                rel: 'noreferrer', 
+              },
+              {
+                base,
+                cleanUrls: true,
+              },
+            )
+            .use(anchorPlugin)
+  
+        },
+        wrapperClasses: [
+          'vp-doc',
+          'VPDoc',
+          'doc-content',
         ],
+        
+      }),
+      
 
-        allowOverrides: true,
 
-        // custom resolvers
+
+      Components({
         resolvers: [
-          // auto import icons
-          // https://github.com/antfu/unplugin-icons
           IconsResolver(),
         ],
-
-        // allow auto import and register components used in markdown
-        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       }),
 
-      // https://github.com/antfu/unplugin-icons
-      Icons({
-        autoInstall: true,
-      }),
-      UnoCSS(),
-      MarkdownTransform(),
+      Icons(),
       Inspect(),
-      mkcert(),
     ],
-    optimizeDeps: {
-      include: optimizeDeps,
+    // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
+    optimizeDeps: { 
+      esbuildOptions: {
+        target: 'esnext',
+        define: {
+          global: 'globalThis',
+        },
+        supported: {
+          bigint: true, 
+        },
+      },
+
     },
   }
+  return config
 })

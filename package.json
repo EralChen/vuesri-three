@@ -33,8 +33,7 @@
 	"dependencies": {
 		"@arcgis/core": "^4.28.0",
 		"@element-plus/icons-vue": "^2.1.0",
-		"@element-plus/utils": "workspace:*",
-		"@skzz/platform": "0.0.0-alpha.64",
+		"@skzz/platform": "0.0.0-alpha.71",
 		"@turf/turf": "^6.5.0",
 		"@vuesri-three/api": "workspace:*",
 		"@vuesri-three/components": "workspace:*",
@@ -45,9 +44,9 @@
 		"@vuesri/core": "^0.0.45",
 		"@vuesri/three": "workspace:*",
 		"@vueuse/core": "^9.12.0",
-		"@vunk/core": "0.0.0-alpha.107",
+		"@vunk/core": "0.0.0-alpha.113",
 		"@vunk/form": "^1.1.52",
-		"@vunk/skzz": "0.0.0-alpha.106",
+		"@vunk/skzz": "0.0.0-alpha.110",
 		"chroma-js": "^2.4.2",
 		"element-plus": "npm:element-plus@latest",
 		"mitt": "^3.0.1",
@@ -69,7 +68,7 @@
 		"ccd": "gulp -f scripts/create/component-docs/index.ts",
 		"app:preview": "gulp -f scripts/app/preview.ts",
 		"app:init-arcgis": "gulp -f scripts/app/init-arcgis.ts",
-		"run:test": "gulp -f scripts/test.ts",
+		"run:task": "gulp -f scripts/task.ts",
 		"rm:nm": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
 	}
 }

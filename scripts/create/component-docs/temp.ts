@@ -8,7 +8,7 @@ lang: zh-CN
 ${t}
 
 
-## 基础用法
+## Basic
 
 :::demo 
 ${l}/basic
@@ -18,8 +18,6 @@ ${l}/basic
 `
 
 export const createVue = () => `<script lang="ts" setup>
-import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
 
 </script>
 <template>

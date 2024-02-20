@@ -1,4 +1,4 @@
-import { capitalize } from '@element-plus/utils'
+import { capitalize } from 'vue'
 import { LIB_PRE } from '@lib-env/build-constants'
 
 // vk => Vk

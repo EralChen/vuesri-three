@@ -1,44 +1,28 @@
 {
-  "name": "@element-plus/docs",
-  "private": true,
+  "name": "@vuesri-three/docs",
   "scripts": {
-    "dev": "pnpm gen-locale && vitepress dev .",
-    "build": "cross-env NODE_ENV=production && vitepress build . && tsx .vitepress/build/rebuild-pwa.ts",
-    "serve": "cross-env NODE_ENV=production vitepress serve . --port 5001",
-    "gen-locale": "rimraf .vitepress/i18n && tsx .vitepress/build/crowdin-generate.ts",
-    "crowdin-credentials": "tsx .vitepress/build/crowdin-credentials.ts"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite build && vite preview"
   },
   "dependencies": {
-    "@docsearch/js": "^3.1.0",
-    "@vue/shared": "^3.2.37",
-    "axios": "^0.27.2",
-    "clipboard-copy": "^4.0.1",
-    "markdown-it": "^13.0.1",
-    "normalize.css": "^8.0.1",
-    "nprogress": "^0.2.0",
-    "prism-theme-vars": "^0.2.3",
-    "@vuesri/three": "workspace:*"
+    "@vunk/gsap": "0.0.0-alpha.3",
+    "deepdash-es": "^5.3.9",
+    "gsap": "^3.12.4",
+    "prism-theme-vars": "^0.2.4",
+    "vike": "0.4.156",
+    "vike-vue": "^0.5.4"
   },
   "devDependencies": {
-    "@crowdin/cli": "^3.7.8",
-    "@docsearch/react": "^3.1.0",
-    "@iconify-json/ri": "^1.1.3",
-    "@types/markdown-it": "^12.2.3",
+    "@iconify-json/ri": "^1.1.4",
+    "@mdit-vue/shared": "^2.0.0",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
-    "chalk": "^4.1.2",
-    "consola": "^2.15.3",
-    "cross-env": "^7.0.3",
-    "escape-html": "^1.0.3",
-    "fast-glob": "^3.2.11",
-    "markdown-it-container": "^3.0.0",
-    "octokit": "^2.0.3",
-    "prismjs": "^1.28.0",
-    "unplugin-icons": "^0.14.6",
+    "markdown-it-anchor": "^8.6.7",
+    "unplugin-icons": "^0.18.1",
     "unplugin-vue-components": "^0.20.1",
-    "unplugin-vue-define-options": "^0.6.1",
-    "vite-plugin-inspect": "^0.5.0",
-    "vite-plugin-mkcert": "^1.7.2",
-    "vite-plugin-pwa": "^0.12.0",
-    "vitepress": "^0.22.4"
+    "unplugin-vue-markdown": "^0.25.2",
+    "vite-plugin-inspect": "^0.8.1",
+    "vitepress": "1.0.0-rc.33",
+    "vue-router": "^4.2.5"
   }
 }
