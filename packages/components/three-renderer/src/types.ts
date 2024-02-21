@@ -22,18 +22,6 @@ export interface ThreeComponent {
   dispose(e: ThreeContext): void;
 }
 
-export interface ThreeLayer extends ThreeComponent {
-  /**
-   * layer 名称
-   */
-  title?: string;
-  /**
-   * 数据源
-   */
-  source?: __esri.Graphic[]
-}
-
-
 export interface ThreeContext {
   context: __esri.RenderContext
   renderer: THREE.WebGLRenderer

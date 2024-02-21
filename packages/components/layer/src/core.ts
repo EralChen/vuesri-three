@@ -1,97 +1,40 @@
-import { ThreeContext } from '@vuesri/three'
-import { Matrix4, Quaternion, Vector3 } from 'three'
+import { ThreeComponent, ThreeContext } from '@vuesri/three'
 import { Deferred } from '@vunk/core/shared/utils-promise'
-import { externalRenderers } from '@vuesri/core/arcgis'
+import { RenderTransform } from '@vuesri-three/components/transform'
 
-import { createRenderCoordinates, genEsriPoints } from '@vuesri-three/shared/utils'
+/**
+ * 像 esri 的 [Layer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-Layer.html#properties-summary) 一样，为 `@vuersi/three` 提供一个 `ThreeLayer` 作为基类
+ * 
+ */
+export class ThreeLayer implements ThreeComponent {
+  title?: string
+  fullExtent?: __esri.Extent
+  visible: boolean = true
+
+  /**
+   * setup 方法后注入 RenderTransform
+   */
+  protected renderTransform: RenderTransform
+  protected contextDef = new Deferred<ThreeContext>()
 
 
-export class Layer  {
-
-  private transformation = new Array(16) 
-
-  private transform = new Matrix4()  // 变换矩阵
-
-  title: string
- 
-  contextDef = new Deferred<ThreeContext>()
-
-  protected whenDef = new Deferred<void>()
-
-
+  /* when */
+  private whenDef = new Deferred<void>()
+  protected ready () {
+    return this.whenDef.resolve()
+  }
   async when () {
     return this.whenDef.promise
   }
+  /* end of when */
 
   setup (e: ThreeContext): void {
+    this.renderTransform = new RenderTransform(e.view)
     this.contextDef.resolve(e)
   }
+  render (): void {}
+  dispose (): void {}
 
-  async genEsriPoints (points: __esri.PointProperties[]) {
-    const e = await this.contextDef.promise
-    return genEsriPoints(e.view, points)
-  }
-
-
-  async createTransform (
-    pointProperties: __esri.PointProperties,
-  ) {
-    const e = await this.contextDef.promise
-    const [ point ] = await this.genEsriPoints([pointProperties])
-
-    /*
-      Computes a 4x4 affine transformation matrix that
-      constitutes a linear coordinate transformation from a
-      local Cartesian coordinate system to the virtual world 
-      coordinate system. For example, this matrix can be used
-      to transform the vertices of a 3D model to the 
-      rendering coordinate system.
-    */
-    const coordinateTransformAt = externalRenderers.renderCoordinateTransformAt(
-      e.view,
-      [point.x, point.y, point.z ?? 0],
-      e.view.spatialReference,
-      this.transformation,
-    )
-
-
-    const getTransform = () => {
-      this.transform.fromArray(coordinateTransformAt)
-      return this.transform
-    }
-
-    const decompose = (
-      translation: Vector3, 
-      rotation: Quaternion, 
-      scale: Vector3,
-    ) => {
-      const transform = getTransform()
-      return transform.decompose(
-        translation,
-        rotation,
-        scale,
-      )
-    }
-
-    return {
-      decompose,
-      getTransform,
-    }
-
-  }
-
-
-  async createRenderCoordinates (
-    points: __esri.PointProperties[],
-  ) {
-    const e = await this.contextDef.promise
-
-    return createRenderCoordinates(
-      e.view,
-      points,
-    )
-  }
-
-  
 }
+
 

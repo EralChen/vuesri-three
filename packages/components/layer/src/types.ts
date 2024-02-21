@@ -1,2 +1,5 @@
+import type { ThreeLayer } from './core'
 
-export {}
+export {
+  ThreeLayer,
+}
