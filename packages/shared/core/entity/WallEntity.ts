@@ -1,4 +1,4 @@
-import { ThreeLayerContext, ThreeComponent } from '@vuesri/three'
+import { ThreeContext, ThreeComponent } from '@vuesri/three'
 import { Mesh, MeshBasicMaterial, BufferGeometry, BufferAttribute } from 'three'
 import type { WallLayer } from '@vuesri-three/shared/core'
 import type { Position } from '@turf/turf'
@@ -27,7 +27,7 @@ export class WallEntity implements ThreeComponent {
     this.height = e.height
   }
 
-  async setup (e: ThreeLayerContext) {
+  async setup (e: ThreeContext) {
     this.bufferGeometry = await this.createBufferGeometry()
 
     this.alphaMesh = new Mesh(
@@ -44,7 +44,7 @@ export class WallEntity implements ThreeComponent {
 
   }
   
-  render (e: ThreeLayerContext): void {
+  render (e: ThreeContext): void {
     if (!this.mesh) return
     const material = this.mesh.material as MeshBasicMaterial
     const texture = material.map 
@@ -56,7 +56,7 @@ export class WallEntity implements ThreeComponent {
       texture.offset.set(0, texture.offset.y - 0.001)
     }
   }
-  dispose (e: ThreeLayerContext): void {
+  dispose (e: ThreeContext): void {
     e.scene.remove(this.mesh)
     e.scene.remove(this.alphaMesh)
   }

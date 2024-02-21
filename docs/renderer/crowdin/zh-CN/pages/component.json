@@ -12,6 +12,11 @@
     "text": "Layer 图层",
     "children": [
       {
+        "link": "/layer",
+        "text": "Layer"
+      },
+      
+      {
         "link": "/wall-layer",
         "text": "WallLayer"
       },
@@ -19,6 +24,7 @@
         "link": "/line-layer",
         "text": "LineLayer"
       }
+
     ]
   }
 }

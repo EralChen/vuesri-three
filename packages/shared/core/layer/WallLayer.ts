@@ -1,4 +1,4 @@
-import { ThreeLayerContext, ThreeLayer } from '@vuesri/three'
+import { ThreeContext, ThreeLayer } from '@vuesri/three'
 import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-three/shared/core'
 // import { Polyline } from '@vuesri/core/arcgis'
 import type { Position } from '@turf/turf'
@@ -32,7 +32,7 @@ export class WallLayer extends MaterialManager(
   }
   
   
-  setup (e: ThreeLayerContext): void {
+  setup (e: ThreeContext): void {
     super.setup(e)
 
     this.baseMaterial = new MeshBasicMaterial({
@@ -42,8 +42,6 @@ export class WallLayer extends MaterialManager(
       depthWrite: false, // 渲染此材质是否对深度缓冲区有任何影响
       alphaMap: this.alphaTexture,
       opacity: 0.1,
-    
-    
     })
     
     this.material = new MeshBasicMaterial({
@@ -60,12 +58,12 @@ export class WallLayer extends MaterialManager(
     })
     this.whenDef.resolve()
   }
-  render (e: ThreeLayerContext): void {
+  render (e: ThreeContext): void {
     this.entities.forEach((entity) => {
       entity.render(e)
     })
   }
-  dispose (e: ThreeLayerContext): void {
+  dispose (e: ThreeContext): void {
     this.entities.forEach((entity) => {
       entity.dispose(e)
     })

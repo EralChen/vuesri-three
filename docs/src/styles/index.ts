@@ -4,6 +4,8 @@ import './element-plus'
 import '@vunk/core/index.css'
 import '@vunk/form/index.css'
 import '@vunk/gsap/index.css'
+import '@arcgis/core/assets/esri/themes/light/main.css'
+import '@vuesri/core/index.css'
 
 import './form'
 import './layout/index.css'

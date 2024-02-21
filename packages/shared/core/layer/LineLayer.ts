@@ -1,5 +1,5 @@
 import { Layer, MaterialManager, TextureManager } from '@vuesri-three/shared/core'
-import { ThreeLayerContext, ThreeLayer } from '@vuesri/three'
+import { ThreeContext, ThreeLayer } from '@vuesri/three'
 import { DoubleSide, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
 
 export interface LineLayerProperties {
@@ -21,7 +21,7 @@ export class LineLayer extends MaterialManager(
 
 
 
-  setup (e: ThreeLayerContext): void {
+  setup (e: ThreeContext): void {
     super.setup(e)
 
     // 外壳材质
@@ -44,10 +44,10 @@ export class LineLayer extends MaterialManager(
     this.whenDef.resolve()
 
   }
-  render (e: ThreeLayerContext): void {
+  render (e: ThreeContext): void {
     //
   }
-  dispose (e: ThreeLayerContext): void {
+  dispose (e: ThreeContext): void {
     //
   }
 

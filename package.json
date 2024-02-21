@@ -41,7 +41,7 @@
 		"@vuesri-three/shared": "workspace:*",
 		"@vuesri-three/stores": "workspace:*",
 		"@vuesri-three/theme": "workspace:*",
-		"@vuesri/core": "^0.0.45",
+		"@vuesri/core": "^1.0.8",
 		"@vuesri/three": "workspace:*",
 		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.113",

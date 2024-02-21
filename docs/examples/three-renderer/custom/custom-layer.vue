@@ -4,15 +4,15 @@ import { __VaThreeRenderer } from '@vuesri-three/components/three-renderer'
 import { BoxGeometry, BufferGeometry, Clock, Material, MathUtils, Mesh, MeshBasicMaterial, MeshStandardMaterial } from 'three'
 import { Point } from '@vuesri/core/arcgis'
 import { useThreeRenderer } from '@vuesri-three/composables'
-import { ThreeLayerContext, ThreeLayer } from '@vuesri/three'
+import { ThreeContext, ThreeLayer } from '@vuesri/three'
 import { Layer, MaterialManager } from '@vuesri-three/shared/core'
 import { sMitter } from '@vuesri/core/shared'
 import { createMitterToggleHandler } from '@vuesri/core/shared/mitter'
 import { __RendererEvents } from '@vuesri-three/components/renderer'
-import { emits } from '../../../../packages/components/three-renderer/src/ctx'
+
 
 const renderer = useThreeRenderer()
-const mitter = renderer[sMitter] as __RendererEvents.Mitter
+const mitter = renderer[sMitter]
 
 const MitterToggleHandler = createMitterToggleHandler(mitter)
 
@@ -33,7 +33,7 @@ class ExampleLayer extends MaterialManager(Layer) implements ThreeLayer {
 
   
   async setup (
-    e: ThreeLayerContext,
+    e: ThreeContext,
   ) {
     super.setup(e)
 

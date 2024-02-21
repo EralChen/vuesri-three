@@ -1,4 +1,4 @@
-import { ThreeLayerContext } from '@vuesri/three'
+import { ThreeContext } from '@vuesri/three'
 import { Matrix4, Quaternion, Vector3 } from 'three'
 import { Deferred } from '@vunk/core/shared/utils-promise'
 import { externalRenderers } from '@vuesri/core/arcgis'
@@ -14,7 +14,7 @@ export class Layer  {
 
   title: string
  
-  contextDef = new Deferred<ThreeLayerContext>()
+  contextDef = new Deferred<ThreeContext>()
 
   protected whenDef = new Deferred<void>()
 
@@ -23,13 +23,13 @@ export class Layer  {
     return this.whenDef.promise
   }
 
-  setup (e: ThreeLayerContext): void {
+  setup (e: ThreeContext): void {
     this.contextDef.resolve(e)
   }
 
-  async genEsriPoints (ps: __esri.PointProperties[]) {
+  async genEsriPoints (points: __esri.PointProperties[]) {
     const e = await this.contextDef.promise
-    return genEsriPoints(e.view, ps)
+    return genEsriPoints(e.view, points)
   }
 
 
@@ -82,14 +82,16 @@ export class Layer  {
 
 
   async createRenderCoordinates (
-    ps: __esri.PointProperties[],
+    points: __esri.PointProperties[],
   ) {
     const e = await this.contextDef.promise
 
     return createRenderCoordinates(
       e.view,
-      ps,
+      points,
     )
   }
+
+  
 }
 
