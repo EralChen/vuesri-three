@@ -15,7 +15,6 @@
         "link": "/layer",
         "text": "Layer"
       },
-      
       {
         "link": "/wall-layer",
         "text": "WallLayer"
@@ -24,7 +23,19 @@
         "link": "/line-layer",
         "text": "LineLayer"
       }
-
+    ]
+  },
+  "support": {
+    "text": "Support 支持",
+    "children": [
+      {
+        "link": "/manager",
+        "text": "Manager"
+      },
+      {
+        "link": "/transform",
+        "text": "Transform"
+      }
     ]
   }
 }

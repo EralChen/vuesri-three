@@ -9,11 +9,10 @@ import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { AnyFunc } from '@vunk/core'
 import { createRenderCoordinates } from '@vuesri-three/shared'
 import { props } from './ctx'
-import { Mitter } from './types'
-
-type EventName = 'click' | 'pointer-move'
+import { Mitter, EventName } from './types'
 
 export default defineComponent({
+  name: 'VaThreeRendererEvents',
   props,
   setup (props) {
 

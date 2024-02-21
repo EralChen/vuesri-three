@@ -2,8 +2,8 @@
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
 import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
 import TestPointLayer from './TestPointLayer.vue'
-import Graphic from 'esri/Graphic';
-import { Point } from 'esri/geometry';
+import Graphic from 'esri/Graphic'
+import { Point } from 'esri/geometry'
 const source: __esri.Graphic[] = [
   new Graphic({
     geometry: new Point({
@@ -14,7 +14,7 @@ const source: __esri.Graphic[] = [
     attributes: {
       name: 'cx',
       value: 100,
-    }
+    },
   }),
   new Graphic({
     geometry: new Point({
@@ -25,16 +25,18 @@ const source: __esri.Graphic[] = [
     attributes: {
       name: 'sl',
       value: 200,
-    }
+    },
   }),
 ]
 
 </script>
 <template>
-  <VaSceneView :default-options="{
-    center: [120, 30],
-    zoom: 10,
-  }">
+  <VaSceneView
+    :default-options="{
+      center: [120, 30],
+      zoom: 10,
+    }"
+  >
     <VaTdtBasemap
       :type="'vec_w'"
       :spatial-reference="{

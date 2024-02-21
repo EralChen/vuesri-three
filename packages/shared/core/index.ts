@@ -1,4 +1,4 @@
-export * from './ThreeRenderer'
+// export * from './ThreeRenderer'
 
 export * from './mixin'
 export * from './layer'

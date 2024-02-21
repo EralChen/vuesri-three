@@ -1,14 +1,12 @@
 import { inject } from 'vue'
-import { ThreeRenderer } from '@vuesri-three/shared/core'
+import { ThreeRenderer } from '@vuesri-three/shared'
 import { sMitter } from '@vuesri/core/shared'
-import { __RendererEvents } from '@vuesri-three/components/renderer'
+import { __VaThreeRendererEvents } from '@vuesri-three/components/three-renderer-events'
 
 export const useThreeRenderer = () => {
-  const threeRenderer = inject<
-    (ThreeRenderer & {
-      [sMitter]: __RendererEvents.Mitter
-    }) | null
-  >('vaThreeRenderer', null)
+  const threeRenderer = inject<(ThreeRenderer & {
+      [sMitter]: __VaThreeRendererEvents.Mitter
+  }) | null>('vaThreeRenderer', null)
 
   if (!threeRenderer) {
     throw new Error(

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { PropType, onUnmounted, ref, watchEffect } from 'vue'
+import { PropType, onUnmounted, watchEffect } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
 import { ThreeContext, ThreeLayer, ThreeComponent } from '@vuesri/three'
 import { BoxGeometry, Clock, MathUtils, Mesh, MeshBasicMaterial } from 'three'
-import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-three/shared/core'
+import { Layer, MaterialManager } from '@vuesri-three/shared/core'
 
 export interface TestPointLayerProperties {
   source?: __esri.Graphic[]
@@ -20,7 +20,7 @@ class TestPointEntity implements ThreeComponent {
 
   layer: TestPointLayer
   graphic: __esri.Graphic
-  mesh: Mesh
+  mesh: Mesh = new Mesh()
   constructor (properties: TestPointEntityProperties) {
     this.layer = properties.layer
     this.graphic = properties.graphic
@@ -32,7 +32,7 @@ class TestPointEntity implements ThreeComponent {
     e.scene.add(this.mesh)
 
     this.layer.createTransform(
-      this.graphic.geometry as __esri.Point
+      this.graphic.geometry as __esri.Point,
     ).then(({ getTransform }) => {
       this.mesh.applyMatrix4(getTransform())
     })
@@ -58,9 +58,9 @@ class TestPointEntity implements ThreeComponent {
 }
 
 class TestPointLayer extends MaterialManager(
-  Layer
+  Layer,
 ) implements ThreeLayer {
-  source: __esri.Graphic[];
+  source: __esri.Graphic[]
   entities: TestPointEntity[] = []
 
   constructor (properties: TestPointLayerProperties = {}) {
@@ -95,7 +95,7 @@ class TestPointLayer extends MaterialManager(
   }
 
   refresh () {
-   return this.contextDef.promise.then((e) => {
+    return this.contextDef.promise.then((e) => {
       this.dispose(e)
       this.setup(e)
     })

@@ -3,6 +3,8 @@ import { __VaView } from '@vuesri/core/components/view'
 import { Emitter } from 'mitt'
 import type { Intersection, Object3D, Object3DEventMap, Raycaster } from 'three'
 
+export type EventName = 'click' | 'pointer-move'
+
 export type Feature = Intersection<Object3D<Object3DEventMap>>
 
 export interface ClickEvent extends __VaView.ClickEvent {

@@ -5,24 +5,37 @@ lang: zh-CN
 
 # ThreeRenderer
 
-ThreeRenderer
+通过 [externalRenderers](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-3d-externalRenderers.html)， 在 `SceneView` 中集成 `THREE.WebGLRenderer`
 
 
-<!-- ## 基础用法
+## Basic
 
-:::demo 
-three-renderer/basic
-::: -->
+实现了 `ThreeComponent` 并被添加到 `layers` 中的实例将被渲染到 `SceneView` 中
 
+:::details ThreeComponent
+```ts
+export interface ThreeComponent {
+  /**
+   * three renderer 初始化时，调用 setup 方法
+   */
+  setup (e: ThreeContext): void;
 
-## Custom
+  /**
+   * three renderer 每次渲染时，调用 render 方法
+   */
+  render(e: ThreeContext): void;
 
-:::demo
-three-renderer/custom/index
->>>tabs
-[three-renderer/custom/custom-layer]
->>>
+  /**
+   * three renderer 销毁时，调用 dispose 方法
+   */
+  dispose(e: ThreeContext): void;
+}
+```
 :::
 
-
-## ThreeRenderer 其他
+:::demo 
+three-renderer/basic/index
+>>>tabs
+[three-renderer/basic/TestPoint]
+>>>
+:::
