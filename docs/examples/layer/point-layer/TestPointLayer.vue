@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { PropType, onUnmounted, watchEffect } from 'vue'
+import { PropType, watchEffect } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
-import { ThreeContext, ThreeLayer, ThreeComponent } from '@vuesri/three'
+import { ThreeContext, ThreeComponent } from '@vuesri/three'
 import { BoxGeometry, Clock, MathUtils, Mesh, MeshBasicMaterial } from 'three'
-import { Layer, MaterialManager } from '@vuesri-three/shared/core'
+import { MaterialManager } from '@vuesri-three/shared/core'
+import { ThreeLayer, _VaLayerUse, extentFromGraphics } from '@vuesri-three/components/layer'
+
 
 export interface TestPointLayerProperties {
   source?: __esri.Graphic[]
@@ -28,18 +30,21 @@ class TestPointEntity implements ThreeComponent {
   setup (e: ThreeContext) {
     const geometry = new BoxGeometry(1000, 1000, 1000)
     this.mesh = new Mesh(geometry, this.layer.material)
+    this.mesh.visible = this.layer.visible
+
     /* sync add  */
     e.scene.add(this.mesh)
 
-    this.layer.createTransform(
-      this.graphic.geometry as __esri.Point,
-    ).then(({ getTransform }) => {
-      this.mesh.applyMatrix4(getTransform())
-    })
+    const transform =  this.layer
+      .getRenderTransform()
+      .createTransformMatrix4(
+        this.graphic.geometry as __esri.Point,
+      )
+    this.mesh.applyMatrix4(transform)
 
 
   }
-  render (e: ThreeContext): void {
+  render (): void {
     const clockDelta = this.clock.getDelta()
 
     if (this.mesh !== undefined) {
@@ -48,8 +53,6 @@ class TestPointEntity implements ThreeComponent {
     
   }
   dispose (e: ThreeContext): void {
-    console.log('dispose', this.mesh)
-
     if (!this.mesh) return
     this.mesh.geometry.dispose()
     e.scene.remove(this.mesh)
@@ -57,9 +60,10 @@ class TestPointEntity implements ThreeComponent {
   }
 }
 
+
 class TestPointLayer extends MaterialManager(
-  Layer,
-) implements ThreeLayer {
+  ThreeLayer,
+) {
   source: __esri.Graphic[]
   entities: TestPointEntity[] = []
 
@@ -67,9 +71,11 @@ class TestPointLayer extends MaterialManager(
     super()
     this.source = properties.source || []
     properties.material && (this.material = properties.material)
+  
   }
   setup (e: ThreeContext): void {
     super.setup(e)
+    this.fullExtent = extentFromGraphics(this.source)
 
     this.entities = this.source.map((graphic) => {
       return new TestPointEntity({
@@ -81,11 +87,11 @@ class TestPointLayer extends MaterialManager(
       entity.setup(e)
     }
     /* layer promise 准备完毕， layer.when() */
-    this.whenDef.resolve()
+    this.ready()
   }
-  render (e: ThreeContext): void {
+  render (): void {
     this.entities.forEach((entity) => {
-      entity.render(e)
+      entity.render()
     })
   }
   dispose (e: ThreeContext): void {
@@ -104,6 +110,10 @@ class TestPointLayer extends MaterialManager(
 }
 
 const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: true,
+  },
   source: {
     type: Array as PropType<__esri.Graphic[]>,
     default: () => [],
@@ -113,16 +123,30 @@ const threeRenderer = useThreeRenderer()
 
 const layer = new TestPointLayer()
 
+const testLayer = new ThreeLayer()
+
+
 watchEffect(() => {
   layer.source = props.source
-  layer.refresh()
 })
 
-threeRenderer.layers.add(layer)
+watchEffect(() => {
+  // layer.visible = props.visible
+  layer.set({
+    visible: props.visible,
+  })
+  testLayer.set({
+    visible: props.visible,
+  })
 
-onUnmounted(() => {
-  threeRenderer.layers.remove(layer)
+  console.log('layer.visible', layer.visible)
 })
+
+testLayer.watch('visible', (v) => {
+  console.log('testLayer.visible', v)
+})
+
+_VaLayerUse.useAddLayer(threeRenderer, layer)
 
 
 </script>

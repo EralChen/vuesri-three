@@ -4,6 +4,7 @@ import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
 import TestPointLayer from './TestPointLayer.vue'
 import Graphic from 'esri/Graphic'
 import { Point } from 'esri/geometry'
+import { ref } from 'vue'
 const source: __esri.Graphic[] = [
   new Graphic({
     geometry: new Point({
@@ -28,6 +29,7 @@ const source: __esri.Graphic[] = [
     },
   }),
 ]
+const visible = ref(true)
 
 </script>
 <template>
@@ -37,6 +39,14 @@ const source: __esri.Graphic[] = [
       zoom: 10,
     }"
   >
+    <template #before>
+      <p>
+        <ElButton @click="visible = !visible">
+          change visible
+        </ElButton>
+        {{ visible }}
+      </p>
+    </template>
     <VaTdtBasemap
       :type="'vec_w'"
       :spatial-reference="{
@@ -46,6 +56,7 @@ const source: __esri.Graphic[] = [
 
     <VaThreeRenderer>
       <TestPointLayer
+        :visible="visible"
         :source="source"
       ></TestPointLayer>
     </VaThreeRenderer>

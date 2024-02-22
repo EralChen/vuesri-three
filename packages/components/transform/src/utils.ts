@@ -200,7 +200,6 @@ export function createTransformMatrix4 (
   matrix4?: Matrix4,
 ) {
   point = createEsriPointsSync(view, [point])[0]
-  console.log('point', point)
   const thisTransformation = transformation ?? new Array(16)
   const thisMatrix4 = matrix4 ?? new Matrix4()
 

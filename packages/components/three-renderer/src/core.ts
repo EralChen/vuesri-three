@@ -1,6 +1,7 @@
 import { externalRenderers } from '@vuesri/core/arcgis'
 import { AmbientLight, AxesHelper, Color, DirectionalLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three'
-import { ThreeLayer } from './types'
+import { ThreeLayer } from '@vuesri-three/components/layer'
+
 
 
 export class ThreeRenderer {

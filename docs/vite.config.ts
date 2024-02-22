@@ -20,7 +20,6 @@ import { linkPlugin } from './vitepress/plugins/link'
 import { anchorPlugin } from './vitepress/plugins/anchor'
 
 
-
 const alias: AliasOptions = [
   {
     find: '#s',
@@ -93,9 +92,7 @@ export default defineConfig(async ({ mode }) => {
         include: [/\.vue$/, /\.md$/],
       }),
       vueJsx({}),
-
  
-
       markdown({
         
         markdownItOptions: {
@@ -141,8 +138,10 @@ export default defineConfig(async ({ mode }) => {
       Icons(),
       Inspect(),
     ],
+
     // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
     optimizeDeps: { 
+
       esbuildOptions: {
         target: 'esnext',
         define: {

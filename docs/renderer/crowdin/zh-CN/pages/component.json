@@ -1,20 +1,26 @@
 {
   "basic": {
-    "text": "Basic 基础组件",
+    "text": "Basic 基础",
     "children": [
       {
         "link": "/three-renderer",
         "text": "ThreeRenderer"
+      },
+      {
+        "link": "/layer",
+        "text": "Layer"
+      },
+      {
+        "link": "/entity-layer",
+        "text": "EntityLayer"
       }
     ]
   },
   "layer": {
     "text": "Layer 图层",
     "children": [
-      {
-        "link": "/layer",
-        "text": "Layer"
-      },
+
+
       {
         "link": "/wall-layer",
         "text": "WallLayer"
@@ -23,6 +29,7 @@
         "link": "/line-layer",
         "text": "LineLayer"
       }
+
     ]
   },
   "support": {
