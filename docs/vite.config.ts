@@ -149,7 +149,7 @@ export default defineConfig(async ({ mode }) => {
     optimizeDeps: { 
       include: [
         'packages/components/**',
-        '@vuersi-three/**',
+        '@vuesri-three/**',
       ],
       esbuildOptions: {
         target: 'esnext',
