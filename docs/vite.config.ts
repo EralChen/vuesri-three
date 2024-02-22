@@ -158,6 +158,7 @@ export default defineConfig(async ({ mode }) => {
         },
         supported: {
           bigint: true, 
+          decorators: true,
         },
       },
 
