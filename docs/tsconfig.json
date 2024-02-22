@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "useDefineForClassFields": true,
+    "useDefineForClassFields": false,
     "baseUrl": ".",
     "paths": {
       "#/*": [
@@ -59,8 +59,9 @@
 
     "typings/**/*.d.ts",
 
+    
     "../typings/**/*.d.ts",
-    "vite.config.ts"
+    "vite.config.ts",
   ],
   "exclude": [
     "node_modules"

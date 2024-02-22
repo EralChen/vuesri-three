@@ -66,17 +66,23 @@ export default defineConfig(async ({ mode }) => {
     },
     ssr: {
       noExternal: [
-        '@vuesri-core/**',
+        '@vuesri/core/**',
         '@arcgis/core/**',
         '@vunk/skzz/**',
         '@skzz/platform/**',
         'esri/**',
         '@vunk/gsap/**',
       ],
+      
     
     },
     build: {
       target: ['esnext'],
+    },
+    esbuild: {
+      include: ['packages/components/**'],
+      target: 'esnext',
+      
     },
     
     plugins: [
@@ -141,7 +147,10 @@ export default defineConfig(async ({ mode }) => {
 
     // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
     optimizeDeps: { 
-
+      include: [
+        'packages/components/**',
+        '@vuersi-three/**',
+      ],
       esbuildOptions: {
         target: 'esnext',
         define: {
