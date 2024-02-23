@@ -1,4 +1,4 @@
-import { ThreeRenderer } from '@vuesri-three/shared/core'
+import { ThreeRenderer } from '@vuesri-three/shared'
 import { __VaView } from '@vuesri/core/components/view'
 import { Emitter } from 'mitt'
 import type { Intersection, Object3D, Object3DEventMap, Raycaster } from 'three'

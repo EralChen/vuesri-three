@@ -25,15 +25,15 @@
 | ready | void | protected | 在图层加载完成后需要手动调用, 使 `when`返回的 `Promise` Fulfilled  |
 
 
-<!-- :::demo 
+:::demo 
 layer/point-layer/index
 >>>tabs
 [layer/point-layer/TestPointLayer]
 >>>
-::: -->
-
-
-
-:::demo
-layer/accessor/index
 :::
+
+
+
+<!-- :::demo
+layer/accessor/index
+::: -->

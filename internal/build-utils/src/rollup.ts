@@ -10,6 +10,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import vueJsx from 'unplugin-vue-jsx/rollup'
 import alias from '@rollup/plugin-alias'
 import multiInput from 'rollup-plugin-multi-input'
+// import babel from '@rollup/plugin-babel'
 
 
 export function rollupComponents (opts: {
@@ -87,6 +88,15 @@ export async function rollupFile (opts: {
       }),
       vue(),
       esbuild(), 
+      // babel({
+      //   plugins: [
+      //     [
+      //       '@babel/plugin-proposal-decorators', 
+      //       { 'legacy': true },
+      //     ],
+      //     '@babel/plugin-proposal-class-properties',
+      //   ],
+      // }),
       commonjs(),
     ],
     external: [

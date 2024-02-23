@@ -1,5 +1,5 @@
 import { Layer, MaterialManager, TextureManager } from '@vuesri-three/shared/core'
-import { ThreeContext, ThreeLayer } from '@vuesri/three'
+import { ThreeComponent, ThreeContext  } from '@vuesri/three'
 import { DoubleSide, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
 
 export interface LineLayerProperties {
@@ -14,7 +14,7 @@ export class LineLayer extends MaterialManager(
   TextureManager(
     Layer,
   ),
-) implements ThreeLayer {
+) implements ThreeComponent {
 
   geometry: __esri.Polyline | undefined
 

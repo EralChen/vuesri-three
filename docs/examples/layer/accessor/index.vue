@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 import Accessor from '@arcgis/core/core/Accessor'
 import { subclass, property } from '@arcgis/core/core/accessorSupport/decorators'
-import '@vuesri-three/components/test'
+import  '@vuesri-three/components/test'
 
 
 const data = ref('')
 
-@subclass('vuersi.three.MyLayer')
+@subclass('vuersi.three.MyLayer1')
 class MyLayer extends Accessor {
   @property({
     type: String,
@@ -19,11 +19,18 @@ const layer = new MyLayer()
 
 setInterval(() => {
   layer.title = 'title' + Math.random()
+
 }, 1000)
 
 layer.watch('title', (value) => {
   data.value = value
+  console.log('layer.title for vue', layer.title)
 })
+
+
+
+
+
 
 
 </script>

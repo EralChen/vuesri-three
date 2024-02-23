@@ -1,4 +1,4 @@
-import { ThreeContext, ThreeLayer } from '@vuesri/three'
+import { ThreeComponent, ThreeContext } from '@vuesri/three'
 import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-three/shared/core'
 // import { Polyline } from '@vuesri/core/arcgis'
 import type { Position } from '@turf/turf'
@@ -15,7 +15,7 @@ export interface WallLayerProperties {
 
 export class WallLayer extends MaterialManager(
   TextureManager(Layer),
-) implements ThreeLayer {
+) implements ThreeComponent {
   height = 0
   entities: WallEntity[] = []
   geometry: __esri.Geometry | undefined

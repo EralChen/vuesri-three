@@ -13,9 +13,9 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
   title?: string
   fullExtent?: __esri.Extent
 
-  // @property({
-  //   type: Boolean,
-  // })
+  @property({
+    type: Boolean,
+  })
   public visible: boolean = true
 
 

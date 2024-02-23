@@ -4,7 +4,7 @@ import markdown from 'unplugin-vue-markdown/vite'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { unocssPreferences , containerPlugin, getDefaultHighlight, preWrapperPlugin , decoratorsLegacy } from '@lib-env/app-utils'
+import { unocssPreferences , containerPlugin, getDefaultHighlight, preWrapperPlugin } from '@lib-env/app-utils'
 import { appRoot, srcRoot } from './path.config'
 
 import path from 'path'
@@ -127,9 +127,9 @@ export default defineConfig(async ({ mode }) => {
         
       }),
     
-      decoratorsLegacy({
-        includes: ['packages/component'],
-      }),
+      // decoratorsLegacy({
+      //   includes: ['packages/component'],
+      // }),
  
 
       Components({
