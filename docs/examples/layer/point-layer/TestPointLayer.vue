@@ -110,12 +110,6 @@ class TestPointLayer extends MaterialManager(
       entity.dispose(e)
     })
   }
-
-  refresh () {
-    const ctx = this.getContext()
-    this.dispose(ctx)
-    this.setup(ctx)
-  }
   
 }
 

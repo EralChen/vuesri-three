@@ -12,8 +12,8 @@ import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
+    <!-- <VaThreeRenderer>
    
-    </VaThreeRenderer>
+    </VaThreeRenderer> -->
   </VaSceneView>
 </template>

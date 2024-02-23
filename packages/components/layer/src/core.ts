@@ -63,6 +63,16 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dispose (e: ThreeContext): void {}
 
+
+  /**
+   * 重新执行 setup 方法
+   */
+  refresh () {
+    const ctx = this.getContext()
+    this.dispose(ctx)
+    this.setup(ctx)
+  }
+
 }
 
 
