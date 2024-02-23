@@ -1,6 +1,6 @@
 import { ThreeLayer } from '@vuesri-three/components/layer'
 import { ThreeContext } from '@vuesri-three/shared'
-import { Entity } from './types'
+import type { Entity } from './types'
 import { Group } from 'three'
 
 
@@ -14,8 +14,20 @@ export class EntityLayer extends ThreeLayer {
     this.group.visible = this.visible
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected init (e: ThreeContext): void {}
+
   setup (e: ThreeContext): void {
     super.setup(e)
+
+    this.init(e)
+
+    this.entities.forEach(entity => {
+      entity.setup(e)
+    })
+
+    e.scene.add(this.group)
+
     this.handles.push(
       this.watch('visible', (v) => {
         this.group.visible = v

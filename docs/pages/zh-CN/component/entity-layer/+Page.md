@@ -30,7 +30,7 @@ export interface Entity extends ThreeComponent {
 ```
 
 
-## EntityLayer Property Overview
+## EntityLayer Property 
 | Name | Type | Visibility | Description |
 | --- | --- | --- | --- |
 | [ThreeLayer Properties](../layer/+Page.md#threelayer-property-overview) | - | - | - |
@@ -38,15 +38,18 @@ export interface Entity extends ThreeComponent {
 | [group](https://threejs.org/docs/?q=group#api/en/objects/Group) | THREE.Group | - | 由 `source` 生成 | 
 
 
-## EntityLayer Method Overview
+## EntityLayer Method 
 | Name | Type | Visibility | Description |
 | --- | --- | --- | --- |
 | [ThreeLayer Methods](../layer/+Page.md#threelayer-method-overview) | - | - | - |
+| init | (e: ThreeContext) => void | protected | 初始化, `setup`中执行 , 发生在 `entity.setup` 之前 |
 
 ## Basic
 
 :::demo 
-entity-layer/basic
+entity-layer/basic/index
+>>>tabs
+[entity-layer/basic/TestLayer]
+>>>
 :::
 
-## EntityLayer 其他
