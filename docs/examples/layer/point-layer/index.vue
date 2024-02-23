@@ -42,9 +42,8 @@ const visible = ref(true)
     <template #before>
       <p>
         <ElButton @click="visible = !visible">
-          change visible
+          current visible is {{ visible }}
         </ElButton>
-        {{ visible }}
       </p>
     </template>
     <VaTdtBasemap

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { PropType, watchEffect } from 'vue'
+import { PropType, watchEffect, watch } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
 import { ThreeContext, ThreeComponent } from '@vuesri/three'
 import { BoxGeometry, Clock, MathUtils, Mesh, MeshBasicMaterial } from 'three'
@@ -66,7 +66,7 @@ class TestPointLayer extends MaterialManager(
 ) {
   source: __esri.Graphic[]
   entities: TestPointEntity[] = []
-
+  private handles: __esri.WatchHandle[] = []
   constructor (properties: TestPointLayerProperties = {}) {
     super()
     this.source = properties.source || []
@@ -86,6 +86,14 @@ class TestPointLayer extends MaterialManager(
     for (const entity of this.entities) {
       entity.setup(e)
     }
+
+    this.handles.push(
+      this.watch('visible', (v) => {
+        this.entities.forEach((entity) => {
+          entity.mesh.visible = v
+        })
+      }),
+    )
     /* layer promise 准备完毕， layer.when() */
     this.ready()
   }
@@ -95,6 +103,9 @@ class TestPointLayer extends MaterialManager(
     })
   }
   dispose (e: ThreeContext): void {
+    this.handles.forEach((handle) => handle.remove())
+    this.handles.length = 0
+
     this.entities.forEach((entity) => {
       entity.dispose(e)
     })
@@ -123,27 +134,15 @@ const threeRenderer = useThreeRenderer()
 
 const layer = new TestPointLayer()
 
-const testLayer = new ThreeLayer()
+layer.source = props.source
+watch(() => props.source, (v) => {
+  layer.source = v
+  layer.refresh()
+})
 
 
 watchEffect(() => {
-  layer.source = props.source
-})
-
-watchEffect(() => {
-  // layer.visible = props.visible
-  layer.set({
-    visible: props.visible,
-  })
-  testLayer.set({
-    visible: props.visible,
-  })
-
-  console.log('layer.visible', layer.visible)
-})
-
-testLayer.watch('visible', (v) => {
-  console.log('testLayer.visible', v)
+  layer.visible = props.visible
 })
 
 _VaLayerUse.useAddLayer(threeRenderer, layer)
