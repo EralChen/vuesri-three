@@ -8,6 +8,8 @@ export const libExternal = [
   /^@vunk\/skzz/,
   /^@vunk\/form/,
   /^element-plus/,
+  /^three/,
+  /^@vuesri\/core/,
   arcgisExternalRule,
   new RegExp(`^${LIB_NAME}`),
   new RegExp(`^${LIB_ALIAS}`),
