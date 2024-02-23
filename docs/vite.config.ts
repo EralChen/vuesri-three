@@ -4,7 +4,7 @@ import markdown from 'unplugin-vue-markdown/vite'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { unocssPreferences , containerPlugin, getDefaultHighlight, preWrapperPlugin } from '@lib-env/app-utils'
+import { unocssPreferences , containerPlugin, getDefaultHighlight, preWrapperPlugin , decoratorsLegacy } from '@lib-env/app-utils'
 import { appRoot, srcRoot } from './path.config'
 
 import path from 'path'
@@ -73,17 +73,12 @@ export default defineConfig(async ({ mode }) => {
         'esri/**',
         '@vunk/gsap/**',
       ],
-      
-    
+ 
     },
     build: {
       target: ['esnext'],
     },
-    esbuild: {
-      include: ['packages/components/**'],
-      target: 'esnext',
-      
-    },
+    
     
     plugins: [
       
@@ -91,7 +86,7 @@ export default defineConfig(async ({ mode }) => {
       vike({
         prerender: true, 
       }),
-
+      
       unocssPreferences(),
       
       vue({
@@ -131,9 +126,11 @@ export default defineConfig(async ({ mode }) => {
         ],
         
       }),
-      
-
-
+    
+      decoratorsLegacy({
+        includes: ['packages/component'],
+      }),
+ 
 
       Components({
         resolvers: [
@@ -147,10 +144,6 @@ export default defineConfig(async ({ mode }) => {
 
     // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
     optimizeDeps: { 
-      include: [
-        'packages/components/**',
-        '@vuesri-three/**',
-      ],
       esbuildOptions: {
         target: 'esnext',
         define: {
@@ -158,9 +151,9 @@ export default defineConfig(async ({ mode }) => {
         },
         supported: {
           bigint: true, 
-          decorators: true,
         },
       },
+
 
     },
   }
