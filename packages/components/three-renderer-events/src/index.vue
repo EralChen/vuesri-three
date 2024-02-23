@@ -7,7 +7,7 @@ import { __VaView } from '@vuesri/core/components/view'
 import { Raycaster, ArrowHelper, Vector3 } from 'three'
 import { ToggleHandler } from '@vunk/core/shared/utils-class'
 import { AnyFunc } from '@vunk/core'
-import { createRenderCoordinates } from '@vuesri-three/shared'
+import { createRenderCoordinates } from '@vuesri-three/components/transform'
 import { props } from './ctx'
 import { Mitter, EventName } from './types'
 

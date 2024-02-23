@@ -1,12 +1,12 @@
 import { ThreeContext, ThreeComponent } from '@vuesri/three'
 import { Mesh, MeshBasicMaterial, BufferGeometry, BufferAttribute } from 'three'
-import type { WallLayer } from '@vuesri-three/shared/core'
+// import type { WallLayer } from '@vuesri-three/shared/core'
 import type { Position } from '@turf/turf'
 
 
 export class WallEntity implements ThreeComponent {
 
-  layer: WallLayer
+  layer: any
   path: [Position, Position]
   height = 0
 

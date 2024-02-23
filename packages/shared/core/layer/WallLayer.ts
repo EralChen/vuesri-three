@@ -1,5 +1,5 @@
 import { ThreeComponent, ThreeContext } from '@vuesri/three'
-import { Layer, MaterialManager, WallEntity, TextureManager } from '@vuesri-three/shared/core'
+import { MaterialManager, WallEntity, TextureManager } from '@vuesri-three/shared/core'
 // import { Polyline } from '@vuesri/core/arcgis'
 import type { Position } from '@turf/turf'
 import { DoubleSide, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
