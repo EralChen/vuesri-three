@@ -14,15 +14,15 @@
 | title | String | - | 图层标题 |
 | fullExtent | [Extent](https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Extent.html) | - | 图层的完整范围 |
 | visible | Boolean | - | 图层是否可见 |
-| contextDef | Deferred\<ThreeContext\> | protected | ThreeContext 延时对象，可在 `setup` 之后获取 |
 
 
 ### Method Overview
-| Method | Return | Visibility | Description |
+| Method | Type | Visibility | Description |
 | --- | --- | --- | --- |
-| when | Promise | - | 图层加载完成后执行的回调函数 |
+| when |() => Promise | - | 图层加载完成后执行的回调函数 |
+| getContext | () => ThreeContext | - | 获取 setup 上下文 |
 | getRenderTransform | () => [RenderTransform](../transform/+Page.md) | - | 获取RenderTransform 实例 |
-| ready | void | protected | 在图层加载完成后需要手动调用, 使 `when`返回的 `Promise` Fulfilled  |
+| ready | () => void | protected | 在图层加载完成后需要手动调用, 使 `when`返回的 `Promise` Fulfilled  |
 
 
 :::demo 

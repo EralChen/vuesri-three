@@ -23,11 +23,24 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
    * setup 方法后注入 RenderTransform
    */
   private renderTransform: RenderTransform
-  protected contextDef = new Deferred<ThreeContext>()
-
   public getRenderTransform () {
+    if (!this.renderTransform) {
+      throw new Error('ThreeLayer not setup')
+    }
     return this.renderTransform
   }
+
+  /**
+   * setup 方法后注入 ThreeContext
+   */
+  private context: ThreeContext
+  public getContext () {
+    if (!this.context) {
+      throw new Error('ThreeLayer not setup')
+    }
+    return this.context
+  }
+
 
 
   /* when */
@@ -42,7 +55,8 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
 
   setup (e: ThreeContext): void {
     this.renderTransform = new RenderTransform(e.view)
-    this.contextDef.resolve(e)
+    this.context = e
+
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render (e: ThreeContext): void {}

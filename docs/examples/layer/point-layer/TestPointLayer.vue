@@ -112,10 +112,9 @@ class TestPointLayer extends MaterialManager(
   }
 
   refresh () {
-    return this.contextDef.promise.then((e) => {
-      this.dispose(e)
-      this.setup(e)
-    })
+    const ctx = this.getContext()
+    this.dispose(ctx)
+    this.setup(ctx)
   }
   
 }
