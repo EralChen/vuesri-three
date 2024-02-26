@@ -1,4 +1,4 @@
-import { Entity, EntityLayer, ThreeContext } from '@vuesri-three/shared'
+import { Entity, EntityLayer } from '@vuesri-three/shared'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
 import { CatmullRomCurve3, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshPhongMaterial, RepeatWrapping, Texture, TextureLoader, TubeGeometry, Vector3 } from 'three'
@@ -22,6 +22,9 @@ export class PipeEntity implements Entity {
   setup (): void {
     this.paths = this.pathsFromGraphic()
     const threeGeometries = this.paths.map(path => this.createThreeGeomety(path))
+    const userData = {
+      graphic: this.graphic,
+    }
   
     const subgroups = threeGeometries.map((geometry) => {
 
@@ -31,6 +34,7 @@ export class PipeEntity implements Entity {
       // 中间的管道
       const mesh = new Mesh(geometry, this.layer.getMaterial())
       mesh.renderOrder = 0
+      mesh.userData = userData
       // 外壳管道
       const shellGeometry = new TubeGeometry(
         geometry.parameters.path,
@@ -45,6 +49,9 @@ export class PipeEntity implements Entity {
         this.layer.shellMaterial,
       )
       shellMesh.renderOrder = 1
+      shellMesh.userData = userData
+ 
+
       g.add(shellMesh)
       g.add(mesh)
  

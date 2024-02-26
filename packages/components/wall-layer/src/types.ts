@@ -20,6 +20,7 @@ export interface LoadEvent {
   view: __esri.SceneView
 }
 
+
 export type OnLoad = (e: LoadEvent) => ReturnVoid
 
 export {}
