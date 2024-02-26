@@ -18,6 +18,14 @@ export default ${pre}${capName}
 `
 
 export const createTypesStr = () => `
+import { ThreeRenderer } from '@vuesri-three/shared'
+
+export interface LoadEvent {
+  renderer: ThreeRenderer
+  view: __esri.SceneView
+  layer: any
+}
+
 export {}
 `
 
@@ -39,13 +47,14 @@ export default defineComponent({
 `
 
 export const createCtxStr = () => `import { PropType } from 'vue'
-
+import { LoadEvent } from './types'
 export const props = {
-  modelValue: {
-    type: Object as PropType<unknown>,
-    default: () => ({}),
+  source: {
+    type: Array as PropType<__esri.Graphic[]>,
+    default: () => [],
   },
 }
 
 export const emits = {
+  load: (e: LoadEvent) => e,
 }`

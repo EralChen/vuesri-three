@@ -19,17 +19,14 @@
   "layer": {
     "text": "Layer 图层",
     "children": [
-
-
       {
         "link": "/wall-layer",
         "text": "WallLayer"
       },
       {
-        "link": "/line-layer",
-        "text": "LineLayer"
+        "link": "/pipe-layer",
+        "text": "PipeLayer"
       }
-
     ]
   },
   "support": {

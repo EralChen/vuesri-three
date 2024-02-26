@@ -30,8 +30,9 @@ export class WallEntity implements Entity {
       return acc.concat(bufferGeometries)
     }, [] as BufferGeometry[])
 
-    /* 一面墙 */
+   
     const subgroups = bufferGeometries.map((geometry) => {
+      /* 一面墙 */
       const g = new Group()
       const mesh = new Mesh(
         geometry,

@@ -3,8 +3,8 @@ import { PropType, watchEffect, watch } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
 import { ThreeContext, ThreeComponent } from '@vuesri/three'
 import { BoxGeometry, Clock, MathUtils, Mesh, MeshBasicMaterial } from 'three'
-import { MaterialManager } from '@vuesri-three/shared/core'
 import { ThreeLayer, _VathLayerUse, extentFromGraphics } from '@vuesri-three/components/layer'
+import { MaterialManager } from '@vuesri-three/components/manager'
 
 
 export interface TestPointLayerProperties {
