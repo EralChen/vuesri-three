@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
-import { __VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { __VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 import { BoxGeometry, BufferGeometry, Clock, Material, MathUtils, Mesh, MeshBasicMaterial, MeshStandardMaterial } from 'three'
 import { Point } from '@vuesri/core/arcgis'
 import { useThreeRenderer } from '@vuesri-three/composables'

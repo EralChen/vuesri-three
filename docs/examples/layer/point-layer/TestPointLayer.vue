@@ -4,7 +4,7 @@ import { useThreeRenderer } from '@vuesri-three/composables'
 import { ThreeContext, ThreeComponent } from '@vuesri/three'
 import { BoxGeometry, Clock, MathUtils, Mesh, MeshBasicMaterial } from 'three'
 import { MaterialManager } from '@vuesri-three/shared/core'
-import { ThreeLayer, _VaLayerUse, extentFromGraphics } from '@vuesri-three/components/layer'
+import { ThreeLayer, _VathLayerUse, extentFromGraphics } from '@vuesri-three/components/layer'
 
 
 export interface TestPointLayerProperties {
@@ -138,7 +138,7 @@ watchEffect(() => {
   layer.visible = props.visible
 })
 
-_VaLayerUse.useAddLayer(threeRenderer, layer)
+_VathLayerUse.useAddLayer(threeRenderer, layer)
 
 
 </script>

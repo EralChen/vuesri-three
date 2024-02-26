@@ -10,7 +10,7 @@
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
-    </VaThreeRenderer>
+    <VathThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

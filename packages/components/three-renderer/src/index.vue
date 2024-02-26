@@ -2,14 +2,14 @@
 import { emits, props } from './ctx'
 import { defineComponent, provide } from 'vue'
 import { useSceneView } from '@vuesri/core/composables'
-import { VaThreeRendererEvents } from '@vuesri-three/components/three-renderer-events'
+import { VathThreeRendererEvents } from '@vuesri-three/components/three-renderer-events'
 import mitt from 'mitt'
 import { sMitter } from '@vuesri/core/shared'
 import { ThreeRenderer } from './core'
 export default defineComponent({
-  name: 'VaThreeRenderer',
+  name: 'VathThreeRenderer',
   components: {
-    VaThreeRendererEvents,
+    VathThreeRendererEvents,
   },
   props,
   emits,
@@ -26,7 +26,7 @@ export default defineComponent({
     
     
 
-    provide('vaThreeRenderer', threeRenderer)
+    provide('vathThreeRenderer', threeRenderer)
 
     emit('load', {
       view,
@@ -38,6 +38,6 @@ export default defineComponent({
 })
 </script>
 <template>
-  <VaThreeRendererEvents />
+  <VathThreeRendererEvents />
   <slot></slot>
 </template>

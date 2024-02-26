@@ -12,7 +12,7 @@ import { props } from './ctx'
 import { Mitter, EventName } from './types'
 
 export default defineComponent({
-  name: 'VaThreeRendererEvents',
+  name: 'VathThreeRendererEvents',
   props,
   setup (props) {
 

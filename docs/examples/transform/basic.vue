@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 
 </script>
 <template>
@@ -12,7 +12,7 @@ import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
-    </VaThreeRenderer>
+    <VathThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

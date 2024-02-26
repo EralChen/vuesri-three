@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 import TestPoint from './TestPoint.vue'
 import { Point } from 'esri/geometry'
 
@@ -26,10 +26,10 @@ const point = new Point({
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
+    <VathThreeRenderer>
       <TestPoint
         :point="point"
       ></TestPoint>
-    </VaThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

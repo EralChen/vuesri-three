@@ -1,58 +1,37 @@
 <script lang="ts">
-import { WallLayer } from '@vuesri-three/shared/core'
 import { props, emits } from './ctx'
-import { defineComponent, onUnmounted, watchEffect } from 'vue'
+import { defineComponent, watch, watchEffect } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
-import type {} from 'three'
+import { WallLayer } from './core'
+import { _VathLayerUse } from '@vuesri-three/components/layer'
 
 export default defineComponent({
-  name: 'VaWallLayer',
+  name: 'VathWallLayer',
   props,
   emits,
   setup (props, { emit }) {
-    const layer = new WallLayer()
+    const layer = new WallLayer({
+      source: props.source,
+    })
     const renderer = useThreeRenderer()
 
     watchEffect(() => {
-      if (!props.geometry) return
-
-      layer.updateEntities({
-        geometry: props.geometry,
-        height: props.height,
-      })
-
+      layer.texture = props.texture
     })
 
-
-
-    watchEffect(() => {
-      if (!props.alphaTextureUrl) return
-
-      layer.alphaTextureUrl = props.alphaTextureUrl
+ 
+    watch(() => props.source, () => {
+      layer.source = props.source
+      layer.refresh()
     })
 
-    watchEffect(() => {
-      if (!props.textureUrl) return
+    _VathLayerUse.useAddLayer(renderer, layer)
 
-      layer.textureUrl = props.textureUrl
+    emit('load', {
+      layer,
+      renderer,
+      view: renderer.view,
     })
-
-    
-
-    renderer.layers.add(layer)
-
-    watchEffect(() => {
-      const color = props.color
-      if (!color) return
-      layer.when().then(() => {
-        layer.baseMaterial.color = color
-      })
-    })
-    
-    onUnmounted(() => {
-      renderer.layers.remove(layer)
-    })
-
 
     return {}
   },

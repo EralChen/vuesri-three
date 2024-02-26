@@ -1,11 +1,11 @@
 import { App } from 'vue'
-import VaThreeRendererEvents from './src/index.vue'
-export * as __VaThreeRendererEvents from './src/types'
+import VathThreeRendererEvents from './src/index.vue'
+export * as __VathThreeRendererEvents from './src/types'
 
-VaThreeRendererEvents.install = (app: App): void => {
-  app.component(VaThreeRendererEvents.name, VaThreeRendererEvents)
+VathThreeRendererEvents.install = (app: App): void => {
+  app.component(VathThreeRendererEvents.name, VathThreeRendererEvents)
 }
 export {
-  VaThreeRendererEvents,
+  VathThreeRendererEvents,
 }
-export default VaThreeRendererEvents
+export default VathThreeRendererEvents

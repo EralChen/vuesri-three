@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { PropType, onBeforeUnmount } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
-import { _VaLayerUse } from '@vuesri-three/components/layer'
+import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { ThreeComponent, ThreeContext } from '@vuesri-three/shared'
 import { createTransformMatrix4 } from '@vuesri-three/components/transform'
 import * as THREE from 'three'
@@ -59,7 +59,7 @@ class CustomComponent implements ThreeComponent {
 const layer = new CustomComponent({
   point: props.point,
 })
-_VaLayerUse.useAddLayer(threerd, layer)
+_VathLayerUse.useAddLayer(threerd, layer)
 
 
 /* 点击事件 */

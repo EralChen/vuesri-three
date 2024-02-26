@@ -68,7 +68,7 @@ export const closedGeometry = (
         ring[0][0] !== ring[ring.length - 1][0] 
         || ring[0][1] !== ring[ring.length - 1][1]
       ) {
-        polygon.insertPoint(ring.length, index, ring[0])
+        polygon.insertPoint(index, ring.length, ring[0])
       }
     })
     return polygon

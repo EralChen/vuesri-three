@@ -18,6 +18,10 @@ export interface Entity extends ThreeComponent {
   group: THREE.Group
 }
 
+export interface EntityLayerProperties {
+  source?: __esri.Graphic[]
+}
+
 export {
   EntityLayer,
 }

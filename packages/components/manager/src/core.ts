@@ -19,7 +19,7 @@ export function MaterialManager<
    */
   return class MaterialManagerMixing extends Base {
 
-    materialMap: Map<string, Material | Material[]> = new Map([
+    materialMap: Map<any, Material | Material[]> = new Map([
       ['default', new MeshBasicMaterial({ color: 0xff0000 })],
     ])
     

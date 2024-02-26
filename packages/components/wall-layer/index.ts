@@ -1,11 +1,11 @@
 import { App } from 'vue'
-import VaWallLayer from './src/index.vue'
-export * as __VaWallLayer from './src/types'
+import VathWallLayer from './src/index.vue'
+export * as __VathWallLayer from './src/types'
 
-VaWallLayer.install = (app: App): void => {
-  app.component(VaWallLayer.name, VaWallLayer)
+VathWallLayer.install = (app: App): void => {
+  app.component(VathWallLayer.name, VathWallLayer)
 }
 export {
-  VaWallLayer,
+  VathWallLayer,
 }
-export default VaWallLayer
+export default VathWallLayer

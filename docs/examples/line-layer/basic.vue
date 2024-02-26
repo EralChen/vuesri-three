@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 import { VaLineLayer } from '@vuesri-three/components/line-layer'
 import { Polyline } from '@vuesri/core/arcgis'
 const geometry = new Polyline({
@@ -39,12 +39,12 @@ const geometry = new Polyline({
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
+    <VathThreeRenderer>
       <VaLineLayer
         :geometry="geometry"
         :texture-url="'/ThreeRenderer/images/line_layer_texture.png'"
       >
       </VaLineLayer>
-    </VaThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

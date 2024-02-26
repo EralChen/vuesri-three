@@ -1,6 +1,6 @@
 export const LIB_NAME = '@vuesri/three'
 export const LIB_ALIAS = LIB_NAME.replace('/', '-') as '@vuesri-three'
-export const LIB_PRE = 'va'
+export const LIB_PRE = 'vath'
 export const LIB_ENTRY_DIRNAME = 'entry'
 export const LIB_ENTRY_FLIENAME = 'index'
 

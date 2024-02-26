@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 import CustomLayer from './custom-layer.vue'
 
 
@@ -14,8 +14,8 @@ import CustomLayer from './custom-layer.vue'
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
+    <VathThreeRenderer>
       <CustomLayer></CustomLayer>
-    </VaThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 import TestPointLayer from './TestPointLayer.vue'
 import Graphic from 'esri/Graphic'
 import { Point } from 'esri/geometry'
@@ -53,11 +53,11 @@ const visible = ref(true)
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
+    <VathThreeRenderer>
       <TestPointLayer
         :visible="visible"
         :source="source"
       ></TestPointLayer>
-    </VaThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

@@ -1,6 +1,6 @@
-import { ThreeLayer } from '@vuesri-three/components/layer'
+import { ThreeLayer, extentFromGraphics } from '@vuesri-three/components/layer'
 import { ThreeContext } from '@vuesri-three/shared'
-import type { Entity } from './types'
+import type { Entity, EntityLayerProperties } from './types'
 import { Group } from 'three'
 
 
@@ -8,9 +8,11 @@ export class EntityLayer extends ThreeLayer {
   public source: __esri.Graphic[]
   public group: THREE.Group = new Group()
   public entities: Entity[] = []
+  public fullExtent: __esri.Extent
   protected handles: __esri.WatchHandle[] = []
-  constructor () {
+  constructor (e: EntityLayerProperties = {}) {
     super()
+    e.source && (this.source = e.source)
     this.group.visible = this.visible
   }
 
@@ -19,7 +21,8 @@ export class EntityLayer extends ThreeLayer {
 
   setup (e: ThreeContext): void {
     super.setup(e)
-
+    this.fullExtent = extentFromGraphics(this.source)
+    
     this.init(e)
 
     this.entities.forEach(entity => {
@@ -33,6 +36,8 @@ export class EntityLayer extends ThreeLayer {
         this.group.visible = v
       }),
     )
+
+    this.ready()
   }
 
   render (e: ThreeContext): void {

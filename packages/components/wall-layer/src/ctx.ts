@@ -1,31 +1,27 @@
-import { Color } from 'three'
+import { RepeatWrapping, TextureLoader } from 'three'
+import { LoadEvent } from './types'
 import { PropType } from 'vue'
+import { defaultTextureUrl } from './const'
+
+
 
 export const props = {
-  geometry: {
-    type: Object as PropType<__esri.Geometry>,
-    default: undefined,
-  },
-  height: {
-    type: Number,
-    default: undefined,
-  },
-  textureUrl: {
-    type: String,
-    default: undefined,
-  },
 
-  alphaTextureUrl: {
-    type: String,
-    default: undefined,
+  source: {
+    type: Array as PropType<__esri.Graphic[]>,
+    default: () => [],
   },
-
-  color: {
-    type: Object as PropType<Color>,
-    default: undefined,
+  texture: {
+    type: Object as PropType<THREE.Texture>,
+    default: () => {
+      const texture = new TextureLoader().load(defaultTextureUrl)
+      texture.wrapS = RepeatWrapping
+      texture.wrapT = RepeatWrapping
+      return texture
+    },
   },
-  
 }
 
 export const emits = {
+  load: (e: LoadEvent) => e,
 }

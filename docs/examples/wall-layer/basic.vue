@@ -1,73 +1,45 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
-import { VaWallLayer } from '@vuesri-three/components/wall-layer'
-import { Polyline, Polygon, Extent } from '@vuesri/core/arcgis'
-import { shallowRef } from 'vue'
-import { Color } from 'three'
-const base = import.meta.env.VITE_BASE_URL
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { Polygon, Graphic } from '@vuesri/core/arcgis'
+import { VathWallLayer, __VathWallLayer } from '@vuesri-three/components/wall-layer'
 
-const viewOptions:__esri.SceneViewProperties = {
-  center: [104.06179498614645, 30.659871702738265],
-  zoom: 18,
-  viewingMode: 'local',
-}
-const geometry2 = new Polyline({
-  paths: [
-    [
-      [104.06191956585747, 30.660483165583024], // 坐标1
-      [104.0646914649979, 30.65909115535485], // 坐标2
-    ],
-   
+const source: __esri.Graphic[] = [
+  new Graphic({
+    geometry: new Polygon({
+      rings: [
+        [
+          [104.06191956585747, 30.660483165583024], // 坐标1
+          [104.06191956585747, 30.65909115535485], // 坐标2
+          [104.0646914649979, 30.65909115535485], // 坐标3
+          [104.0646914649979, 30.660483165583024], // 坐标4
+        ],
 
-  ],
-})
-const color2 = new Color('blue')
-// const geometry = new Extent({
-//   xmin: 104.06191956585747,
-//   ymin: 30.660483165583024,
-//   xmax: 104.0646914649979,
-//   ymax: 30.65909115535485,
-//   spatialReference: {
-//     wkid: 4326,
-//   },
-// })
-
-const geometry = shallowRef<__esri.Geometry>(
-  new Polygon({
-    rings: [
-      [
-        [104.06191956585747, 30.660483165583024], // 坐标1
-        [104.06191956585747, 30.65909115535485], // 坐标2
-        [104.0646914649979, 30.65909115535485], // 坐标3
-        [104.0646914649979, 30.660483165583024], // 坐标4
       ],
-
-    ],
+    }),
+    attributes: {
+      name: 'cx',
+      value: 100,
+    },
   }),
-) 
+]
+const layerLoad: __VathWallLayer.OnLoad = async (e) => {
+  const layer = e.layer
+  await layer.when()
+  e.view.goTo(layer.fullExtent, {
+    animate: false,
+  })
+}
 
-const color = shallowRef(
-  new Color('red'),
-)
-// geometry2
+
 </script>
 <template>
   <VaSceneView
-    :default-options="viewOptions"
+    :default-options="{
+      center: [120, 30],
+      zoom: 10,
+    }"
   >
-    <template #before>
-      <p>
-        <el-button @click="geometry = geometry2">
-          change geometry
-        </el-button>
-
-        <el-button @click="color = color2">
-          change color
-        </el-button>
-      </p>
-    </template>
-
     <VaTdtBasemap
       :type="'vec_w'"
       :spatial-reference="{
@@ -75,15 +47,12 @@ const color = shallowRef(
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer :axes-helper="true">
-      <VaWallLayer 
-        :geometry="geometry"
-        :height="50"
-        :alpha-texture-url="base + '/ThreeRenderer/images/wall_layer_alpha_map.png'"
-        :texture-url="base + '/ThreeRenderer/images/wall_layer_texture.png'"
-        :color="color"
+    <VathThreeRenderer>
+      <VathWallLayer
+        :source="source"
+        @load="layerLoad"
       >
-      </VaWallLayer>
-    </VaThreeRenderer>
+      </VathWallLayer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>

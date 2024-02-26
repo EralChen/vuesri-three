@@ -19,7 +19,7 @@ ${l}/basic
 
 export const createVue = () => `<script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 
 </script>
 <template>
@@ -31,9 +31,9 @@ import { VaThreeRenderer } from '@vuesri-three/components/three-renderer'
       }"
     ></VaTdtBasemap>
 
-    <VaThreeRenderer>
+    <VathThreeRenderer>
    
-    </VaThreeRenderer>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>
 `

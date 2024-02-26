@@ -4,7 +4,7 @@ import { Entity } from '@vuesri-three/shared'
 import { EntityLayer } from '@vuesri-three/components/entity-layer'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { PropType, watch, watchEffect } from 'vue'
-import { _VaLayerUse } from '@vuesri-three/components/layer'
+import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { useThreeRenderer } from '@vuesri-three/composables'
 
 interface TestPointEntityProperties {
@@ -89,7 +89,7 @@ watchEffect(() => {
   layer.visible = props.visible
 })
 
-_VaLayerUse.useAddLayer(threeRenderer, layer)
+_VathLayerUse.useAddLayer(threeRenderer, layer)
 
 
 

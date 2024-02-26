@@ -1,12 +1,12 @@
 import { App } from 'vue'
-import VaThreeRenderer from './src/index.vue'
-export * as __VaThreeRenderer from './src/types'
+import VathThreeRenderer from './src/index.vue'
+export * as __VathThreeRenderer from './src/types'
 export * from './src/core'
 
-VaThreeRenderer.install = (app: App): void => {
-  app.component(VaThreeRenderer.name, VaThreeRenderer)
+VathThreeRenderer.install = (app: App): void => {
+  app.component(VathThreeRenderer.name, VathThreeRenderer)
 }
 export {
-  VaThreeRenderer,
+  VathThreeRenderer,
 }
-export default VaThreeRenderer
+export default VathThreeRenderer
