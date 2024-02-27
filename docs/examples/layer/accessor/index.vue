@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import Accessor from '@arcgis/core/core/Accessor'
 import { subclass, property } from '@arcgis/core/core/accessorSupport/decorators'
-import  '@vuesri-three/components/test'
 
 
 const data = ref('')
