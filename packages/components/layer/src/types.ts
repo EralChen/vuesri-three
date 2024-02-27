@@ -1,4 +1,4 @@
-import type { ThreeLayer } from './core'
+import type { ThreeLayer } from '@vuesri-three/components/layer'
 
 export {
   ThreeLayer,

@@ -5,7 +5,7 @@ import { useSceneView } from '@vuesri/core/composables'
 import { VathThreeRendererEvents } from '@vuesri-three/components/three-renderer-events'
 import mitt from 'mitt'
 import { sMitter } from '@vuesri/core/shared'
-import { ThreeRenderer } from './core'
+import { ThreeRenderer } from '@vuesri-three/components/three-renderer'
 export default defineComponent({
   name: 'VathThreeRenderer',
   components: {

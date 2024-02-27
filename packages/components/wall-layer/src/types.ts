@@ -1,5 +1,5 @@
 import { __VathEntityLayer } from '@vuesri-three/components/entity-layer'
-import type { WallLayer } from './core'
+import type { WallLayer } from '@vuesri-three/components/wall-layer'
 import { ThreeRenderer } from '@vuesri-three/shared'
 import { ReturnVoid } from '@vunk/core'
 

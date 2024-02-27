@@ -40,7 +40,8 @@ export default series(
         cwd: path.resolve(__dirname, './'),
         onlyFiles: true,
         absolute: true,
-        ignore: [...filePathIgnore],
+        ignore: [...filePathIgnore, '**/src/core.ts'],
+      
       })
 
       filePaths.forEach(item => {

@@ -2,7 +2,7 @@
 import { props, emits } from './ctx'
 import { defineComponent, watch, watchEffect } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
-import { WallLayer } from './core'
+import { WallLayer } from '@vuesri-three/components/wall-layer'
 import { _VathLayerUse } from '@vuesri-three/components/layer'
 
 export default defineComponent({

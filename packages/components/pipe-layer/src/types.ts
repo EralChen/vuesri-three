@@ -1,5 +1,5 @@
 import { ThreeRenderer } from '@vuesri/three'
-import type { PipeLayer } from './core'
+import type { PipeLayer } from '@vuesri-three/components/pipe-layer'
 import { ReturnVoid } from '@vunk/core'
 import { __VathEntityLayerEvents } from '@vuesri-three/components/entity-layer-events'
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { props, emits } from './ctx'
 import { defineComponent, provide, watch } from 'vue'
-import { PipeLayer } from './core'
+import { PipeLayer } from '@vuesri-three/components/pipe-layer'
 import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { useThreeRenderer } from '@vuesri-three/composables'
 import { VathEntityLayerEvents, _VathEntityLayerEventsCtx } from '@vuesri-three/components/entity-layer-events'

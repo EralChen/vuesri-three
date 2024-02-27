@@ -1,5 +1,6 @@
 import { App } from 'vue'
 import VathWallLayer from './src/index.vue'
+export * from './src/core'
 export * as __VathWallLayer from './src/types'
 
 VathWallLayer.install = (app: App): void => {

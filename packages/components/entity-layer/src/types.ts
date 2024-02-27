@@ -1,5 +1,5 @@
 import { ThreeComponent } from '@vuesri-three/shared'
-import type { EntityLayer } from './core'
+import type { EntityLayer } from '@vuesri-three/components/entity-layer'
 
 export interface Entity extends ThreeComponent {
   /**

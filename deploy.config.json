@@ -1,0 +1,12 @@
+[
+  {
+    "scripts": [
+      "docs:build"
+    ],
+    "path": {
+      "dist": "./docs/dist/client",
+      "html": "/home/nginx/html/docs/vuesri-three"
+    }
+  }
+
+]
