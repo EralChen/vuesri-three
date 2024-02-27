@@ -8,7 +8,7 @@ export class EntityLayer extends ThreeLayer {
   public source: __esri.Graphic[]
   public group: THREE.Group = new Group()
   public entities: Entity[] = []
-  public fullExtent: __esri.Extent
+  declare public fullExtent: __esri.Extent
   protected handles: __esri.WatchHandle[] = []
   constructor (e: EntityLayerProperties = {}) {
     super()
