@@ -2,13 +2,12 @@
 /// <reference types="vike-vue/dist/renderer/+config" />
 
 import { ApiReturnType } from '@vunk/core'
-import { rCrowdinFilesAsReflect, CrowdinFileLang } from '../renderer/crowdin'
+import { rCrowdinFilesAsReflect } from '../renderer/crowdin'
 
 declare global {
   namespace Vike {
     interface PageContext {
       crowdin: ApiReturnType<typeof rCrowdinFilesAsReflect>
-      lang: CrowdinFileLang
     }
   }
 
