@@ -163,11 +163,11 @@ importers:
         specifier: ^0.2.4
         version: 0.2.4
       vike:
-        specifier: 0.4.156
-        version: 0.4.156(vite@5.1.3)
+        specifier: 0.4.163
+        version: 0.4.163(vite@5.1.3)
       vike-vue:
-        specifier: ^0.5.4
-        version: 0.5.4(vike@0.4.156)(vue@3.4.19)
+        specifier: ^0.6.3
+        version: 0.6.3(vike@0.4.163)(vue@3.4.19)
     devDependencies:
       '@iconify-json/ri':
         specifier: ^1.1.4
@@ -9486,18 +9486,18 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /vike-vue@0.5.4(vike@0.4.156)(vue@3.4.19):
-    resolution: {integrity: sha512-GL9LwbtPGyXJGs6t4QPmpaxA+tsc8Xc0+imf1ZlgFL7AVC4UYveVmWHzmedXcVT3ro9Q9y5P/UUM4nalX+jbIA==}
+  /vike-vue@0.6.3(vike@0.4.163)(vue@3.4.19):
+    resolution: {integrity: sha512-oVMWkxJfhiFBu99pID/4P3qng1fnb9C15W+SAQZ5GOr+pXSfL2DAMNi1kCQJ4mccZ/Ec0Xk+jfYMp0LZOucltw==}
     peerDependencies:
-      vike: ^0.4.152
+      vike: ^0.4.160
       vue: ^3.0.0
     dependencies:
-      vike: 0.4.156(vite@5.1.3)
+      vike: 0.4.163(vite@5.1.3)
       vue: 3.4.19(typescript@4.9.5)
     dev: false
 
-  /vike@0.4.156(vite@5.1.3):
-    resolution: {integrity: sha512-CaeG+clu+oLDKSv4B+6aOYoWNUb/URF6dK3/AeC9NJD0XvsfW8at1yQO5hA3M1SVWpe7c/tUGw1uYVgceT4JMw==}
+  /vike@0.4.163(vite@5.1.3):
+    resolution: {integrity: sha512-BlV0aAGrtWquxcrKczxypfRHh6XLK8KEhFojqB6pQC7gJhExhUtTYilCH90t8/Awbo5E54OoLXkpp1BsS4rKsw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:

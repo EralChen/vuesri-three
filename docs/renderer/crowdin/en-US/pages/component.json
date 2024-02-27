@@ -1,8 +1,6 @@
 {
-  "view": {
-    "text": "View",
-    "children": [
-    ]
+  "basic": {
+    "text": "Basic 基础",
+    "children": []
   }
-
 }

@@ -11,7 +11,7 @@ export interface CrowdinFile<S extends NormalObject = NormalObject> {
 /* lang */
 export enum CrowdinFileLang {
   zhCN = 'zh-CN',
-  // enUS = 'en-US',
+  enUS = 'en-US',
 } 
 export interface CrowdinFileLangMedia {
   label: string
@@ -24,11 +24,11 @@ export const CrowdinFileLangOptions: CrowdinFileLangMedia[]  = [
     value: CrowdinFileLang.zhCN,
     glob: import.meta.glob('./zh-CN/**/*.json'),
   },
-  // {
-  //   label: '英文',
-  //   value: CrowdinFileLang.enUS,
-  //   glob: import.meta.glob('./en-US/**/*.json'),
-  // },
+  {
+    label: '英文',
+    value: CrowdinFileLang.enUS,
+    glob: import.meta.glob('./en-US/**/*.json'),
+  },
 ]
 export const CrowdinFileLangReflect = CrowdinFileLangOptions.reduce((acc, cur) => {
   acc[cur.value] = cur
@@ -45,7 +45,7 @@ export async function rCrowdinFiles (
   lang: CrowdinFileLang =  CrowdinFileLang.zhCN,
 ) {
 
-  const files = CrowdinFileLangReflect[lang]?.glob ?? []
+  const files = CrowdinFileLangReflect[lang].glob
   const crowdinFiles: CrowdinFile[] = []
 
   for (const filepath in files) {

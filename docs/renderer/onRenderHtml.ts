@@ -18,8 +18,7 @@ import 'uno.css'
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   const { stream } = pageContext.config
-  const lang = getLang(pageContext) as CrowdinFileLang
-
+  const lang = (getLang(pageContext) || 'zh-CN') as CrowdinFileLang
 
   let pageView: ReturnType<typeof dangerouslySkipEscape> | ReturnType<typeof renderToNodeStream> | string = ''
   let fromHtmlRenderer = undefined
