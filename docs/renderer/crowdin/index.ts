@@ -45,7 +45,7 @@ export async function rCrowdinFiles (
   lang: CrowdinFileLang =  CrowdinFileLang.zhCN,
 ) {
 
-  const files = CrowdinFileLangReflect[lang].glob
+  const files = CrowdinFileLangReflect[lang]?.glob ?? []
   const crowdinFiles: CrowdinFile[] = []
 
   for (const filepath in files) {
