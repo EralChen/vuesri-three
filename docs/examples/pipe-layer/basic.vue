@@ -35,6 +35,11 @@ const source: __esri.Graphic[] = [
       ],
       
     }),
+    attributes: {
+      name: '管线1',
+      type: '管线',
+      id: '1',
+    },
   }),
 
 ]
@@ -45,14 +50,16 @@ const layerLoad: __VathPipeLayer.OnLoad = async (e) => {
     animate: false,
   })
 }
-const viewOptions: __esri.SceneViewProperties = {
-  viewingMode: 'local',
+const layerClick: __VathPipeLayer.OnClick = (e) => {
+  const { result } = e
+  if (result) {
+    console.log(result.graphic?.attributes)
+    window.alert(result.graphic?.attributes.name)
+  }
 }
 </script>
 <template>
-  <VaSceneView
-    :default-options="viewOptions"
-  >
+  <VaSceneView>
     <VaTdtBasemap
       :type="'vec_w'"
       :spatial-reference="{
@@ -64,6 +71,7 @@ const viewOptions: __esri.SceneViewProperties = {
       <VathPipeLayer
         :source="source"
         @load="layerLoad"
+        @click="layerClick"
       >
       </VathPipeLayer>
     </VathThreeRenderer>

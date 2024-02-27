@@ -1,22 +1,20 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { defineComponent, onBeforeUnmount, watch } from 'vue'
+import { defineComponent, provide, watch } from 'vue'
 import { PipeLayer } from './core'
-import { _VathLayerUse, _VathLayerUtils } from '@vuesri-three/components/layer'
+import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { useThreeRenderer } from '@vuesri-three/composables'
-import { createMitterToggleHandler } from '@vuesri/core/shared/mitter'
-import { sMitter } from '@vuesri/core'
-
-
+import { VathEntityLayerEvents, _VathEntityLayerEventsCtx } from '@vuesri-three/components/entity-layer-events'
 export default defineComponent({
   name: 'VathPipeLayer',
+  components: {
+    VathEntityLayerEvents,
+  },
   props,
   emits,
   setup (props, { emit }) {
     const renderer = useThreeRenderer()
-    const mitter = renderer[sMitter]
-    const MitterToggleHandler = createMitterToggleHandler(mitter)
-
+    const eventsEmits = _VathEntityLayerEventsCtx.createOnEmits(emit)
 
     const layer = new PipeLayer({
       source: props.source,
@@ -31,28 +29,17 @@ export default defineComponent({
       renderer,
       view: renderer.view,
     })
+    provide('vathEntityLayer', layer)
 
-    const clickMitterToggleHandler = new MitterToggleHandler('click', (e) => {
-
-      
-
-      if (
-        e.feature 
-        && _VathLayerUtils.isDescendantOfGroup(e.feature.object, layer.group)
-      ) {
-        console.log('click', e.feature.object)
-
-      }
-    })
-    clickMitterToggleHandler.add()
-    onBeforeUnmount(() => {
-      clickMitterToggleHandler.remove()
-    })
-
-    return {}
+    return {
+      eventsEmits,
+    }
   },
 })
 </script>
 <template>
+  <VathEntityLayerEvents
+    v-on="eventsEmits"
+  ></VathEntityLayerEvents>
   <slot></slot>
 </template>
