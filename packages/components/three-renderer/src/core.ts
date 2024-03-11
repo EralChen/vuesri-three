@@ -9,11 +9,11 @@ export class ThreeRenderer {
   layers: ThreeLayerCollection = new ThreeLayerCollection()
     
 
-  private renderer?: THREE.WebGLRenderer
-  readonly scene: THREE.Scene = new Scene()
-  readonly camera: THREE.PerspectiveCamera = new PerspectiveCamera()
-  private ambient: THREE.AmbientLight = new AmbientLight(0xffffff, 0.5)
-  private sun: THREE.DirectionalLight = new DirectionalLight(0xffffff, 0.5)
+  private renderer?: WebGLRenderer
+  readonly scene = new Scene()
+  readonly camera = new PerspectiveCamera()
+  private ambient = new AmbientLight(0xffffff, 0.5)
+  private sun = new DirectionalLight(0xffffff, 0.5)
 
 
   getRenderer () {
@@ -73,7 +73,7 @@ export class ThreeRenderer {
     this.layers.forEach(layer => {
       layer.setup({
         context,
-        renderer: this.renderer as THREE.WebGLRenderer,
+        renderer: this.renderer as WebGLRenderer,
         scene: this.scene,
         view: this.view,
       })
@@ -125,7 +125,7 @@ export class ThreeRenderer {
     this.layers.forEach(layer => {
       layer.render({
         context,
-        renderer: this.renderer as THREE.WebGLRenderer,
+        renderer: this.renderer as WebGLRenderer,
         scene: this.scene,
         view: this.view,
       })
@@ -137,6 +137,7 @@ export class ThreeRenderer {
 
     this.renderer?.render(this.scene, this.camera)
 
+    //@ts-ignore
     externalRenderers.requestRender(this.view)
 
     context.resetWebGLState()
@@ -147,7 +148,7 @@ export class ThreeRenderer {
     this.layers.forEach(layer => {
       layer.dispose({
         context,
-        renderer: this.renderer as THREE.WebGLRenderer,
+        renderer: this.renderer as WebGLRenderer,
         scene: this.scene,
         view: this.view,
       })

@@ -2,13 +2,13 @@
 export { onRenderClient }
 
 import { createVueApp } from './app'
-import { getTitle } from '#/vike-vue/renderer/getTitle'
-import { getLang } from '#/vike-vue/renderer/getLang'
+import { getTitle } from '../vike-vue/renderer/getTitle'
+import { getLang } from '../vike-vue/renderer/getLang'
 import type { OnRenderClientAsync } from 'vike/types'
-import { useCopyCode } from '#/vitepress/composables/copy-code'
+import { useCopyCode } from '../vitepress/composables/copy-code'
 
 import { esriConfig } from '@vuesri/core/arcgis'
-import { VikeVueApp } from 'vike-vue/dist/renderer/types'
+import { VikeVueApp } from 'vike-vue/dist/types/PageContext'
 // esriConfig.assetsPath = import.meta.env.VITE_BASE_URL + '/Esri'
 esriConfig.apiKey = 'AAPKb14837d0d1fd48c2a9e834966b090d71jkWd8RL_697p0sRB9s87pEWRaefvBwcC_pdbOKwZd3Ka8xiulyqbHPassAKuHBxH'
 
@@ -30,7 +30,7 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
 
     await pageContext.config.onBeforeMountApp?.(ctxWithApp)
 
-    app.mount(container)
+    app?.mount(container)
   } else {
     // Client routing
     // See https://vike.dev/server-routing-vs-client-routing

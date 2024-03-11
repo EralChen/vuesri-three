@@ -1,7 +1,7 @@
 
 import type { Config, ConfigEffect } from 'vike/types'
-import { onRenderClient } from './onRenderClient'
-import { onRenderHtml } from './onRenderHtml'
+// import { onRenderClient } from './onRenderClient'
+// import { onRenderHtml } from './onRenderHtml'
 
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
@@ -27,9 +27,9 @@ const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) 
 }
 
 
-export default {
-  onRenderHtml,
-  onRenderClient,
+const config = {
+  onRenderHtml: 'import:./onRenderHtml.ts:onRenderHtml',
+  onRenderClient: 'import:./onRenderClient.ts:onRenderClient',
 
 
   // TODO/next-major-release: remove pageProps (i.e. tell users to use data() instead of onBeforeRender() to fetch data)
@@ -85,3 +85,6 @@ export default {
     },
   },
 } satisfies Config
+
+
+export default config

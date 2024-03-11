@@ -43,6 +43,7 @@ module.exports = defineConfig({
     // for ts
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/func-call-spacing': ['error', 'never'],
+    '@typescript-eslint/ban-ts-comment': 'off',
     // for vue
     'vue/multi-word-component-names': 'off',
     'vue/prefer-import-from-vue': 'off',
