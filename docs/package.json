@@ -10,7 +10,7 @@
     "deepdash-es": "^5.3.9",
     "gsap": "^3.12.4",
     "prism-theme-vars": "^0.2.4",
-    "vike": "0.4.163",
+    "vike": "0.4.165",
     "vike-vue": "^0.6.3"
   },
   "devDependencies": {
