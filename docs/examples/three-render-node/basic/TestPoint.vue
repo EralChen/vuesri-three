@@ -2,7 +2,7 @@
 import { PropType, onBeforeUnmount } from 'vue'
 import { useThreeRenderer } from '@vuesri-three/composables'
 import { _VathLayerUse } from '@vuesri-three/components/layer'
-import { ThreeComponent, ThreeContext } from '@vuesri-three/shared'
+import { ThreeComponent, ThreeContext, ThreeNodeContext } from '@vuesri-three/shared'
 import { createTransformMatrix4 } from '@vuesri-three/components/transform'
 import * as THREE from 'three'
 import { sMitter } from '@vuesri/core'
@@ -28,7 +28,7 @@ class CustomComponent implements ThreeComponent {
   constructor (props: { point: __esri.Point }) {
     this.point = props.point   
   }
-  setup (e: ThreeContext): void {
+  setup (e: ThreeNodeContext): void {
     const geometry = new THREE.BoxGeometry(1000, 1000, 1000)
     const material = new THREE.MeshBasicMaterial({ 
       color: 0xffff00,
@@ -39,15 +39,15 @@ class CustomComponent implements ThreeComponent {
     /* mesh 应用矩阵变换，调整到地理坐标系中 */
     const transform = createTransformMatrix4(e.view, this.point)
     this.mesh.applyMatrix4(transform)
+
   }
 
-  render (): void {
+  animate (e: ThreeNodeContext) {
     const clockDelta = this.clock.getDelta()
-
-    if (this.mesh !== undefined) {
-      this.mesh.geometry.rotateY(this.radiansPerSecond * clockDelta)
-    }
+    this.mesh?.geometry.rotateY(this.radiansPerSecond * clockDelta)
+    e.renderNode.requestRender()
   }
+
   dispose (e: ThreeContext): void {
     if (this.mesh) {
       this.mesh.geometry.dispose()

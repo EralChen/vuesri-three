@@ -61,6 +61,8 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render (e: ThreeContext): void {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  animate (e: ThreeContext): void {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dispose (e: ThreeContext): void {}
 
 

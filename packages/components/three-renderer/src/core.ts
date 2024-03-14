@@ -120,14 +120,15 @@ export class ThreeRenderer {
       sunLight.ambient.color[2],
     )
 
-    const layerCtx = {
+    const ctx = {
       context,
       renderer: this.renderer as WebGLRenderer,
       scene: this.scene,
       view: this.view,
     }
     this.layers.forEach(layer => {
-      layer.render?.(layerCtx)
+      layer.render?.(ctx)
+      layer.animate?.(ctx)
     })
 
     this.renderer?.resetState()

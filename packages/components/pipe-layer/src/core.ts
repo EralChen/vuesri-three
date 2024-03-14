@@ -1,4 +1,4 @@
-import { Entity, EntityLayer } from '@vuesri-three/shared'
+import { Entity, EntityLayer, ThreeContext } from '@vuesri-three/shared'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
 import { CatmullRomCurve3, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshPhongMaterial, RepeatWrapping, Texture, TextureLoader, TubeGeometry, Vector3 } from 'three'
@@ -120,7 +120,7 @@ export class PipeLayer extends MaterialManager(EntityLayer) {
       texture.wrapS = RepeatWrapping
       texture.wrapT = RepeatWrapping
       texture.repeat.set(20, 4)
-      texture.needsUpdate = true
+      // texture.needsUpdate = true
       return texture
     })()
 
@@ -134,6 +134,8 @@ export class PipeLayer extends MaterialManager(EntityLayer) {
       map: this.texture,
       opacity: 1,
     })
+    // this.material.needsUpdate = true
+
     this.handles.push(
       this.watch('texture', () => {
         this.getMaterial().map = this.texture
@@ -149,11 +151,12 @@ export class PipeLayer extends MaterialManager(EntityLayer) {
     
   }
 
-  render (): void {
+  animate (ctx: ThreeContext): void {
     if (!this.visible) return
     const texture = this.getMaterial().map
     if (!texture) return
     texture.offset.x += 0.01
+    ctx.renderNode?.requestRender()
   }
 
   getMaterial () {

@@ -6,7 +6,7 @@ import { Group } from 'three'
 
 export class EntityLayer extends ThreeLayer {
   public source: __esri.Graphic[]
-  public group: THREE.Group = new Group()
+  public group: Group = new Group()
   public entities: Entity[] = []
   declare public fullExtent: __esri.Extent
   protected handles: __esri.WatchHandle[] = []
@@ -40,9 +40,9 @@ export class EntityLayer extends ThreeLayer {
     this.ready()
   }
 
-  render (e: ThreeContext): void {
+  animate (e: ThreeContext): void {
     this.entities.forEach(entity => {
-      entity.render(e)
+      entity.animate?.(e)
     })
   }
 

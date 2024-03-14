@@ -91,15 +91,28 @@ export class ThreeRenderNode extends RenderNode {
     this.scene.add(this.sun)
 
 
+    const ctx = {
+      context: this,
+      renderer: this.renderer as WebGLRenderer,
+      scene: this.scene,
+      view: this.view,
+      renderNode: this,
+    }
+
+
     this.layers.forEach(layer => {
-      layer.setup({
-        context: this,
-        renderer: this.renderer as WebGLRenderer,
-        scene: this.scene,
-        view: this.view,
-        renderNode: this,
-      })
+      layer.setup(ctx)
     })
+
+    
+    const animate = () => {
+      this.layers.forEach(layer => {
+        layer.animate?.(ctx)
+      })
+      requestAnimationFrame(animate)
+    }
+    animate()
+    
 
     this.resetWebGLState()
   }

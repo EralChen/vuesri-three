@@ -19,6 +19,8 @@ export interface ThreeComponent<
   render?(e: CTX): void;
 
 
+  animate?(e: CTX): void;
+
   /**
    * three renderer 销毁时，调用 dispose 方法
    * 遍历执行所有 layers 的 dispose 方法
@@ -36,6 +38,7 @@ export interface ThreeContext {
   scene: Scene
   view: __esri.SceneView
   
+  renderNode?: __esri.RenderNode
 }
 
 

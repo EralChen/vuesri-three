@@ -41,11 +41,12 @@ class CustomComponent implements ThreeComponent {
     this.mesh.applyMatrix4(transform)
   }
 
-  render (): void {
+  animate (ctx: ThreeContext): void {
     const clockDelta = this.clock.getDelta()
 
     if (this.mesh !== undefined) {
       this.mesh.geometry.rotateY(this.radiansPerSecond * clockDelta)
+      ctx.renderNode?.requestRender()
     }
   }
   dispose (e: ThreeContext): void {
