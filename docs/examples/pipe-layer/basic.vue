@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
+// import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
+import { VathThreeRenderNode } from '@vuesri-three/components/three-render-node'
 import { VathPipeLayer, __VathPipeLayer } from '@vuesri-three/components/pipe-layer'
 import { Graphic, Polyline } from '@vuesri/core/arcgis'
 
@@ -67,13 +68,13 @@ const layerClick: __VathPipeLayer.OnClick = (e) => {
       }"
     ></VaTdtBasemap>
 
-    <VathThreeRenderer>
+    <VathThreeRenderNode>
       <VathPipeLayer
         :source="source"
         @load="layerLoad"
         @click="layerClick"
       >
       </VathPipeLayer>
-    </VathThreeRenderer>
+    </VathThreeRenderNode>
   </VaSceneView>
 </template>

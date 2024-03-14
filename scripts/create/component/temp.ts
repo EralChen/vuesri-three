@@ -9,7 +9,10 @@ import ${pre}${capName} from './src/index.vue'
 export * as __${pre}${capName} from './src/types'
 
 ${pre}${capName}.install = (app: App): void => {
-  app.component(${pre}${capName}.name, ${pre}${capName})
+  app.component(
+    ${pre}${capName}.name || '${pre}${capName}', 
+    ${pre}${capName}
+  )
 }
 export {
   ${pre}${capName},

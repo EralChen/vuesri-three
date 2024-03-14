@@ -5,7 +5,7 @@ import Accessor from '@arcgis/core/core/Accessor'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
 
 /**
- * 像 esri 的 [Layer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-Layer.html#properties-summary) 一样，为 `@vuersi/three` 提供一个 `ThreeLayer` 作为基类
+ * 像 esri 的 [Layer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-Layer.html#properties-summary) 一样，为 `@vuesri/three` 提供一个 `ThreeLayer` 作为基类
  * 
  */
 @subclass('vuesri.three.ThreeLayer')
@@ -60,6 +60,8 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render (e: ThreeContext): void {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  animate (e: ThreeContext): void {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dispose (e: ThreeContext): void {}
 
