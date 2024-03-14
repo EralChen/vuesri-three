@@ -6,7 +6,7 @@ import { subclass, property } from '@arcgis/core/core/accessorSupport/decorators
 
 const data = ref('')
 
-@subclass('vuersi.three.MyLayer1')
+@subclass('vuesri.three.MyLayer1')
 class MyLayer extends Accessor {
   @property({
     type: String,
