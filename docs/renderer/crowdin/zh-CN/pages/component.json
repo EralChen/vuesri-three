@@ -15,13 +15,14 @@
         "text": "EntityLayer"
       },
       {
-        "link": "/three-render-node",
-        "text": "ThreeRenderNode"
-      },
-      {
         "link": "/render-node",
         "text": "RenderNode"
+      },
+      {
+        "link": "/three-render-node",
+        "text": "ThreeRenderNode"
       }
+
     ]
   },
   "layer": {

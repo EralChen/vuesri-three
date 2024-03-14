@@ -27,7 +27,7 @@ export default defineComponent({
       eventName: EventName
       private handler: AnyFunc
       raycaster = new Raycaster()
-      camera = threeRd.camera
+      camera = threeRd.threeCamera
       scene = threeRd.scene
       constructor (
         eventName: EventName, 

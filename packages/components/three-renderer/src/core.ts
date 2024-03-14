@@ -6,12 +6,12 @@ import { ThreeComponent } from './types'
 
 export class ThreeRenderer {
   view: __esri.SceneView
-  layers: ThreeLayerCollection = new ThreeLayerCollection()
+  layers: ThreeLayerCollection<ThreeComponent> = new ThreeLayerCollection()
     
 
   private renderer?: WebGLRenderer
   readonly scene = new Scene()
-  readonly camera = new PerspectiveCamera()
+  readonly threeCamera = new PerspectiveCamera()
   private ambient = new AmbientLight(0xffffff, 0.5)
   private sun = new DirectionalLight(0xffffff, 0.5)
 
@@ -86,16 +86,15 @@ export class ThreeRenderer {
 
   public render (context: __esri.RenderContext): void {
 
-    this.camera.position.set(context.camera.eye[0], context.camera.eye[1], context.camera.eye[2])
+    this.threeCamera.position.set(context.camera.eye[0], context.camera.eye[1], context.camera.eye[2])
 
-    this.camera.up.set(context.camera.up[0], context.camera.up[1], context.camera.up[2])
+    this.threeCamera.up.set(context.camera.up[0], context.camera.up[1], context.camera.up[2])
 
-    this.camera.lookAt(
+    this.threeCamera.lookAt(
       new Vector3(context.camera.center[0], context.camera.center[1], context.camera.center[2]),
     )
 
-    this.camera.projectionMatrix.fromArray(context.camera.projectionMatrix)
-    // this.camera.updateProjectionMatrix()
+    this.threeCamera.projectionMatrix.fromArray(context.camera.projectionMatrix)
 
     const sunLight = context.sunLight
 
@@ -121,21 +120,22 @@ export class ThreeRenderer {
       sunLight.ambient.color[2],
     )
 
-    
+    const layerCtx = {
+      context,
+      renderer: this.renderer as WebGLRenderer,
+      scene: this.scene,
+      view: this.view,
+    }
     this.layers.forEach(layer => {
-      layer.render({
-        context,
-        renderer: this.renderer as WebGLRenderer,
-        scene: this.scene,
-        view: this.view,
-      })
+      layer.render?.(layerCtx)
+      layer.animate?.(layerCtx)
     })
 
     this.renderer?.resetState()
 
     context.bindRenderTarget()
 
-    this.renderer?.render(this.scene, this.camera)
+    this.renderer?.render(this.scene, this.threeCamera)
 
     //@ts-ignore
     externalRenderers.requestRender(this.view)
@@ -164,8 +164,8 @@ export class ThreeRenderer {
     const aspect = this.view.width / this.view.height
     const renderer = this.getRenderer()
     if (isNaN(aspect)) return
-    this.camera.aspect = aspect
-    this.camera.updateProjectionMatrix()
+    this.threeCamera.aspect = aspect
+    this.threeCamera.updateProjectionMatrix()
     renderer.setSize(this.view.width, this.view.height)
 
   }
@@ -175,12 +175,12 @@ export class ThreeRenderer {
 }
 
 
-export class ThreeLayerCollection extends Array<ThreeComponent> {
-  add (layer: ThreeComponent): void {
+export class ThreeLayerCollection<T> extends Array<T> {
+  add (layer: T): void {
     this.push(layer)
   }
   
-  remove (layer: ThreeComponent): void {
+  remove (layer: T): void {
     const index = this.indexOf(layer)
     if (index > -1) {
       this.splice(index, 1)

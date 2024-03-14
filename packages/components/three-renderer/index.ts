@@ -4,7 +4,9 @@ export * as __VathThreeRenderer from './src/types'
 export * from './src/core'
 
 VathThreeRenderer.install = (app: App): void => {
-  app.component(VathThreeRenderer.name, VathThreeRenderer)
+  app.component(
+    VathThreeRenderer.name || 'VathThreeRenderer', VathThreeRenderer,
+  )
 }
 export {
   VathThreeRenderer,

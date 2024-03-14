@@ -1,7 +1,8 @@
 import * as geometryService from '@arcgis/core/rest/geometryService'
 import ProjectParameters from '@arcgis/core/rest/support/ProjectParameters'
-import { Point, esriConfig, externalRenderers } from '@vuesri/core/arcgis'
+import { Point, esriConfig } from '@vuesri/core/arcgis'
 import { Matrix4 } from 'three'
+import * as webgl from '@arcgis/core/views/3d/webgl'
 
 /**
  * 创建 __esri.Point 实例
@@ -132,7 +133,7 @@ export async function createRenderCoordinates (
 
   const res  = new Float32Array(pos.length)
 
-  externalRenderers.toRenderCoordinates(
+  webgl.toRenderCoordinates(
     view,
     pos,
     0,
@@ -170,8 +171,8 @@ export function createRenderCoordinatesSync (
 
   const res  = new Float32Array(pos.length)
 
-  externalRenderers.toRenderCoordinates(
-    view,
+  webgl.toRenderCoordinates(
+    view, 
     pos,
     0,
     view.spatialReference,
@@ -204,7 +205,7 @@ export function createTransformMatrix4 (
   const thisMatrix4 = matrix4 ?? new Matrix4()
 
 
-  const coordinateTransformAt = externalRenderers.renderCoordinateTransformAt(
+  const coordinateTransformAt = webgl.renderCoordinateTransformAt(
     view,
     [
       point.x ?? point.longitude, 
@@ -220,6 +221,9 @@ export function createTransformMatrix4 (
 
   return thisMatrix4
 }
+
+
+
 
 
 

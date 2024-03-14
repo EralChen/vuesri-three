@@ -1,9 +1,8 @@
-import { PropType } from 'vue'
 import { LoadEvent } from './types'
 export const props = {
-  source: {
-    type: Array as PropType<__esri.Graphic[]>,
-    default: () => [],
+  axesHelper: {
+    type: Boolean,
+    default: false,
   },
 }
 
