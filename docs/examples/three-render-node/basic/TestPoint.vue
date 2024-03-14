@@ -41,8 +41,7 @@ class CustomComponent implements ThreeComponent {
     this.mesh.applyMatrix4(transform)
   }
 
-
-  animate (): void {
+  render (): void {
     const clockDelta = this.clock.getDelta()
 
     if (this.mesh !== undefined) {

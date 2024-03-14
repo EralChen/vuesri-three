@@ -128,7 +128,6 @@ export class ThreeRenderer {
     }
     this.layers.forEach(layer => {
       layer.render?.(layerCtx)
-      layer.animate?.(layerCtx)
     })
 
     this.renderer?.resetState()

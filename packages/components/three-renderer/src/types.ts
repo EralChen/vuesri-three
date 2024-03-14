@@ -18,10 +18,6 @@ export interface ThreeComponent<
    */
   render?(e: CTX): void;
 
-  /**
-   * three renderer 每次渲染时，调用 animate 方法
-   */
-  animate?(e: CTX): void;
 
   /**
    * three renderer 销毁时，调用 dispose 方法

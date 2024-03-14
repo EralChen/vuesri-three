@@ -99,47 +99,10 @@ export class ThreeRenderNode extends RenderNode {
         view: this.view,
         renderNode: this,
       })
-
     })
-    this.startLayersAnimation()
 
     this.resetWebGLState()
   }
-
-  private layersAnimating: number | null = null
-  private startLayersAnimation () {
-    
-    const ctx = {
-      context: this,
-      renderer: this.getRenderer(),
-      scene: this.scene,
-      view: this.view,
-      renderNode: this,
-    }
-    const animate = () => {
-
-      const animations = this.layers.filter(layer => layer.animate)
-      
-      if (animations.length) {
-        animations.forEach(layer => {
-          layer.animate?.(ctx)
-        })
-        this.requestRender()
-      }
-
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-    
-  }
-  private stopLayersAnimation () {
-    if (this.layersAnimating) {
-      cancelAnimationFrame(this.layersAnimating)
-      this.layersAnimating = null
-    }
-  }
-
 
 
   render (inputs: __esri.ManagedFBO[]): __esri.ManagedFBO {
@@ -186,7 +149,6 @@ export class ThreeRenderNode extends RenderNode {
   }
 
   destroy (): void {
-    this.stopLayersAnimation()
     this.dispose()
     super.destroy()
   }
