@@ -34,9 +34,11 @@ function genRoutes (menus: MenuRaw[], parentPath = basePath): RouteRecordRaw[] {
       title: menu.text,
       alwaysShow: true,
     } 
+    
 
     if (menu.children?.length) { // 如果是父级菜单, 以第一个子菜单为默认 Index
       meta.subMenuIndex = path + menu.children[0].link
+      
     }
 
     const route = {
@@ -44,6 +46,7 @@ function genRoutes (menus: MenuRaw[], parentPath = basePath): RouteRecordRaw[] {
       meta,
       name: menu.text,
       children: genRoutes(menu.children ?? [], path),
+    
     } as RouteRecordRaw
     return route
   })

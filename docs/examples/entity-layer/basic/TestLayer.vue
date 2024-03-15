@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { BoxGeometry, Clock, Group, MathUtils, Mesh, Object3DEventMap } from 'three'
-import { Entity } from '@vuesri-three/shared'
+import { Entity, ThreeContext } from '@vuesri-three/shared'
 import { EntityLayer } from '@vuesri-three/components/entity-layer'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { PropType, watch, watchEffect } from 'vue'
@@ -38,11 +38,12 @@ class TestPointEntity implements Entity {
 
     this.group.applyMatrix4(transform)
   }
-  render (): void {
+  animate (ctx: ThreeContext): void {
     const clockDelta = this.clock.getDelta()
 
     if (this.mesh !== undefined) {
       this.mesh.geometry.rotateY(this.radiansPerSecond * clockDelta)
+      ctx.renderNode?.requestRender()
     }
     
   }

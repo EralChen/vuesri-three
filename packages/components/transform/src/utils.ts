@@ -1,8 +1,12 @@
 import * as geometryService from '@arcgis/core/rest/geometryService'
 import ProjectParameters from '@arcgis/core/rest/support/ProjectParameters'
-import { Point, esriConfig } from '@vuesri/core/arcgis'
+import { 
+  Point, esriConfig,
+  /* for legacy */
+  externalRenderers as webgl,
+} from '@vuesri/core/arcgis'
 import { Matrix4 } from 'three'
-import * as webgl from '@arcgis/core/views/3d/webgl'
+// import * as webgl from '@arcgis/core/views/3d/webgl'
 
 /**
  * 创建 __esri.Point 实例

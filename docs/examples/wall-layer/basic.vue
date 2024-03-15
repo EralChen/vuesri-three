@@ -2,7 +2,7 @@
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
 import { Polygon, Graphic } from '@vuesri/core/arcgis'
 import { VathWallLayer, __VathWallLayer } from '@vuesri-three/components/wall-layer'
-import { VathThreeRenderNode } from '@vuesri-three/components/three-render-node'
+import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 
 const source: __esri.Graphic[] = [
   new Graphic({
@@ -47,12 +47,12 @@ const layerLoad: __VathWallLayer.OnLoad = async (e) => {
       }"
     ></VaTdtBasemap>
 
-    <VathThreeRenderNode>
+    <VathThreeRenderer>
       <VathWallLayer
         :source="source"
         @load="layerLoad"
       >
       </VathWallLayer>
-    </VathThreeRenderNode>
+    </VathThreeRenderer>
   </VaSceneView>
 </template>
