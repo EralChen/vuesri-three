@@ -1,5 +1,6 @@
 import { ThreeComponent } from '@vuesri-three/shared'
 import type { EntityLayer } from '@vuesri-three/components/entity-layer'
+import { Group } from 'three'
 
 export interface Entity extends ThreeComponent {
   /**
@@ -15,7 +16,7 @@ export interface Entity extends ThreeComponent {
   /**
    * 由单个 graphic 创建的 THREE.Group
    */
-  group: THREE.Group
+  group: Group
 }
 
 export interface EntityLayerProperties {
