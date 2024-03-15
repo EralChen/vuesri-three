@@ -1,6 +1,7 @@
 
 import { ThreeRenderer } from '@vuesri-three/shared'
 import { ReturnVoid } from '@vunk/core'
+import { Scene, WebGLRenderer } from 'three'
 
 export interface ThreeComponent {
   /**
@@ -24,8 +25,8 @@ export interface ThreeComponent {
 
 export interface ThreeContext {
   context: __esri.RenderContext
-  renderer: THREE.WebGLRenderer
-  scene: THREE.Scene
+  renderer: WebGLRenderer
+  scene: Scene
   view: __esri.SceneView
 }
 
