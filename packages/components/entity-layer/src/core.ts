@@ -40,9 +40,9 @@ export class EntityLayer extends ThreeLayer {
     this.ready()
   }
 
-  render (e: ThreeContext): void {
+  animate (e: ThreeContext): void {
     this.entities.forEach(entity => {
-      entity.render(e)
+      entity.animate?.(e)
     })
   }
 

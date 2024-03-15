@@ -1,4 +1,4 @@
-import { RepeatWrapping, TextureLoader } from 'three'
+import { RepeatWrapping, Texture, TextureLoader } from 'three'
 import { LoadEvent } from './types'
 import { PropType } from 'vue'
 import { defaultTextureUrl } from './const'
@@ -12,7 +12,7 @@ export const props = {
     default: () => [],
   },
   texture: {
-    type: Object as PropType<THREE.Texture>,
+    type: Object as PropType<Texture>,
     default: () => {
       const texture = new TextureLoader().load(defaultTextureUrl)
       texture.wrapS = RepeatWrapping

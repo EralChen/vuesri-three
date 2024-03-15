@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { VaSceneView, VaTdtBasemap } from '@vuesri/core'
-import { VathThreeRenderer } from '@vuesri-three/components/three-renderer'
 import { Polygon, Graphic } from '@vuesri/core/arcgis'
 import { VathWallLayer, __VathWallLayer } from '@vuesri-three/components/wall-layer'
+import { VathThreeRenderNode } from '@vuesri-three/components/three-render-node'
 
 const source: __esri.Graphic[] = [
   new Graphic({
@@ -47,12 +47,12 @@ const layerLoad: __VathWallLayer.OnLoad = async (e) => {
       }"
     ></VaTdtBasemap>
 
-    <VathThreeRenderer>
+    <VathThreeRenderNode>
       <VathWallLayer
         :source="source"
         @load="layerLoad"
       >
       </VathWallLayer>
-    </VathThreeRenderer>
+    </VathThreeRenderNode>
   </VaSceneView>
 </template>

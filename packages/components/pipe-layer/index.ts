@@ -4,7 +4,10 @@ export * as __VathPipeLayer from './src/types'
 export * from './src/core'
 
 VathPipeLayer.install = (app: App): void => {
-  app.component(VathPipeLayer.name, VathPipeLayer)
+  app.component(
+    VathPipeLayer.name || 'VathPipeLayer', 
+    VathPipeLayer,
+  )
 }
 export {
   VathPipeLayer,

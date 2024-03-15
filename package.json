@@ -47,6 +47,7 @@
 		"element-plus": "npm:element-plus@latest",
 		"mitt": "^3.0.1",
 		"three": "^0.162.0",
+		"twgl.js": "^5.5.4",
 		"vue": "^3.4.21"
 	},
 	"scripts": {

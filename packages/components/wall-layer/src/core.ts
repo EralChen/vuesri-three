@@ -1,4 +1,4 @@
-import { EntityLayer, Entity } from '@vuesri-three/shared'
+import { EntityLayer, Entity, ThreeContext } from '@vuesri-three/shared'
 import { WallEntityProperties, WallLayerProperties } from './types'
 import { BufferAttribute, BufferGeometry, DoubleSide, Group, Mesh, MeshBasicMaterial, RepeatWrapping, Texture, TextureLoader } from 'three'
 import { MaterialManager } from '@vuesri-three/components/manager'
@@ -212,7 +212,8 @@ export class WallLayer extends MaterialManager(EntityLayer) {
     })
   }
 
-  render (): void {
+  
+  animate (ctx: ThreeContext): void {
 
     const texture = this.getMaterial().map
     if (!texture) return
@@ -222,6 +223,7 @@ export class WallLayer extends MaterialManager(EntityLayer) {
     } else {
       texture.offset.set(0, texture.offset.y - 0.01)
     }
+    ctx.renderNode?.requestRender()
 
   }
 
