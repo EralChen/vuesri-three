@@ -2,6 +2,7 @@ import { __VathEntityLayer } from '@vuesri-three/components/entity-layer'
 import type { WallLayer } from '@vuesri-three/components/wall-layer'
 import { ThreeRenderer } from '@vuesri-three/shared'
 import { ReturnVoid } from '@vunk/core'
+import { Texture } from 'three'
 
 export interface WallEntityProperties {
   layer: WallLayer
@@ -9,7 +10,7 @@ export interface WallEntityProperties {
 }
 
 export interface WallLayerProperties extends __VathEntityLayer.EntityLayerProperties {
-  texture?: THREE.Texture
+  texture?: Texture
   
   height?: number
 }
