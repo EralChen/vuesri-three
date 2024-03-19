@@ -12,9 +12,9 @@ import { reactiveUtils } from '@vuesri/core/arcgis/4.23'
 export class ThreeRenderNode extends RenderNode {
 
   consumes: __esri.ConsumedNodes = {
-    required: ['opaque-color'],
+    required: [],
   }
-  produces: __esri.RenderNodeOutput = 'opaque-color'
+  produces: __esri.RenderNodeOutput = 'composite-color'
 
 
   layers: ThreeLayerCollection<ThreeNodeComponent> = new ThreeLayerCollection()
@@ -119,6 +119,7 @@ export class ThreeRenderNode extends RenderNode {
 
 
   render (inputs: __esri.ManagedFBO[]): __esri.ManagedFBO {
+    console.log('render', 'inputs', inputs)
     this.renderer?.resetState()
     const output = this.bindRenderTarget()
 

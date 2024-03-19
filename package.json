@@ -10,7 +10,7 @@
 		"@types/gulp": "^4.0.9",
 		"@types/node": "^18.0.4",
 		"@types/three": "^0.162.0",
-		"arcgis-js-api": "^4.29.7",
+		"arcgis-js-api": "^4.29.8",
 		"consola": "^2.15.3",
 		"eslint": "^8.35.0",
 		"eslint-define-config": "^1.5.1",
@@ -30,7 +30,7 @@
 		"vitest": "^0.18.1"
 	},
 	"dependencies": {
-		"@arcgis/core": "^4.29.7",
+		"@arcgis/core": "^4.29.8",
 		"@element-plus/icons-vue": "^2.1.0",
 		"@skzz/platform": "0.0.0-alpha.71",
 		"@turf/turf": "^6.5.0",
