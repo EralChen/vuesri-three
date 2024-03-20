@@ -119,7 +119,6 @@ export class ThreeRenderNode extends RenderNode {
 
 
   render (inputs: __esri.ManagedFBO[]): __esri.ManagedFBO {
-    console.log('render', 'inputs', inputs)
     this.renderer?.resetState()
     const output = this.bindRenderTarget()
 

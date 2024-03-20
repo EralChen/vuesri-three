@@ -30,8 +30,10 @@ export function MarkdownTransform (): Plugin {
 
     async transform (code, id) {
       if (!id.endsWith('.md')) return
+      if (code.startsWith('<script setup>')) return
 
       let componentId = path.basename(id, '.md')
+      
       
       if (componentId === '+Page') { // 如果是入口文件
         // 取上一级目录名

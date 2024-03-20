@@ -13,10 +13,7 @@ const source = shallowRef([
       y: 30.1,
       z: 1000,
     }),
-    attributes: {
-      name: 'cx',
-      value: 100,
-    },
+
   }),
   new Graphic({
     geometry: new Point({
@@ -24,10 +21,6 @@ const source = shallowRef([
       y: 30,
       z: 1000,
     }),
-    attributes: {
-      name: 'sl',
-      value: 200,
-    },
   }),
 ] as __esri.Graphic[]) 
 const visible = ref(true)

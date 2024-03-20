@@ -31,14 +31,14 @@ const layerLoad: __VathWallLayer.OnLoad = async (e) => {
   })
 }
 
-
+const defaultOptions: __esri.SceneViewProperties = {
+  center: [120, 30],
+  zoom: 10,
+}
 </script>
 <template>
   <VaSceneView
-    :default-options="{
-      center: [120, 30],
-      zoom: 10,
-    }"
+    :default-options="defaultOptions"
   >
     <VaTdtBasemap
       :type="'vec_w'"
