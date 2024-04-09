@@ -35,6 +35,14 @@
       {
         "link": "/pipe-layer",
         "text": "PipeLayer"
+      },
+      {
+        "link": "/wave-layer",
+        "text": "WaveLayer"
+      },
+      {
+        "link": "/geo-region-layer",
+        "text": "GeoRegionLayer"
       }
     ]
   },
