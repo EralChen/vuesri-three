@@ -1,9 +1,6 @@
-import { getDefaultHighlight } from './highlight'
-import { preWrapperPlugin } from './preWrapper'
-import { containerPlugin } from './containers'
+
+import { vuePropsContainerPlugin } from './containers'
 
 export {
-  getDefaultHighlight,
-  preWrapperPlugin,
-  containerPlugin,
+  vuePropsContainerPlugin
 }

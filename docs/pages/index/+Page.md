@@ -1,5 +1,4 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
 const BasicDemo = defineAsyncComponent(() => import('./basic-demo.vue'))
 </script>
 
