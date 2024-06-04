@@ -1,5 +1,6 @@
 {
   "name": "@vuesri-three/docs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -23,7 +24,7 @@
     "unplugin-vue-components": "^0.20.1",
     "unplugin-vue-markdown": "^0.25.2",
     "vite-plugin-inspect": "^0.8.1",
-    "vitepress": "1.0.0-rc.33",
+    "vitepress": "^1.2.3",
     "vue-router": "^4.2.5"
   }
 }
