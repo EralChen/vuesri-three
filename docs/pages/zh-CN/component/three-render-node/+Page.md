@@ -15,6 +15,9 @@ ArcGIS Maps SDK for JavaScript 4.29
 
 :::demo 
 three-render-node/basic/index
+>>>subs
+[three-render-node/basic/TestPoint]
+>>>
 :::
 
 ## ThreeRenderNode 其他
