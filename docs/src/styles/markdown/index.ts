@@ -1,4 +1,5 @@
 import 'vitepress/dist/client/theme-default/styles/vars.css'
+import 'vitepress/dist/client/theme-default/styles/icons.css'
 // import 'vitepress/dist/client/theme-default/styles/base.css'
 // import 'vitepress/dist/client/theme-default/styles/utils.css'
 import 'vitepress/dist/client/theme-default/styles/components/custom-block.css'
