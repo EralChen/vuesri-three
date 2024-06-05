@@ -48,7 +48,7 @@ export interface Entity extends ThreeComponent {
 
 :::demo 
 entity-layer/basic/index
->>>tabs
+>>>subs
 [entity-layer/basic/TestLayer]
 >>>
 :::

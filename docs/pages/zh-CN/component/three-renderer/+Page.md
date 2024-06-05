@@ -35,7 +35,7 @@ export interface ThreeComponent {
 
 :::demo 
 three-renderer/basic/index
->>>tabs
+>>>subs
 [three-renderer/basic/TestPoint]
 >>>
 :::

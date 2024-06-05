@@ -11,7 +11,7 @@ lang: zh-CN
 
 :::demo 
 render-node/basic/index
->>>tabs
+>>>subs
 [render-node/basic/render-node]
 >>>
 :::

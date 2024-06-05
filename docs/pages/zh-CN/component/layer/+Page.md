@@ -30,7 +30,7 @@
 
 :::demo 
 layer/point-layer/index
->>>tabs
+>>>subs
 [layer/point-layer/TestPointLayer]
 >>>
 :::
