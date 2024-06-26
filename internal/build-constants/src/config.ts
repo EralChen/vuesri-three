@@ -13,6 +13,7 @@ export const libExternal = [
   arcgisExternalRule,
   new RegExp(`^${LIB_NAME}`),
   new RegExp(`^${LIB_ALIAS}`),
+  /^@turf/,
 ]
 
 export const hasArcgisExternalRule = libExternal.includes(arcgisExternalRule)
