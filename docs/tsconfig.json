@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node10",
     "strict": true,
     "jsx": "preserve",
     "allowJs": true,
@@ -60,7 +60,8 @@
 
     
     "../typings/**/*.d.ts",
-    "vite.config.ts",
+
+    "vite.config.mts",
   ],
   "exclude": [
     "node_modules"

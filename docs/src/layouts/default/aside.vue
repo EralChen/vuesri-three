@@ -5,7 +5,6 @@ import { VkRoutesMenuContent } from '@vunk/skzz/components/routes-menu-content'
 import type { RouteRecordRaw } from 'vue-router'
 import { Ref, computed, nextTick, onMounted, ref, shallowRef } from 'vue'
 import { SkAppIcon } from '@skzz/platform/components/app-icon'
-import { useSharedMenuClick } from '#s/composables/menuClick'
 import { VkDuplex } from '@vunk/core'
 import { findDeep } from 'deepdash-es/standalone'
 
@@ -19,7 +18,7 @@ interface MenuRaw {
 const menuComponent = ref() as Ref<{
   open: (index: string) => void
 }>
-const { listenerToggle } =  useSharedMenuClick()
+
 const componentCrow = useCrowdinFile(CrowdinFilePath.component)
 const basePath = import.meta.env.BASE_URL + componentCrow.lang + '/component' 
 
@@ -91,8 +90,6 @@ const filterMenu = computed(() => {
 const pathname = shallowRef('')
 onMounted(() => {
   pathname.value = window.location.pathname
-  // menu 点击事件监听
-  listenerToggle.add()
   initOpenMenu()
 })
 function initOpenMenu () {
@@ -119,7 +116,10 @@ function initOpenMenu () {
 }
 /* end of menu event   */
 
-
+const linkCtrlClick = (e: Event) => {
+  // 阻止事件冒泡
+  e.stopPropagation()
+}
 </script>
 <template>
   <VkDuplex class="h-full">
@@ -144,19 +144,25 @@ function initOpenMenu () {
             :base-path="basePath"
           >
             <template #item="{ href, data }">
-              <a :href="href">
+              <a 
+                :href="href" 
+                class="layout-default-aside-menu-a"
+                :title="data.meta?.title"
+                @click.ctrl="linkCtrlClick"
+              >
                 <ElIcon>
                   <SkAppIcon 
                     v-if="data.meta?.icon"
                     :icon="data.meta.icon"
                   />
                 </ElIcon>
-
               </a>
             </template>
 
             <template #itemTitle="{ data }">
-              {{ data.meta?.title }}
+              <span 
+                class="layout-default-aside-menu-title"
+              > {{ data.meta?.title }} </span> 
             </template>
 
             <template #menuTitle="{ data }">
@@ -169,6 +175,24 @@ function initOpenMenu () {
   </VkDuplex>
 </template>
 <style>
+
+
+.layout-default-aside-menu-title{
+  /* 超出 省略 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.layout-default-aside-menu-a{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: var(--el-color-primary);
+}
+
+
 .layout-default-aside-search{
   margin-top: var(--gap-xxs);
 }

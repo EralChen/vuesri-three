@@ -1,5 +1,6 @@
 {
   "name": "@vuesri-three/docs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,8 +12,8 @@
     "gsap": "^3.12.4",
     "lil-gui": "^0.19.2",
     "prism-theme-vars": "^0.2.4",
-    "vike": "0.4.165",
-    "vike-vue": "^0.6.3"
+    "vike": "0.4.177",
+    "vike-vue": "^0.7.6"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.4",
@@ -20,11 +21,12 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "markdown-it-anchor": "^8.6.7",
+    "markdown-it-container": "^4.0.0",
     "unplugin-icons": "^0.18.1",
     "unplugin-vue-components": "^0.20.1",
     "unplugin-vue-markdown": "^0.25.2",
     "vite-plugin-inspect": "^0.8.1",
-    "vitepress": "1.0.0-rc.33",
+    "vitepress": "^1.2.3",
     "vue-router": "^4.2.5"
   }
 }

@@ -5,6 +5,7 @@ import { CatmullRomCurve3, DoubleSide, Group, Mesh, MeshBasicMaterial, MeshPhong
 import { PipeEntityProperties } from './types'
 import { _VathEntityLayerUtils } from '@vuesri-three/components/entity-layer'
 import { defaultTextureUrl } from './const'
+import { unflat } from '@vunk/shared/array'
 
 export class PipeEntity implements Entity {
   layer: PipeLayer
@@ -74,7 +75,7 @@ export class PipeEntity implements Entity {
       pipe,
     )
 
-    const v3List = renderTransform.unflat(renderCoordinates, 3).map(
+    const v3List = unflat(renderCoordinates, 3).map(
       item => new Vector3(item[0], item[1], item[2]),
     )
 
@@ -134,7 +135,6 @@ export class PipeLayer extends MaterialManager(EntityLayer) {
       map: this.texture,
       opacity: 1,
     })
-    // this.material.needsUpdate = true
 
     this.handles.push(
       this.watch('texture', () => {

@@ -48,12 +48,6 @@ export class RenderTransform {
     return this.transform
   }
 
-  unflat (data: Float32Array, size: number) {
-    return Array.from(
-      { length: Math.ceil(data.length / size) },
-      (_, i) => data.slice(i * size, (i + 1) * size),
-    )
-  }
 
   
 
