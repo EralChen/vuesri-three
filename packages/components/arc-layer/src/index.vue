@@ -1,6 +1,6 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { defineComponent, provide, watch } from 'vue'
+import { defineComponent, nextTick, provide, watch, watchEffect } from 'vue'
 import { ArcLayer } from '@vuesri-three/components/arc-layer'
 import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { useThreeRenderer } from '@vuesri-three/composables'
@@ -11,8 +11,8 @@ export default defineComponent({
   components: {
     VathEntityLayerEvents,
   },
-  emits,
   props,
+  emits,
   setup (props, { emit }) {
     const renderer = useThreeRenderer()
     const eventsEmits = _VathEntityLayerEventsCtx.createOnEmits(emit)
@@ -23,7 +23,18 @@ export default defineComponent({
     watch(() => props.source, (source) => {
       layer.source = source
     })
+
+    watchEffect(() => {
+      layer.radius = props.radius
+    })
+
+    watchEffect(() => {
+      layer.color = props.color
+    })
+
+
     _VathLayerUse.useAddLayer(renderer, layer)
+
 
     emit('load', {
       layer,

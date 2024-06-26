@@ -6,6 +6,7 @@ export const props = {
     type: Array as PropType<__esri.Graphic[]>,
     default: () => [],
   },
+  
 }
 
 export const emits = {
