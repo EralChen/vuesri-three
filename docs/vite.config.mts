@@ -3,7 +3,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vike from 'vike/plugin'
 
 import { AliasOptions, UserConfig, defineConfig, loadEnv } from 'vite'
-import { vuePropsContainerPlugin } from '@lib-env/app-utils'
 import { appRoot, srcRoot } from './path.config'
 
 import path from 'path'
@@ -13,7 +12,6 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 
 import Components from 'unplugin-vue-components/vite'
-
 
 import { createMarkdownPlugin } from '@vunk/shared/vite/markdown'
 import { fixPath } from '@lib-env/build-utils'
@@ -39,13 +37,13 @@ const alias: AliasOptions = [
     replacement: path.resolve(appRoot,'./examples'),
   },
   {
-    find: 'esri/',
-    replacement: '@arcgis/core/',
+    find: '#',
+    replacement: path.resolve(appRoot),
   },
 
   {
-    find: '#',
-    replacement: path.resolve(appRoot),
+    find: 'esri/',
+    replacement: '@arcgis/core/',
   },
 ]
 
@@ -67,31 +65,31 @@ export default defineConfig(async ({ mode }) => {
     },
     ssr: {
       noExternal: [
-        '@vuesri/core/**',
+        '@vuesri-core/**',
         '@arcgis/core/**',
         '@vunk/skzz/**',
         '@skzz/platform/**',
         'esri/**',
         '@vunk/gsap/**',
       ],
- 
+    
     },
     build: {
       target: ['esnext'],
     },
-    
     
     plugins: [
       
       vike({
         prerender: true, 
       }),
-      
+
 
       vue({
         include: [/\.vue$/, /\.md$/],
       }),
       vueJsx({}),
+      
       unocss(),
 
       await createMarkdownPlugin({
@@ -103,10 +101,8 @@ export default defineConfig(async ({ mode }) => {
         sourceContainerPluginSettings: {
           root: path.resolve(workRoot, 'packages'),
         },
-        markdownItSetup(mdit) {
-          mdit.use(vuePropsContainerPlugin, {
-            componentsPath: path.resolve(workRoot, 'packages'),
-          })
+        propsContainerPluginSettings: {
+          root: path.resolve(workRoot, 'packages/components'),
         },
       }),
 
@@ -119,7 +115,6 @@ export default defineConfig(async ({ mode }) => {
       Icons(),
       Inspect(),
     ],
-
     // We manually add a list of dependencies to be pre-bundled, in order to avoid a page reload at dev start which breaks vike's CI
     optimizeDeps: { 
       esbuildOptions: {
@@ -131,7 +126,6 @@ export default defineConfig(async ({ mode }) => {
           bigint: true, 
         },
       },
-
 
     },
   }

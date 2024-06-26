@@ -1,6 +1,5 @@
 {
 	"devDependencies": {
-		"@lib-env/app-utils": "workspace:*",
 		"@lib-env/build-constants": "workspace:*",
 		"@lib-env/build-utils": "workspace:*",
 		"@lib-env/eslint-config": "workspace:*",
@@ -43,7 +42,7 @@
 		"@vueuse/core": "^9.12.0",
 		"@vunk/core": "0.0.0-alpha.113",
 		"@vunk/form": "^1.1.52",
-		"@vunk/shared": "^0.2.2",
+		"@vunk/shared": "^0.5.1",
 		"@vunk/skzz": "0.0.0-alpha.110",
 		"chroma-js": "^2.4.2",
 		"element-plus": "npm:element-plus@latest",
