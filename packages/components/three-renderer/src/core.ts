@@ -40,6 +40,7 @@ export class ThreeRenderer {
 
   public setup (context?: __esri.RenderContext): void {
     
+    
     if (!context) {
       throw new Error('no context passed to setup, cannot work that way')
     }
