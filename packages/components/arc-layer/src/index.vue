@@ -1,6 +1,6 @@
 <script lang="ts">
 import { props, emits } from './ctx'
-import { defineComponent, nextTick, provide, watch, watchEffect } from 'vue'
+import { defineComponent, provide, watch, watchEffect } from 'vue'
 import { ArcLayer } from '@vuesri-three/components/arc-layer'
 import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { useThreeRenderer } from '@vuesri-three/composables'

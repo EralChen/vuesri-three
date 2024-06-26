@@ -73,6 +73,7 @@ const changeColor = () => {
     <VathThreeRenderNode>
       <VathArcLayer
         :source="source"
+        :radius="1500"
         :color="color"
         @load="layerLoad"
       ></VathArcLayer>

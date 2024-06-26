@@ -207,6 +207,8 @@ export class ArcLayer extends MaterialManager(EntityLayer)  {
     this.handles.push(
       this.watch('color', () => {
         this.getMaterial().color = this.color
+        this.getContext().renderNode?.requestRender()
+
       }),
     )
 
