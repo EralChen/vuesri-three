@@ -38,6 +38,14 @@
       {
         "link": "/arc-layer",
         "text": "ArcLayer"
+      },
+      {
+        "link": "/wave-layer",
+        "text": "WaveLayer"
+      },
+      {
+        "link": "/geo-region-layer",
+        "text": "GeoRegionLayer"
       }
     ]
   },

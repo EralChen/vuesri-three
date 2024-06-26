@@ -36,6 +36,9 @@ export default defineComponent({
         super()
         this.eventName = eventName
         this.handler = handler
+        // LineSegments2: "Raycaster.camera" needs to be set in order to raycast against LineSegments2 while worldUnits is set to false.
+        this.raycaster.camera = this.camera
+
       }
       add () {
         const mouseHandle = async (e) => {

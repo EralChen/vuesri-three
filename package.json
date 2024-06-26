@@ -30,6 +30,7 @@
 	"dependencies": {
 		"@arcgis/core": "^4.29.8",
 		"@element-plus/icons-vue": "^2.1.0",
+		"@farst-three/core": "^0.0.13-alpha",
 		"@skzz/platform": "0.0.0-alpha.71",
 		"@turf/turf": "^6.5.0",
 		"@vuesri-three/components": "workspace:*",
@@ -46,6 +47,7 @@
 		"element-plus": "npm:element-plus@latest",
 		"mitt": "^3.0.1",
 		"three": "^0.165.0",
+		"radash": "^12.1.0",
 		"twgl.js": "^5.5.4",
 		"vue": "^3.4.21"
 	},
