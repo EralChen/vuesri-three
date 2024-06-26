@@ -22,7 +22,6 @@
         "link": "/three-render-node",
         "text": "ThreeRenderNode"
       }
-
     ]
   },
   "layer": {
@@ -35,6 +34,10 @@
       {
         "link": "/pipe-layer",
         "text": "PipeLayer"
+      },
+      {
+        "link": "/arc-layer",
+        "text": "ArcLayer"
       }
     ]
   },
