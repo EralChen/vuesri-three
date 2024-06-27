@@ -21,8 +21,11 @@ export class EntityLayer extends ThreeLayer {
 
   setup (e: ThreeContext): void {
     super.setup(e)
-    this.fullExtent = extentFromGraphics(this.source)
-    
+
+    if (this.source?.length) {
+      this.fullExtent = extentFromGraphics(this.source)
+    }
+
     this.init(e)
 
     this.entities.forEach(entity => {

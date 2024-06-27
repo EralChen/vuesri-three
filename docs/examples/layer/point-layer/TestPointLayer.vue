@@ -75,7 +75,11 @@ class TestPointLayer extends MaterialManager(
   }
   setup (e: ThreeContext): void {
     super.setup(e)
-    this.fullExtent = extentFromGraphics(this.source)
+
+
+    if (this.source?.length) {
+      this.fullExtent = extentFromGraphics(this.source)
+    }
 
     this.entities = this.source.map((graphic) => {
       return new TestPointEntity({

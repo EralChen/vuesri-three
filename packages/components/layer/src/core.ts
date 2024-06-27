@@ -73,6 +73,8 @@ export class ThreeLayer extends Accessor implements ThreeComponent {
     const ctx = this.getContext()
     this.dispose(ctx)
     this.setup(ctx)
+    ctx.renderNode?.requestRender()
+    
   }
 
 }

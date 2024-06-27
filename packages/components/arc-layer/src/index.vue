@@ -22,6 +22,7 @@ export default defineComponent({
     })
     watch(() => props.source, (source) => {
       layer.source = source
+      layer.refresh()
     })
 
     watchEffect(() => {
