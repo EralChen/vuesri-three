@@ -1,13 +1,12 @@
 import { Entity, EntityLayer, ThreeContext } from '@vuesri-three/shared'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
-import {  Color, DoubleSide, Group,  Mesh, MeshBasicMaterial, QuadraticBezierCurve3, RepeatWrapping, Texture, TextureLoader, TubeGeometry, Vector3 } from 'three'
+import {  Color, DoubleSide, Group,  Mesh, MeshBasicMaterial, QuadraticBezierCurve3, Texture, TubeGeometry, Vector3 } from 'three'
 import { ArcEntityProperties } from './types'
 import { _VathEntityLayerUtils } from '@vuesri-three/components/entity-layer'
 import { Point } from '@vuesri/core/arcgis'
 import * as geometryEngine from '@arcgis/core/geometry/geometryEngine'
 import { unflat } from '@vunk/shared/array'
-import { defaultTextureUrl } from './const'
 
 
 
