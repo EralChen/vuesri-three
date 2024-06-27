@@ -21,6 +21,14 @@ export const props = {
     default: new Color(0x85A9A9),
   },
 
+  /**
+   * 材质 textureUrl
+   */
+  textureUrl: {
+    type: String,
+    default: '',
+  },
+
 }
 
 export const emits = {

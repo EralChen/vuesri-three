@@ -1,13 +1,15 @@
-import { Entity, EntityLayer, ThreeContext } from '@vuesri-three/shared'
+import { Entity, EntityLayer } from '@vuesri-three/shared'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
-import {  Color, DoubleSide, Group,  Mesh, MeshBasicMaterial, QuadraticBezierCurve3, RepeatWrapping, Texture, TextureLoader, TubeGeometry, Vector3 } from 'three'
+import { Color, Group, QuadraticBezierCurve3, Vector3 } from 'three'
 import { ArcEntityProperties } from './types'
 import { _VathEntityLayerUtils } from '@vuesri-three/components/entity-layer'
 import { Point } from '@vuesri/core/arcgis'
 import * as geometryEngine from '@arcgis/core/geometry/geometryEngine'
 import { unflat } from '@vunk/shared/array'
-import { defaultTextureUrl } from './const'
+import { Line2 } from 'three/examples/jsm/lines/Line2'
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 
 
 
@@ -21,7 +23,7 @@ export class ArcEntity implements Entity {
   private paths: __esri.Point[][] = []
 
 
-  private lines: TubeGeometry[] = []
+  private lines: LineGeometry[] = []
   constructor (e: ArcEntityProperties) {
     this.layer = e.layer
     this.graphic = e.graphic
@@ -36,13 +38,14 @@ export class ArcEntity implements Entity {
         a.push(this.createThreeGeomety(arc))
       })
       return a    
-    }, [] as TubeGeometry[])
+    }, [] as LineGeometry[])
 
   
     const subgroups = threeGeometries.map((geometry) => {
       const g = new Group()
       
-      const line = new Mesh(geometry, this.layer.getMaterial())
+      const line = new Line2(geometry, this.layer.getMaterial())
+      // const line = new Mesh(geometry, this.layer.getMaterial())
 
 
       this.lines.push(line.geometry)
@@ -85,12 +88,19 @@ export class ArcEntity implements Entity {
      * radialSegments   管道口是几边形 分为多少段
      * closed 收尾是否相连 封闭
      */
-    const geometry = new TubeGeometry(
-      curve,
-      50,
-      this.layer.radius,
-      8,
-      false,
+    // const geometry = new TubeGeometry(
+    //   curve,
+    //   50,
+    //   this.layer.radius,
+    //   8,
+    //   false,
+    // )
+
+    const geometry = new LineGeometry()
+
+    // geometry.setFromPoints(curve.getPoints(50))
+    geometry.setPositions(
+      curve.getPoints(50).map(p => [p.x, p.y, p.z]).flat(),
     )
 
     return geometry
@@ -180,20 +190,23 @@ export class ArcLayer extends MaterialManager(EntityLayer)  {
   })
   public color = new Color(0x85A9A9)
 
-  @property({
-    type: Texture,
-  })
-  public texture: Texture|null  = null
 
   protected init () {
-    this.material = new MeshBasicMaterial({
-      side: DoubleSide,
-      transparent: true,
-      depthWrite: false,
-      opacity: 1,
+
+    // this.material = new MeshBasicMaterial({
+    //   side: DoubleSide,
+    //   transparent: true,
+    //   depthWrite: false,
+    //   opacity: 1,
+    //   color: this.color,
+    // })
+
+    this.material = new LineMaterial({
       color: this.color,
-      map: this.texture,
+      linewidth: 15,
+      
     })
+
 
     this.entities = this.source.map(item => {
       return new ArcEntity({
@@ -213,30 +226,15 @@ export class ArcLayer extends MaterialManager(EntityLayer)  {
       this.watch('color', () => {
         this.getMaterial().color = this.color
         this.getContext().renderNode?.requestRender()
+
       }),
     )
 
-    this.handles.push(
-      this.watch('texture', () => {
-        this.getMaterial().map = this.texture
-        this.getContext().renderNode?.requestRender()
-      }),
-    )
-
-
-  }
-
-  animate (ctx: ThreeContext): void {
-    if (!this.visible) return
-    const texture = this.getMaterial().map
-    if (!texture) return
-    texture.offset.x -= 0.01
-    ctx.renderNode?.requestRender()
   }
 
 
   getMaterial () {
-    return this.material as MeshBasicMaterial
+    return this.material as LineMaterial
   }
 
 

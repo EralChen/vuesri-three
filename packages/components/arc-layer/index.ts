@@ -6,7 +6,7 @@ export * from './src/core'
 VathArcLayer.install = (app: App): void => {
   app.component(
     VathArcLayer.name || 'VathArcLayer', 
-    VathArcLayer
+    VathArcLayer,
   )
 }
 export {

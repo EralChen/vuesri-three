@@ -5,6 +5,7 @@ import { ArcLayer } from '@vuesri-three/components/arc-layer'
 import { _VathLayerUse } from '@vuesri-three/components/layer'
 import { useThreeRenderer } from '@vuesri-three/composables'
 import { VathEntityLayerEvents, _VathEntityLayerEventsCtx } from '@vuesri-three/components/entity-layer-events'
+import { RepeatWrapping, TextureLoader } from 'three'
 
 export default defineComponent({
   name: 'VathArcLayer',
@@ -31,6 +32,21 @@ export default defineComponent({
 
     watchEffect(() => {
       layer.color = props.color
+    })
+
+    watchEffect(() => {
+      if (props.textureUrl) {
+ 
+        layer.texture = (function () {
+          const texture = new TextureLoader().load(props.textureUrl)
+          texture.wrapS = RepeatWrapping
+          texture.wrapT = RepeatWrapping
+          texture.repeat.set(1, 1)
+          return texture 
+        })()
+      } else {
+        layer.texture = null
+      }
     })
 
 
