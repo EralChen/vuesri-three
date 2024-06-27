@@ -71,7 +71,7 @@ const source = shallowRef([
     }),
     attributes: {
       name: '管线1',
-      type: '管线',
+      type: '管线2',
       id: '2',
     },
   }),
@@ -92,6 +92,8 @@ const changeColor = () => {
 const changeSource = () => {
   source.value = source.value.length ? [] : sourceDefault.value
 }
+
+
 </script>
 <template>
   <VaSceneView>

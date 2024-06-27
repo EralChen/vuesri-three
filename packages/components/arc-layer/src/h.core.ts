@@ -1,15 +1,12 @@
 import { Entity, EntityLayer } from '@vuesri-three/shared'
 import { MaterialManager } from '@vuesri-three/components/manager'
 import { property, subclass } from '@arcgis/core/core/accessorSupport/decorators'
-import { Color, Group, QuadraticBezierCurve3, Vector3 } from 'three'
+import {  Color, DoubleSide, Group,  Mesh, MeshBasicMaterial, QuadraticBezierCurve3, TubeGeometry, Vector3 } from 'three'
 import { ArcEntityProperties } from './types'
 import { _VathEntityLayerUtils } from '@vuesri-three/components/entity-layer'
 import { Point } from '@vuesri/core/arcgis'
 import * as geometryEngine from '@arcgis/core/geometry/geometryEngine'
 import { unflat } from '@vunk/shared/array'
-import { Line2 } from 'three/examples/jsm/lines/Line2'
-import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
-import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 
 
 
@@ -23,7 +20,7 @@ export class ArcEntity implements Entity {
   private paths: __esri.Point[][] = []
 
 
-  private lines: LineGeometry[] = []
+  private lines: TubeGeometry[] = []
   constructor (e: ArcEntityProperties) {
     this.layer = e.layer
     this.graphic = e.graphic
@@ -38,14 +35,13 @@ export class ArcEntity implements Entity {
         a.push(this.createThreeGeomety(arc))
       })
       return a    
-    }, [] as LineGeometry[])
+    }, [] as TubeGeometry[])
 
   
     const subgroups = threeGeometries.map((geometry) => {
       const g = new Group()
       
-      const line = new Line2(geometry, this.layer.getMaterial())
-      // const line = new Mesh(geometry, this.layer.getMaterial())
+      const line = new Mesh(geometry, this.layer.getMaterial())
 
 
       this.lines.push(line.geometry)
@@ -88,19 +84,12 @@ export class ArcEntity implements Entity {
      * radialSegments   管道口是几边形 分为多少段
      * closed 收尾是否相连 封闭
      */
-    // const geometry = new TubeGeometry(
-    //   curve,
-    //   50,
-    //   this.layer.radius,
-    //   8,
-    //   false,
-    // )
-
-    const geometry = new LineGeometry()
-
-    // geometry.setFromPoints(curve.getPoints(50))
-    geometry.setPositions(
-      curve.getPoints(50).map(p => [p.x, p.y, p.z]).flat(),
+    const geometry = new TubeGeometry(
+      curve,
+      50,
+      this.layer.radius,
+      8,
+      false,
     )
 
     return geometry
@@ -193,17 +182,12 @@ export class ArcLayer extends MaterialManager(EntityLayer)  {
 
   protected init () {
 
-    // this.material = new MeshBasicMaterial({
-    //   side: DoubleSide,
-    //   transparent: true,
-    //   depthWrite: false,
-    //   opacity: 1,
-    //   color: this.color,
-    // })
-
-    this.material = new LineMaterial({
+    this.material = new MeshBasicMaterial({
+      side: DoubleSide,
+      transparent: true,
+      depthWrite: false,
+      opacity: 1,
       color: this.color,
-      linewidth: 15,
     })
 
 
@@ -233,7 +217,7 @@ export class ArcLayer extends MaterialManager(EntityLayer)  {
 
 
   getMaterial () {
-    return this.material as LineMaterial
+    return this.material as MeshBasicMaterial
   }
 
 
