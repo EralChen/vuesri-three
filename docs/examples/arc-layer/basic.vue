@@ -7,6 +7,7 @@ import { Color } from 'three'
 import { shallowRef } from 'vue'
 
 const texture = shallowRef('') 
+const layerIf = shallowRef(true)
 const sourceDefault = shallowRef([
   new Graphic({
     geometry: new Polyline({
@@ -115,6 +116,10 @@ const changeTexture = () => {
         <ElButton @click="changeTexture">
           材质
         </ElButton>
+
+        <ElButton @click="layerIf = !layerIf">
+          if {{ layerIf }}
+        </ElButton>
       </p>
     </template>
     <VaTdtBasemap
@@ -126,6 +131,7 @@ const changeTexture = () => {
 
     <VathThreeRenderNode>
       <VathArcLayer
+        v-if="layerIf"
         :texture-url="texture"
         :source="source"
         :radius="1500"
