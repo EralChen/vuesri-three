@@ -11,7 +11,7 @@ const BasicDemo = defineAsyncComponent(() => import('./basic-demo.vue'))
 
 ```shell
 # pnpm or npm or yarn
-$ pnpm install @arcgis/core @vunk/core@alpha @vuesri/core  @vuesri/three@alpha
+$ pnpm install @arcgis/core @vunk/core @vuesri/core  @vuesri/three
 ```
 
 
