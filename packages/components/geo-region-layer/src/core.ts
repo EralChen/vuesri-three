@@ -1,7 +1,7 @@
 import { ThreeContext } from '@vuesri-three/shared'
 import { FtGeoJson2ExtrudeGeometry, FtTextureLoader } from '@farst-three/core'
 import { ThreeLayer } from '@vuesri-three/components/layer'
-import { Point } from 'esri/geometry'
+import { Point } from '@vuesri/core/arcgis'
 import { Mesh, MeshBasicMaterial, Object3D, RepeatWrapping, Vector2 } from 'three'
 import { FeatureCollection, Geometry } from '@turf/turf'
 import { Line2 } from 'three/examples/jsm/lines/Line2'

@@ -1,4 +1,4 @@
-import { Polygon } from 'esri/geometry'
+import { Polygon } from '@vuesri/core/arcgis'
 
 /**
  * 从 geometry 中获取 路径（Point[]） 数组

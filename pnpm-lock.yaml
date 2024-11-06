@@ -48,8 +48,8 @@ importers:
         specifier: ^1.1.52
         version: 1.1.65
       '@vunk/shared':
-        specifier: ^0.5.2
-        version: 0.5.2
+        specifier: ^0.5.37
+        version: 0.5.37
       '@vunk/skzz':
         specifier: 0.0.0-alpha.110
         version: 0.0.0-alpha.110
@@ -2357,8 +2357,8 @@ packages:
   '@vunk/core@0.0.0-alpha.113':
     resolution: {integrity: sha512-jj8jWWx7AC9qWD7/kQrsoi+a5qPrc4tJrYt7VvGEbbtQE9BGauLt+sVMIuFxnzhc7qK083ici/IUyrYH4GypGw==}
 
-  '@vunk/core@0.0.0-alpha.125':
-    resolution: {integrity: sha512-uXfBK0fFnvUXLtxm6NIujGaelch5uMFmNNeTzlP9Ik4+dWAspFuq4mU++Fv2E8uC5ESyEO/GasC9S52Kg9vpOQ==}
+  '@vunk/core@0.0.0-alpha.130':
+    resolution: {integrity: sha512-W2JGM0qpTeIQz311NQyRzN24iYRAZT5p3+eMa7ObU8bujkvDM3ayIrK5Ombzv84DqebjgcH+crphgVOAQ0FvSw==}
 
   '@vunk/form@1.1.65':
     resolution: {integrity: sha512-5JGXIXzExgJ9xhTYwoMqee+rtFDSl21/ZEFL0wu2PoOJeQeAoLdmi/ZGPSOxlI/fW5N03/OPLau1EvEXoQzz7w==}
@@ -2366,8 +2366,8 @@ packages:
   '@vunk/gsap@0.0.0-alpha.3':
     resolution: {integrity: sha512-UTyP4VmeAoMY+eab/OhFyyXrd21W4zgQuV2px4r/5x8iox187yf3AH42zuI//ub+loVTgE74iu9MQasTJ8NdMw==}
 
-  '@vunk/shared@0.5.2':
-    resolution: {integrity: sha512-PdjxK1Zt+WUS4+q8wFkcF76M4d8t/bXsBVvts1fTCpYHY3oDlYzTBpehP2BrD6AnIeIzenP1atSTC7nY1xr0zg==}
+  '@vunk/shared@0.5.37':
+    resolution: {integrity: sha512-EDrrJzoFS9n8vM4b8DuSoXDGIP4T/N0Ct8ht82E5erXJvOjxVHJwx9+VP20roYGMRF64gmKJ/Xn/uEJ9B6+KZA==}
 
   '@vunk/skzz@0.0.0-alpha.110':
     resolution: {integrity: sha512-8O89yNY4TGu1GpW5Dc4LZ4NzCNB9tVPXuXctqJzvvrADP0dc4dqmLQggg5JExQ7taEXwCVOqnAmgXkWHMcyMmQ==}
@@ -8605,15 +8605,15 @@ snapshots:
 
   '@vunk/core@0.0.0-alpha.113': {}
 
-  '@vunk/core@0.0.0-alpha.125': {}
+  '@vunk/core@0.0.0-alpha.130': {}
 
   '@vunk/form@1.1.65':
     dependencies:
-      '@vunk/core': 0.0.0-alpha.125
+      '@vunk/core': 0.0.0-alpha.130
 
   '@vunk/gsap@0.0.0-alpha.3': {}
 
-  '@vunk/shared@0.5.2': {}
+  '@vunk/shared@0.5.37': {}
 
   '@vunk/skzz@0.0.0-alpha.110': {}
 
