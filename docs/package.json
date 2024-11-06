@@ -12,8 +12,8 @@
     "gsap": "^3.12.4",
     "lil-gui": "^0.19.2",
     "prism-theme-vars": "^0.2.4",
-    "vike": "0.4.177",
-    "vike-vue": "^0.7.6"
+    "vike": "0.4.200",
+    "vike-vue": "^0.8.5"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.4",
