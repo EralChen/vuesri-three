@@ -1,6 +1,6 @@
 import { externalRenderers } from '@vuesri/core/arcgis'
 import { AmbientLight, AxesHelper, Color, DirectionalLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three'
-import { ThreeComponent } from './types'
+import { ThreeComponent, ThreeContext } from './types'
 
 
 
@@ -176,20 +176,34 @@ export class ThreeRenderer {
 }
 
 
-export class ThreeLayerCollection<T> extends Array<T> {
+export class ThreeLayerCollection<T extends ThreeComponent> extends Array<T> {
+
+  public context: ThreeContext | undefined
+
   add (layer: T): void {
+    this.context && layer.setup(this.context)
     this.push(layer)
   }
   
   remove (layer: T): void {
     const index = this.indexOf(layer)
     if (index > -1) {
+      if (this.context) {
+        layer.dispose(this.context)
+        this.context.renderNode?.requestRender()
+      }
       this.splice(index, 1)
+    
     }
   }
 
   removeAll (): void {
+    this.forEach(layer => {
+      this.context && layer.dispose(this.context)
+    })
+    this.context && this.context.renderNode?.requestRender()
     this.length = 0
+    
   }
 
 }

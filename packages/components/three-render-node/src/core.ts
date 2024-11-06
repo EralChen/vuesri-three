@@ -98,6 +98,7 @@ export class ThreeRenderNode extends RenderNode {
       view: this.view,
       renderNode: this,
     }
+    this.layers.context = ctx
 
 
     this.layers.forEach(layer => {
