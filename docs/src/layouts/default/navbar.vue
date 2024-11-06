@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import VpThemeToggler from '#/vitepress/components/navbar/vp-theme-toggler.vue'
+const base = import.meta.env.BASE_URL
 
 </script>
 <template>
@@ -7,9 +8,12 @@ import VpThemeToggler from '#/vitepress/components/navbar/vp-theme-toggler.vue'
     sk-flex="row-between-center"
     class="h-full layout-default-navbar"
   >
-    <div class="font-600 plr-l ptb-s text-primary">
+    <a
+      :href="base"
+      class="font-600 plr-l ptb-s text-primary"
+    >
       @vuesri/three
-    </div>
+    </a>
     <VpThemeToggler></VpThemeToggler>
   </div>
 </template>
