@@ -1,0 +1,1 @@
+import{c as t}from"./chunk-DY5FnirW.js";function l(a){return class extends a{constructor(){super(...arguments),this.materialMap=new Map([["default",new t({color:16711680})]]),this.defaultKey="default"}get material(){return this.materialMap.get(this.defaultKey)}set material(e){this.materialMap.set(this.defaultKey,e)}}}export{l as M};
