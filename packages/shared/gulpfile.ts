@@ -1,52 +1,35 @@
-import {series} from 'gulp'
+import { parallel } from 'gulp'
 import path from 'path'
-import glob from 'fast-glob'
+import { globSync } from 'fast-glob'
 import { distDir } from '@lib-env/path'
 import { taskWithName } from '@lib-env/shared'
 import { filePathIgnore } from '@lib-env/build-constants'
-import { genTypes, rollupFile } from '@lib-env/build-utils'
-import consola from 'consola'
+import { genTypes, rollupFiles } from '@lib-env/build-utils'
 
-const getOutputFile = (filePath: string) => path.resolve(
-  distDir, 
-  `shared/${
-    path
-      .relative(path.resolve(__dirname), filePath)
-      .replace('.ts', '.js')
-  }`,
-)
 const buildFile = '**/index.ts'
+const baseDirname = __dirname.split(path.sep).pop() as string
+const external = []
 
-export default series(
+const filePaths = globSync(buildFile, {
+  cwd: path.resolve(__dirname, './'),
+  onlyFiles: true,
+  absolute: true,
+  ignore: filePathIgnore,
+})
 
-  taskWithName('bundleSharedJs', async () => {
-
-    const filePaths = await glob(buildFile, {
-      cwd: path.resolve(__dirname, './'),
-      onlyFiles: true,
-      absolute: true,
-      ignore: filePathIgnore,
+export default parallel(
+  taskWithName(`bundle ${baseDirname}`, async () => {
+    await rollupFiles({
+      input: filePaths,
+      outputDir: path.resolve(distDir, baseDirname),
+      external,
     })
-
-    filePaths.forEach(item => {
-      rollupFile({
-        inputFile: item,
-        outputFile: getOutputFile(item),
-        format: 'esm',
-      })
-      consola.info(
-        item, 
-        path.resolve(distDir, './shared'),
-      )
-    })
-
   }),
-
-  taskWithName('genSharedTypes', async () => {
-    genTypes({
+  taskWithName(`gen ${baseDirname} types`, async () => {
+    await genTypes({
       filesRoot: path.resolve(__dirname),
-      source: buildFile,
+      outDir: baseDirname,
     })
   }),
-
 )
+

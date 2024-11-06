@@ -1,127 +1,40 @@
-
-import { fixPath } from  './alias'
-import { rollup, InputOptions, OutputOptions, RollupOptions, InputPluginOption } from 'rollup'
-import vue from '@vitejs/plugin-vue'
-import css from 'rollup-plugin-css-only'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import esbuild from 'rollup-plugin-esbuild'
 import { libExternal } from '@lib-env/build-constants'
-import commonjs from '@rollup/plugin-commonjs'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import alias from '@rollup/plugin-alias'
-import multiInput from 'rollup-plugin-multi-input'
+import { rollupFiles as baseRollupFiles } from '@vunk/shared/build/rollup'
+import { InputOption, InputPluginOption, OutputOptions, RollupOutput } from 'rollup'
+import { fixPath } from './alias'
 
-const esbuildPlugin = esbuild({
-  target: 'esnext',
-  tsconfigRaw: {
-    compilerOptions: {
-      experimentalDecorators: true,
-      useDefineForClassFields: false,
-    },
+
+export const rollupFiles = async (
+  settings: {
+    input: InputOption,
+    external: (string|RegExp)[],
+    outputDir: string,
+    plugins?: InputPluginOption
+    outputOptions?: OutputOptions,
+
+    outputExtname?: string,
   },
-})
+): Promise<RollupOutput> => {
 
-export function rollupComponents (opts: {
-  files: string[],
-  entry: (file: string) => string,
-  outputFile: (file: string) => string,
-  external?: (string|RegExp)[]
-}) {
-  const builds = opts.files.map(async (file: string) => {
-    const entry = opts.entry(file)  // 入口
-    const inputConfig: InputOptions = {
-      input: entry,
-      plugins: [
-        alias({
-          entries: [
-            { find: 'esri', replacement: '@arcgis/core' },
-          ],
-        }),
-        nodeResolve({
-          extensions: ['.json', '.js',  '.ts'],
-          browser: true,
-        }),
-        css({
-          output: 'index.css',
-        }),
-        
-        vue(),
-        vueJsx({}),
- 
-        esbuildPlugin,
+  const outputExtname = settings.outputExtname ?? '.mjs'
 
-        commonjs(),
-      ],
-      external: [
-        ...libExternal, 
-        ...opts.external ?? [],
-      ],
-    }
-    const bundle = await rollup(inputConfig)
+  const external = settings.external ?? []
 
-    const outputConfig: OutputOptions = {
-      format: 'esm',
-      file: opts.outputFile(file),
-      paths: fixPath, // 修改别名到真实路径
-    }
-    await bundle.write(outputConfig)
-  })
-  return Promise.all(builds)
-}
-
-export async function rollupFile (opts: {
-  inputFile: string | string[],
-  outputFile?: string
-  outputDir?: string
-  external?: (string|RegExp)[]
-  format: 'umd'|'esm'
-  multi?: boolean
-}) {
-  const inputConfig = {
-    input: opts.inputFile,
-    
-    plugins: [
-      alias({
-        entries: [
-          { find: 'esri', replacement: '@arcgis/core' },
-        ],
-      }),
-      nodeResolve({
-        extensions: ['.js', '.json', '.ts'],
-        browser: true,
-      }),
-      // css({
-      //   output: 'index.css',
-      // }),
-      // vue(),
-
-      esbuildPlugin,
-
-      commonjs(),
-    ],
+  return baseRollupFiles({
+    input: settings.input,
     external: [
       ...libExternal,
-      ...opts.external ?? [],
+      ...external,
     ],
-    
-  } as RollupOptions
+    outputDir: settings.outputDir,
+    plugins: settings.plugins,
+    outputExtname,
 
-  opts.multi 
-    && (inputConfig.plugins as InputPluginOption[])
-      .push(multiInput())
+    outputOptions: {
+      paths: fixPath,
+      chunkFileNames: `[name]${outputExtname}`,
+      ...settings.outputOptions,
+    },
 
-  const outConfig: OutputOptions = {
-    format: 'esm',
-    paths: fixPath,
-    inlineDynamicImports: true,
-  }
-  opts.multi && (outConfig.inlineDynamicImports = false)
-
-  opts.outputFile && (outConfig.file = opts.outputFile)
-  opts.outputDir && (outConfig.dir = opts.outputDir)
-
-
-  const bundle = await rollup(inputConfig)
-  return bundle.write(outConfig)
-
+  })
 }

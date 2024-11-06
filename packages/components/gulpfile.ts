@@ -1,66 +1,40 @@
-import { parallel, series } from 'gulp'
-import glob, { sync } from 'fast-glob'
+import { parallel } from 'gulp'
 import path from 'path'
-
+import { globSync } from 'fast-glob'
 import { distDir } from '@lib-env/path'
-import { rollupComponents, rollupFile, genTypes } from '@lib-env/build-utils'
-import { filePathIgnore, libExternal } from '@lib-env/build-constants'
 import { taskWithName } from '@lib-env/shared'
+import { filePathIgnore } from '@lib-env/build-constants'
+import { genTypes, rollupFiles } from '@lib-env/build-utils'
+import { createTsPlugins, createVuePlugins } from '@vunk/shared/build/rollup/plugins'
 
-// sync 快速找到所有目录
-const files = sync('*', {
+const buildFile = '**/index.ts'
+const baseDirname = __dirname.split(path.sep).pop() as string
+const external = []
+
+const filePaths = globSync(buildFile, {
   cwd: path.resolve(__dirname, './'),
-  onlyDirectories: true,
-  ignore: ['node_modules'],
+  onlyFiles: true,
+  absolute: true,
+  ignore: filePathIgnore,
 })
 
-export default series(
-  parallel(
-
-    taskWithName('bundleComponents', 
-      () => rollupComponents({
-        files,
-        entry: (file)=> path.resolve(__dirname, file, './index.ts'),
-        outputFile: (file) => path.resolve(distDir, `./components/${file}/index.js`),
-      }),
-    ),
-
-  
-    taskWithName('bundleComponentsSrcTs', async () => {
-    
-      const getOutputFile = (filePath: string) => path.resolve(
-        distDir, 
-        `./components/${path.relative(
-          path.resolve(__dirname, './'), filePath,
-        )
-          .replace('.ts', '.js')}`,
-      )
-    
-      const filePaths = await glob('**/src/**/*.ts', {
-        cwd: path.resolve(__dirname, './'),
-        onlyFiles: true,
-        absolute: true,
-        ignore: [...filePathIgnore, '**/src/core.ts'],
-      
-      })
-
-      filePaths.forEach(item => {
-        rollupFile({
-          inputFile: item,
-          outputFile: getOutputFile(item),
-          format: 'esm',
-          external: libExternal,
-        })
-      })
-
-    }),
-
-
-    taskWithName('genTypes', () => genTypes({
-      filesRoot: path.resolve(__dirname, './'),
-    })),
-  
-  ),
-
+export default parallel(
+  taskWithName(`bundle ${baseDirname}`, async () => {
+    await rollupFiles({
+      input: filePaths,
+      outputDir: path.resolve(distDir, baseDirname),
+      external,
+      plugins: [
+        ...createTsPlugins(),
+        ...createVuePlugins(),
+      ],
+    })
+  }),
+  taskWithName(`gen ${baseDirname} types`, async () => {
+    await genTypes({
+      filesRoot: path.resolve(__dirname),
+      outDir: baseDirname,
+    })
+  }),
 )
 
