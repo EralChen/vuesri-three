@@ -5,21 +5,21 @@ import { entryPackage, distDir } from '@lib-env/path'
 import { readJson, run, taskWithName, writeJson } from '@lib-env/shared'
 
 export default series(
-  taskWithName('update:vision', async () => {
+  // taskWithName('update:vision', async () => {
 
-    const fileObj = readJson(entryPackage) as { version: string; module: string }
+  //   const fileObj = readJson(entryPackage) as { version: string; module: string }
     
-    // 默认小版本+1
-    const versionList = fileObj.version.split('.')
-    const sVersion = versionList.at(-1)
-    if (sVersion) {
-      versionList[versionList.length - 1] = +sVersion + 1 + ''
-    }
-    fileObj.version = versionList.join('.')
+  //   // 默认小版本+1
+  //   const versionList = fileObj.version.split('.')
+  //   const sVersion = versionList.at(-1)
+  //   if (sVersion) {
+  //     versionList[versionList.length - 1] = +sVersion + 1 + ''
+  //   }
+  //   fileObj.version = versionList.join('.')
  
-    await writeJson(entryPackage, fileObj, 2)
+  //   await writeJson(entryPackage, fileObj, 2)
 
-  }),
+  // }),
   taskWithName('destPkg', async () => {
     const distPkgFile = path.resolve(distDir, './package.json')
 
